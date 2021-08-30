@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <drawer />
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,7 +8,13 @@
     <router-view />
   </div>
 </template>
+<script lang="ts">
+import {Component, Vue } from "vue-property-decorator"
+@Component
+export default class App extends Vue {
 
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
