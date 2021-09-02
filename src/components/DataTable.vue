@@ -7,9 +7,9 @@
   >
     <template v-slot:top>
       <v-toolbar
-
+        elevation="2"
       >
-        <v-toolbar-title>My CRUD</v-toolbar-title>
+        <v-toolbar-title>Flugzeuge</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -126,6 +126,7 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
+
       <v-icon
         small
         class="mr-2"
@@ -164,13 +165,14 @@ export default class DataTable extends Vue {
     {text: "Bauweise", value:"bauweise"},
     {text: "Gewicht", value:"gewicht"},
     {text: "Spannweite", value:"spannweite"},
-    {text: "Faktor", value:"faktor"}
+    {text: "Faktor", value:"faktor"},
+    {text: "Aktions", value: "actions", sortable: false}
   ]
   editedIndex = -1;
   dialog = false;
   dialogDelete = false;
-  planes: Array<Plane>;
-  editedItem: {
+  planes: Array<Plane> = [];
+  editedItem = {
     name: '',
     type: '',
     bauweise: '',
@@ -178,7 +180,7 @@ export default class DataTable extends Vue {
     spannweite: 0,
     faktor: 0,
   }
-  defaultItem: {
+  defaultItem = {
     name: '',
     type: '',
     bauweise: '',
@@ -198,18 +200,25 @@ export default class DataTable extends Vue {
     .withGewicht(298)
     .withSpannweite(66)
     .withFaktor(4)
-
+    const p1 = Plane.createEmptyPlane()
+    .withName("Spitfire")
+    .withType("DD")
+    .withBauweise("LK")
+    .withGewicht(300)
+    .withSpannweite(70)
+    .withFaktor(5)
     this.planes.push(p)
+    this.planes.push(p1)
   }
 
 
-  editItem (item) {
+  editItem (item: any) {
     this.editedIndex = this.planes.indexOf(item)
     this.editedItem = Object.assign({}, item)
     this.dialog = true
   }
 
-  deleteItem (item) {
+  deleteItem (item:any) {
     this.editedIndex = this.planes.indexOf(item)
     this.editedItem = Object.assign({}, item)
     this.dialogDelete = true

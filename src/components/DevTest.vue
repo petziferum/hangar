@@ -1,14 +1,16 @@
 <template>
 <v-container>
-  planes: {{ planes }}
+<DataTable />
 </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-
-@Component
+import DataTable from "@/components/DataTable.vue";
+@Component({
+  components: { DataTable }
+})
 export default class DevTest extends Vue {
 planes: Array<Plane> = [];
 
@@ -21,7 +23,6 @@ planes: Array<Plane> = [];
     .withGewicht(945)
     .withSpannweite(98)
     .withFaktor(34)
-    console.log("p", p)
     this.planes.push(p)
   }
 
