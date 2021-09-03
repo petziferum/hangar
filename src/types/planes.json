@@ -1,0 +1,551 @@
+[
+  {
+    "name": "Perty",
+    "type": "TD",
+    "bauweise": "Styro",
+    "gewicht": 150,
+    "spannweite": 56,
+    "faktor": "2,7",
+    "d": ""
+  },
+  {
+    "name": "Trojan",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 170,
+    "spannweite": 50,
+    "faktor": "3,4",
+    "d": ""
+  },
+  {
+    "name": "Simprop",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 340,
+    "spannweite": 90,
+    "faktor": "3,8",
+    "d": ""
+  },
+  {
+    "name": "Polykarpov",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 298,
+    "spannweite": 66,
+    "faktor": "4,5",
+    "d": "D"
+  },
+  {
+    "name": "Me 109",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 360,
+    "spannweite": 80,
+    "faktor": "4,5",
+    "d": ""
+  },
+  {
+    "name": "Hellcat -",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 280,
+    "spannweite": 62,
+    "faktor": "4,5",
+    "d": "D"
+  },
+  {
+    "name": "Hummer",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 390,
+    "spannweite": 86,
+    "faktor": "4,7",
+    "d": ""
+  },
+  {
+    "name": "Chipmonk",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 500,
+    "spannweite": 104,
+    "faktor": "4,8",
+    "d": ""
+  },
+  {
+    "name": "US Army",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 500,
+    "spannweite": 100,
+    "faktor": 5,
+    "d": ""
+  },
+  {
+    "name": "Mustang gelb",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 550,
+    "spannweite": 107,
+    "faktor": "5,1",
+    "d": "D"
+  },
+  {
+    "name": "Chipmonk",
+    "type": "TD",
+    "bauweise": "Styro",
+    "gewicht": 500,
+    "spannweite": 91,
+    "faktor": "5,5",
+    "d": ""
+  },
+  {
+    "name": "Cherokee",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 600,
+    "spannweite": 107,
+    "faktor": "5,6",
+    "d": ""
+  },
+  {
+    "name": "Skylark",
+    "type": "TD",
+    "bauweise": "2mot",
+    "gewicht": 560,
+    "spannweite": 93,
+    "faktor": 6,
+    "d": ""
+  },
+  {
+    "name": "Warhawk-",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 540,
+    "spannweite": 86,
+    "faktor": "6,3",
+    "d": "D"
+  },
+  {
+    "name": "Hellcat +",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 540,
+    "spannweite": 82,
+    "faktor": "6,5",
+    "d": "D"
+  },
+  {
+    "name": "Bonanza",
+    "type": "TD",
+    "bauweise": "EZF3",
+    "gewicht": 720,
+    "spannweite": 107,
+    "faktor": "6,7",
+    "d": ""
+  },
+  {
+    "name": "Me 109",
+    "type": "TD",
+    "bauweise": "Styro",
+    "gewicht": 630,
+    "spannweite": 92,
+    "faktor": "6,8",
+    "d": "D"
+  },
+  {
+    "name": "Red Bull",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 700,
+    "spannweite": 100,
+    "faktor": 7,
+    "d": ""
+  },
+  {
+    "name": "Flame",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 1280,
+    "spannweite": 183,
+    "faktor": 7,
+    "d": ""
+  },
+  {
+    "name": "Me 110",
+    "type": "TD",
+    "bauweise": "EZF  3  2mot",
+    "gewicht": 760,
+    "spannweite": 108,
+    "faktor": 7,
+    "d": ""
+  },
+  {
+    "name": "Mustang blau",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 730,
+    "spannweite": 102,
+    "faktor": "7,2",
+    "d": ""
+  },
+  {
+    "name": "E-Zone",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 700,
+    "spannweite": 97,
+    "faktor": "7,2",
+    "d": ""
+  },
+  {
+    "name": "Zero",
+    "type": "TD",
+    "bauweise": "Styro EZF",
+    "gewicht": 740,
+    "spannweite": 101,
+    "faktor": "7,3",
+    "d": ""
+  },
+  {
+    "name": "Bearcat",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 840,
+    "spannweite": 115,
+    "faktor": "7,3",
+    "d": "D"
+  },
+  {
+    "name": "Spitfire",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 840,
+    "spannweite": 111,
+    "faktor": "7,6",
+    "d": ""
+  },
+  {
+    "name": "Lightning -",
+    "type": "MD",
+    "bauweise": "2mot",
+    "gewicht": 788,
+    "spannweite": 102,
+    "faktor": "7,7",
+    "d": ""
+  },
+  {
+    "name": "Rondo",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 880,
+    "spannweite": 112,
+    "faktor": "7,9",
+    "d": ""
+  },
+  {
+    "name": "Texan",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 980,
+    "spannweite": 120,
+    "faktor": "8,2",
+    "d": ""
+  },
+  {
+    "name": "Lawotschkin",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 850,
+    "spannweite": 99,
+    "faktor": "8,6",
+    "d": "D"
+  },
+  {
+    "name": "Scirocco",
+    "type": "TD",
+    "bauweise": "EZF 3",
+    "gewicht": 920,
+    "spannweite": 104,
+    "faktor": "8,8",
+    "d": ""
+  },
+  {
+    "name": "Multibat",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 1310,
+    "spannweite": 148,
+    "faktor": "8,9",
+    "d": ""
+  },
+  {
+    "name": "Eltra",
+    "type": "MD",
+    "bauweise": "",
+    "gewicht": 1540,
+    "spannweite": 166,
+    "faktor": "9,3",
+    "d": ""
+  },
+  {
+    "name": "Rata",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 960,
+    "spannweite": 100,
+    "faktor": "9,6",
+    "d": "D"
+  },
+  {
+    "name": "Stuka",
+    "type": "TD",
+    "bauweise": "L",
+    "gewicht": 1250,
+    "spannweite": 122,
+    "faktor": "10,2",
+    "d": "D"
+  },
+  {
+    "name": "Spitfire",
+    "type": "TD",
+    "bauweise": "Styro",
+    "gewicht": 1180,
+    "spannweite": 109,
+    "faktor": "10,9",
+    "d": ""
+  },
+  {
+    "name": "Lightning+",
+    "type": "MD",
+    "bauweise": "2mot",
+    "gewicht": 1450,
+    "spannweite": 132,
+    "faktor": 11,
+    "d": ""
+  },
+  {
+    "name": "Corsair",
+    "type": "TD",
+    "bauweise": "EZF",
+    "gewicht": 1500,
+    "spannweite": 118,
+    "faktor": "12,7",
+    "d": "D"
+  },
+  {
+    "name": "Focke Wulf",
+    "type": "TD",
+    "bauweise": "EZF3 L 2mot",
+    "gewicht": 1560,
+    "spannweite": 116,
+    "faktor": "13,4",
+    "d": ""
+  },
+  {
+    "name": "Warhawk+",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 3000,
+    "spannweite": 162,
+    "faktor": "18,5",
+    "d": ""
+  },
+  {
+    "name": "Courrier",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 400,
+    "spannweite": 106,
+    "faktor": "3,8",
+    "d": ""
+  },
+  {
+    "name": "Piper",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 560,
+    "spannweite": 118,
+    "faktor": "4,7",
+    "d": ""
+  },
+  {
+    "name": "Starlet",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 480,
+    "spannweite": 80,
+    "faktor": 6,
+    "d": ""
+  },
+  {
+    "name": "Skywagon",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 640,
+    "spannweite": 104,
+    "faktor": "6,2",
+    "d": ""
+  },
+  {
+    "name": "SE 10",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 1200,
+    "spannweite": 138,
+    "faktor": "8,7",
+    "d": ""
+  },
+  {
+    "name": "Skymaster",
+    "type": "HD",
+    "bauweise": "2mot",
+    "gewicht": 1380,
+    "spannweite": 154,
+    "faktor": "8,9",
+    "d": ""
+  },
+  {
+    "name": "Islander-",
+    "type": "HD",
+    "bauweise": "2mot",
+    "gewicht": 1180,
+    "spannweite": 122,
+    "faktor": "9,7",
+    "d": ""
+  },
+  {
+    "name": "Prima",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 1400,
+    "spannweite": 138,
+    "faktor": "10,1",
+    "d": ""
+  },
+  {
+    "name": "Islander+",
+    "type": "HD",
+    "bauweise": "2mot",
+    "gewicht": 1340,
+    "spannweite": 152,
+    "faktor": 11,
+    "d": ""
+  },
+  {
+    "name": "Skyhawk",
+    "type": "HD",
+    "bauweise": "",
+    "gewicht": 1600,
+    "spannweite": 152,
+    "faktor": "13,8",
+    "d": ""
+  },
+  {
+    "name": "Zaunkönig",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 105,
+    "spannweite": 52,
+    "faktor": 2,
+    "d": ""
+  },
+  {
+    "name": "Styro 66",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 480,
+    "spannweite": 96,
+    "faktor": 5,
+    "d": ""
+  },
+  {
+    "name": "Rot DD",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 620,
+    "spannweite": 86,
+    "faktor": "7,2",
+    "d": ""
+  },
+  {
+    "name": "Mew",
+    "type": "DD",
+    "bauweise": "Styro",
+    "gewicht": 600,
+    "spannweite": 81,
+    "faktor": "7,4",
+    "d": ""
+  },
+  {
+    "name": "Udet",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1140,
+    "spannweite": 132,
+    "faktor": "8,6",
+    "d": ""
+  },
+  {
+    "name": "Antonow",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1000,
+    "spannweite": 100,
+    "faktor": 10,
+    "d": "D"
+  },
+  {
+    "name": "Fokker D9",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1270,
+    "spannweite": 113,
+    "faktor": "11,2",
+    "d": ""
+  },
+  {
+    "name": "Pitt blau",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1220,
+    "spannweite": 101,
+    "faktor": 12,
+    "d": ""
+  },
+  {
+    "name": "Pitt weiß",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1220,
+    "spannweite": 101,
+    "faktor": 12,
+    "d": ""
+  },
+  {
+    "name": "Camel",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 1640,
+    "spannweite": 128,
+    "faktor": "12,8",
+    "d": ""
+  },
+  {
+    "name": "Stearman",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 2100,
+    "spannweite": 124,
+    "faktor": "16,9",
+    "d": ""
+  },
+  {
+    "name": "Pitt Phyton",
+    "type": "DD",
+    "bauweise": "",
+    "gewicht": 3200,
+    "spannweite": 136,
+    "faktor": "23,5",
+    "d": ""
+  }
+]
