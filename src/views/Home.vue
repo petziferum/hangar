@@ -1,5 +1,5 @@
 <template>
-<DevTest />
+  <DevTest />
 </template>
 
 <script lang="ts">
@@ -11,7 +11,6 @@ export default Vue.extend({
 
   components: {
     DevTest,
-
   },
 });
 </script>
