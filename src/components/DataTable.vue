@@ -16,6 +16,7 @@
               Neues Flugzeug
             </v-btn>
           </template>
+
           <v-card>
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
@@ -91,12 +92,19 @@
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
     </template>
+
+    <template v-slot:footer>
+      <v-toolbar flat>
+        <v-btn small @click="importPlanes">import</v-btn>
+      </v-toolbar>
+    </template>
   </v-data-table>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
+import { default as planes } from "../types/planes.json";
 
 @Component
 export default class DataTable extends Vue {
@@ -115,16 +123,24 @@ export default class DataTable extends Vue {
   planes: Array<Plane> = [];
   editedItem: Plane = Plane.createEmptyPlane();
   defaultItem: Plane = Plane.createEmptyPlane();
-  ddefaultItem = {
-    name: "",
-    type: "",
-    bauweise: "",
-    gewicht: 0,
-    spannweite: 0,
-    faktor: 0,
-  };
+  jPlanes = [];
+
   get formTitle(): number | string {
     return this.editedIndex === -1 ? "Neues Flugzeug" : "Flugzeug bearbeiten";
+  }
+
+  importPlanes(): void {
+    const liste = planes;
+    for (let p of liste) {
+      const plane = Plane.createEmptyPlane()
+        .withName(p.name)
+        .withType(p.type)
+        .withBauweise(p.bauweise)
+        .withGewicht(p.gewicht)
+        .withSpannweite(p.spannweite);
+
+      this.planes.push(plane);
+    }
   }
 
   initialize(): void {
@@ -188,7 +204,7 @@ export default class DataTable extends Vue {
     this.close();
   }
   created(): void {
-    this.initialize();
+    this.importPlanes();
   }
 }
 </script>
