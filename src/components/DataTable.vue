@@ -90,7 +90,7 @@
       <v-edit-dialog :return-value.sync="props.item.name" @close="close">
         {{ props.item.name }}
         <template v-slot:input>
-          <v-img :src="require('@/assets/hangar-plane.png')"></v-img>
+          <v-img :src="require('@/assets/redbull_000000.JPG')"></v-img>
         </template>
       </v-edit-dialog>
     </template>
