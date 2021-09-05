@@ -1,5 +1,8 @@
+import Sender from "@/types/Sender";
+
 export default class Plane {
   name: string | undefined;
+  sender: Sender | undefined;
   type: string | undefined;
   bauweise: string | undefined;
   gewicht: number | undefined;
@@ -8,6 +11,7 @@ export default class Plane {
 
   constructor(
     name: string | undefined,
+    sender: Sender | undefined,
     type: string | undefined,
     bauweise: string | undefined,
     gewicht: number | undefined,
@@ -15,6 +19,7 @@ export default class Plane {
     faktor: number | undefined
   ) {
     this.name = name;
+    this.sender = sender;
     this.type = type;
     this.bauweise = bauweise;
     this.gewicht = gewicht;
@@ -24,6 +29,10 @@ export default class Plane {
 
   withName(name: string): Plane {
     this.name = name;
+    return this;
+  }
+  withSender(value: Sender): Plane {
+    this.sender = value;
     return this;
   }
   withType(value: string): Plane {
@@ -49,6 +58,7 @@ export default class Plane {
 
   static createEmptyPlane(): Plane {
     return new Plane(
+      undefined,
       undefined,
       undefined,
       undefined,

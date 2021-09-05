@@ -93,7 +93,18 @@
           <v-img :src="require('@/assets/hangar-plane.png')"></v-img>
         </template>
       </v-edit-dialog>
-
+    </template>
+    <template v-slot:item.sender="props">
+      <v-edit-dialog :return-value.sync="props.item.sender" @close="close">
+        {{ props.item.sender }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.sender"
+            label="Sender"
+            autofocus
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
     </template>
 
     <template v-slot:item.actions="{ item }">
@@ -116,11 +127,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import { default as planes } from "../types/planes.json";
+import Sender from "@/types/Sender";
 
 @Component
 export default class DataTable extends Vue {
   headers = [
     { text: "Flugzeug", value: "name" },
+    { text: "Sender", value: "sender" },
     { text: "Typ", value: "type" },
     { text: "Bauweise", value: "bauweise" },
     { text: "Gewicht", value: "gewicht" },
@@ -149,6 +162,18 @@ export default class DataTable extends Vue {
         .withBauweise(p.bauweise)
         .withGewicht(p.gewicht)
         .withSpannweite(p.spannweite);
+      if (p.sender) {
+        switch (p.sender) {
+          case "Turnigy":
+            plane.withSender(Sender.TURNIGY);
+            break;
+          case "Spektrum":
+            plane.withSender(Sender.SPEKTRUM);
+            break;
+          default:
+            plane.withSender(Sender.UNKNOWN);
+        }
+      }
 
       this.planes.push(plane);
     }
