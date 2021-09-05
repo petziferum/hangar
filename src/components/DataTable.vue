@@ -85,6 +85,17 @@
         </v-dialog>
       </v-toolbar>
     </template>
+
+    <template v-slot:item.name="props">
+      <v-edit-dialog :return-value.sync="props.item.name" @close="close">
+        {{ props.item.name }}
+        <template v-slot:input>
+          <v-img :src="require('@/assets/hangar-plane.png')"></v-img>
+        </template>
+      </v-edit-dialog>
+
+    </template>
+
     <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
