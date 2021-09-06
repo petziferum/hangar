@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Perty",
+    "sender": "Turnigy",
+    "type": "TD",
+    "bauweise": "Styro",
+    "gewicht": 150,
+    "spannweite": 56,
+    "faktor": "2,7",
+    "image": "antonov"
+  },
+  {
+    "name": "Trojan",
+    "type": "TD",
+    "sender": "Spektrum",
+    "bauweise": "",
+    "gewicht": 170,
+    "spannweite": 50,
+    "faktor": "3,4",
+    "image": "boomerang"
+  },
+  {
+    "name": "Simprop",
+    "sender": "Turnigy",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 340,
+    "spannweite": 90,
+    "faktor": "3,8",
+    "image": "redbull"
+  }
+  ]

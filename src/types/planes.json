@@ -7,7 +7,7 @@
     "gewicht": 150,
     "spannweite": 56,
     "faktor": "2,7",
-    "d": ""
+    "image": "antonov"
   },
   {
     "name": "Trojan",
@@ -17,7 +17,7 @@
     "gewicht": 170,
     "spannweite": 50,
     "faktor": "3,4",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Simprop",
@@ -27,7 +27,7 @@
     "gewicht": 340,
     "spannweite": 90,
     "faktor": "3,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Polykarpov",
@@ -36,7 +36,7 @@
     "gewicht": 298,
     "spannweite": 66,
     "faktor": "4,5",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Me 109",
@@ -45,7 +45,7 @@
     "gewicht": 360,
     "spannweite": 80,
     "faktor": "4,5",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Hellcat -",
@@ -54,7 +54,7 @@
     "gewicht": 280,
     "spannweite": 62,
     "faktor": "4,5",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Hummer",
@@ -63,7 +63,7 @@
     "gewicht": 390,
     "spannweite": 86,
     "faktor": "4,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Chipmonk",
@@ -72,7 +72,7 @@
     "gewicht": 500,
     "spannweite": 104,
     "faktor": "4,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "US Army",
@@ -81,7 +81,7 @@
     "gewicht": 500,
     "spannweite": 100,
     "faktor": 5,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Mustang gelb",
@@ -90,7 +90,7 @@
     "gewicht": 550,
     "spannweite": 107,
     "faktor": "5,1",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Chipmonk",
@@ -99,7 +99,7 @@
     "gewicht": 500,
     "spannweite": 91,
     "faktor": "5,5",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Cherokee",
@@ -108,7 +108,7 @@
     "gewicht": 600,
     "spannweite": 107,
     "faktor": "5,6",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Skylark",
@@ -117,7 +117,7 @@
     "gewicht": 560,
     "spannweite": 93,
     "faktor": 6,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Warhawk-",
@@ -126,7 +126,7 @@
     "gewicht": 540,
     "spannweite": 86,
     "faktor": "6,3",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Hellcat +",
@@ -135,7 +135,7 @@
     "gewicht": 540,
     "spannweite": 82,
     "faktor": "6,5",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Bonanza",
@@ -144,7 +144,7 @@
     "gewicht": 720,
     "spannweite": 107,
     "faktor": "6,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Me 109",
@@ -153,7 +153,7 @@
     "gewicht": 630,
     "spannweite": 92,
     "faktor": "6,8",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Red Bull",
@@ -162,7 +162,7 @@
     "gewicht": 700,
     "spannweite": 100,
     "faktor": 7,
-    "d": "redbull"
+    "image": "redbull"
   },
   {
     "name": "Flame",
@@ -171,7 +171,7 @@
     "gewicht": 1280,
     "spannweite": 183,
     "faktor": 7,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Me 110",
@@ -180,7 +180,7 @@
     "gewicht": 760,
     "spannweite": 108,
     "faktor": 7,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Mustang blau",
@@ -189,7 +189,7 @@
     "gewicht": 730,
     "spannweite": 102,
     "faktor": "7,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "E-Zone",
@@ -198,7 +198,7 @@
     "gewicht": 700,
     "spannweite": 97,
     "faktor": "7,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Zero",
@@ -207,7 +207,7 @@
     "gewicht": 740,
     "spannweite": 101,
     "faktor": "7,3",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Bearcat",
@@ -216,7 +216,7 @@
     "gewicht": 840,
     "spannweite": 115,
     "faktor": "7,3",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Spitfire",
@@ -225,7 +225,7 @@
     "gewicht": 840,
     "spannweite": 111,
     "faktor": "7,6",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Lightning -",
@@ -234,7 +234,7 @@
     "gewicht": 788,
     "spannweite": 102,
     "faktor": "7,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Rondo",
@@ -243,7 +243,7 @@
     "gewicht": 880,
     "spannweite": 112,
     "faktor": "7,9",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Texan",
@@ -252,7 +252,7 @@
     "gewicht": 980,
     "spannweite": 120,
     "faktor": "8,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Lawotschkin",
@@ -261,7 +261,7 @@
     "gewicht": 850,
     "spannweite": 99,
     "faktor": "8,6",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Scirocco",
@@ -270,7 +270,7 @@
     "gewicht": 920,
     "spannweite": 104,
     "faktor": "8,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Multibat",
@@ -279,7 +279,7 @@
     "gewicht": 1310,
     "spannweite": 148,
     "faktor": "8,9",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Eltra",
@@ -288,7 +288,7 @@
     "gewicht": 1540,
     "spannweite": 166,
     "faktor": "9,3",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Rata",
@@ -297,7 +297,7 @@
     "gewicht": 960,
     "spannweite": 100,
     "faktor": "9,6",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Stuka",
@@ -306,7 +306,7 @@
     "gewicht": 1250,
     "spannweite": 122,
     "faktor": "10,2",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Spitfire",
@@ -315,7 +315,7 @@
     "gewicht": 1180,
     "spannweite": 109,
     "faktor": "10,9",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Lightning+",
@@ -324,7 +324,7 @@
     "gewicht": 1450,
     "spannweite": 132,
     "faktor": 11,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Corsair",
@@ -333,7 +333,7 @@
     "gewicht": 1500,
     "spannweite": 118,
     "faktor": "12,7",
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Focke Wulf",
@@ -342,7 +342,7 @@
     "gewicht": 1560,
     "spannweite": 116,
     "faktor": "13,4",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Warhawk+",
@@ -351,7 +351,7 @@
     "gewicht": 3000,
     "spannweite": 162,
     "faktor": "18,5",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Courrier",
@@ -360,7 +360,7 @@
     "gewicht": 400,
     "spannweite": 106,
     "faktor": "3,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Piper",
@@ -369,7 +369,7 @@
     "gewicht": 560,
     "spannweite": 118,
     "faktor": "4,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Starlet",
@@ -378,7 +378,7 @@
     "gewicht": 480,
     "spannweite": 80,
     "faktor": 6,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Skywagon",
@@ -387,7 +387,7 @@
     "gewicht": 640,
     "spannweite": 104,
     "faktor": "6,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "SE 10",
@@ -396,7 +396,7 @@
     "gewicht": 1200,
     "spannweite": 138,
     "faktor": "8,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Skymaster",
@@ -405,7 +405,7 @@
     "gewicht": 1380,
     "spannweite": 154,
     "faktor": "8,9",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Islander-",
@@ -414,7 +414,7 @@
     "gewicht": 1180,
     "spannweite": 122,
     "faktor": "9,7",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Prima",
@@ -423,7 +423,7 @@
     "gewicht": 1400,
     "spannweite": 138,
     "faktor": "10,1",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Islander+",
@@ -432,7 +432,7 @@
     "gewicht": 1340,
     "spannweite": 152,
     "faktor": 11,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Skyhawk",
@@ -441,7 +441,7 @@
     "gewicht": 1600,
     "spannweite": 152,
     "faktor": "13,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Zaunkönig",
@@ -450,7 +450,7 @@
     "gewicht": 105,
     "spannweite": 52,
     "faktor": 2,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Styro 66",
@@ -459,7 +459,7 @@
     "gewicht": 480,
     "spannweite": 96,
     "faktor": 5,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Rot DD",
@@ -468,7 +468,7 @@
     "gewicht": 620,
     "spannweite": 86,
     "faktor": "7,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Mew",
@@ -477,7 +477,7 @@
     "gewicht": 600,
     "spannweite": 81,
     "faktor": "7,4",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Udet",
@@ -486,7 +486,7 @@
     "gewicht": 1140,
     "spannweite": 132,
     "faktor": "8,6",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Antonow",
@@ -495,7 +495,7 @@
     "gewicht": 1000,
     "spannweite": 100,
     "faktor": 10,
-    "d": "D"
+    "image": "image"
   },
   {
     "name": "Fokker D9",
@@ -504,7 +504,7 @@
     "gewicht": 1270,
     "spannweite": 113,
     "faktor": "11,2",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Pitt blau",
@@ -513,7 +513,7 @@
     "gewicht": 1220,
     "spannweite": 101,
     "faktor": 12,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Pitt weiß",
@@ -522,7 +522,7 @@
     "gewicht": 1220,
     "spannweite": 101,
     "faktor": 12,
-    "d": ""
+    "image": ""
   },
   {
     "name": "Camel",
@@ -531,7 +531,7 @@
     "gewicht": 1640,
     "spannweite": 128,
     "faktor": "12,8",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Stearman",
@@ -540,7 +540,7 @@
     "gewicht": 2100,
     "spannweite": 124,
     "faktor": "16,9",
-    "d": ""
+    "image": ""
   },
   {
     "name": "Pitt Phyton",
@@ -549,6 +549,6 @@
     "gewicht": 3200,
     "spannweite": 136,
     "faktor": "23,5",
-    "d": ""
+    "image": ""
   }
 ]

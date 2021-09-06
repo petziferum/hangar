@@ -4,6 +4,7 @@
     :items="planes"
     sort-by="calories"
     class="elevation-1"
+    :options="tableOptions"
   >
     <template v-slot:top>
       <v-toolbar elevation="2">
@@ -30,6 +31,13 @@
                       v-model="editedItem.name"
                       label="Name"
                     ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-autocomplete
+                      v-model="editedItem.sender"
+                      :items="senderItems"
+                      label="Sender"
+                    ></v-autocomplete>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
@@ -87,10 +95,14 @@
     </template>
 
     <template v-slot:item.name="props">
-      <v-edit-dialog :return-value.sync="props.item.name" @close="close">
+      <v-edit-dialog
+        :return-value.sync="props.item.name"
+        @close="close"
+      >
         {{ props.item.name }}
         <template v-slot:input>
-          <v-img :src="require('@/assets/redbull_00001.jpg')"></v-img>
+          img {{ img }}, {{ props.item }}
+          <v-img :src="img"></v-img>
         </template>
       </v-edit-dialog>
     </template>
@@ -126,8 +138,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-import { default as planes } from "../types/planes.json";
-import Sender from "@/types/Sender";
+import { default as planes } from "../types/p2.json";
+import Sender, { SenderAsRecord } from "@/types/Sender";
 
 @Component
 export default class DataTable extends Vue {
@@ -142,16 +154,23 @@ export default class DataTable extends Vue {
     { text: "Aktions", value: "actions", sortable: false },
   ];
   editedIndex = -1;
+  senderItems = SenderAsRecord;
   dialog = false;
   dialogDelete = false;
   planes: Array<Plane> = [];
   editedItem: Plane = Plane.createEmptyPlane();
   defaultItem: Plane = Plane.createEmptyPlane();
   jPlanes = [];
+  tableOptions = {
+    itemsPerPage: -1,
+  };
+  img = require("@/assets/lightningplus_00000.jpg")
+
 
   get formTitle(): number | string {
     return this.editedIndex === -1 ? "Neues Flugzeug" : "Flugzeug bearbeiten";
   }
+
 
   importPlanes(): void {
     const liste = planes;
@@ -161,7 +180,15 @@ export default class DataTable extends Vue {
         .withType(p.type)
         .withBauweise(p.bauweise)
         .withGewicht(p.gewicht)
-        .withSpannweite(p.spannweite);
+        .withSpannweite(p.spannweite)
+        .withImage(p.image);
+
+      if (typeof p.faktor === "string") {
+        const newfaktor = p.faktor.replace(",", ".");
+        plane.withFaktor(parseFloat(newfaktor));
+      } else {
+        plane.withFaktor(p.faktor);
+      }
       if (p.sender) {
         switch (p.sender) {
           case "Turnigy":
@@ -196,6 +223,12 @@ export default class DataTable extends Vue {
       .withFaktor(5);
     this.planes.push(p);
     this.planes.push(p1);
+  }
+
+  getFaktor(gewicht: number, spannweite: number) {
+    if (gewicht && spannweite) {
+      return gewicht * spannweite;
+    } else return "";
   }
 
   editItem(item: Plane): void {

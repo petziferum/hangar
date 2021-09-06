@@ -8,6 +8,7 @@ export default class Plane {
   gewicht: number | undefined;
   spannweite: number | undefined;
   faktor: number | undefined;
+  image: string | undefined;
 
   constructor(
     name: string | undefined,
@@ -16,7 +17,8 @@ export default class Plane {
     bauweise: string | undefined,
     gewicht: number | undefined,
     spannweite: number | undefined,
-    faktor: number | undefined
+    faktor: number | undefined,
+    image: string | undefined
   ) {
     this.name = name;
     this.sender = sender;
@@ -25,6 +27,7 @@ export default class Plane {
     this.gewicht = gewicht;
     this.spannweite = spannweite;
     this.faktor = faktor;
+    this.image = image;
   }
 
   withName(name: string): Plane {
@@ -55,9 +58,14 @@ export default class Plane {
     this.faktor = value;
     return this;
   }
+  withImage(value: string): Plane {
+    this.image = "@/assets/"+ value + "_00000.jpg";
+    return this;
+  }
 
   static createEmptyPlane(): Plane {
     return new Plane(
+      undefined,
       undefined,
       undefined,
       undefined,
