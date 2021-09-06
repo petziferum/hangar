@@ -1,6 +1,6 @@
 [
   {
-    "name": "Perty",
+    "name": "Antonov",
     "sender": "Turnigy",
     "type": "TD",
     "bauweise": "Styro",
@@ -10,7 +10,7 @@
     "image": "antonov"
   },
   {
-    "name": "Trojan",
+    "name": "Boomerang",
     "type": "TD",
     "sender": "Spektrum",
     "bauweise": "",
@@ -20,7 +20,7 @@
     "image": "boomerang"
   },
   {
-    "name": "Simprop",
+    "name": "Redbull",
     "sender": "Turnigy",
     "type": "TD",
     "bauweise": "",

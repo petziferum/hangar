@@ -95,26 +95,23 @@
     </template>
 
     <template v-slot:item.name="props">
-      <v-edit-dialog
-        :return-value.sync="props.item.name"
-        @close="close"
-      >
+      <v-edit-dialog :return-value.sync="props.item.name" @close="close">
         {{ props.item.name }}
         <template v-slot:input>
-          img {{ img }}, {{ props.item }}
-          <v-img :src="img"></v-img>
+          img: {{ props.item.image }}
+          <v-img :src="planeImage(props.item.image)" contain></v-img>
         </template>
       </v-edit-dialog>
     </template>
     <template v-slot:item.sender="props">
-      <v-edit-dialog :return-value.sync="props.item.sender" @close="close">
+      <v-edit-dialog :return-value.sync="props.item" @close="close">
         {{ props.item.sender }}
         <template v-slot:input>
-          <v-text-field
+          <v-autocomplete
             v-model="props.item.sender"
+            :items="senderItems"
             label="Sender"
-            autofocus
-          ></v-text-field>
+          ></v-autocomplete>
         </template>
       </v-edit-dialog>
     </template>
@@ -125,12 +122,6 @@
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
-    </template>
-
-    <template v-slot:footer>
-      <v-toolbar flat>
-        <v-btn small @click="importPlanes">import</v-btn>
-      </v-toolbar>
     </template>
   </v-data-table>
 </template>
@@ -164,13 +155,20 @@ export default class DataTable extends Vue {
   tableOptions = {
     itemsPerPage: -1,
   };
-  img = require("@/assets/lightningplus_00000.jpg")
-
+  img = [{ plane: "", img: require("@/assets/logo.png") }];
 
   get formTitle(): number | string {
     return this.editedIndex === -1 ? "Neues Flugzeug" : "Flugzeug bearbeiten";
   }
 
+  planeImage(name: string): unknown {
+    const image = this.img.find(
+      (el) => el.plane.toLowerCase() === name.toLowerCase()
+    );
+    if (image) {
+      return image.img;
+    } else return this.img[0].img;
+  }
 
   importPlanes(): void {
     const liste = planes;
@@ -202,6 +200,11 @@ export default class DataTable extends Vue {
         }
       }
 
+      const image = {
+        plane: p.image,
+        img: require("@/assets/" + p.image + "_00000.jpg"),
+      };
+      this.img.push(image);
       this.planes.push(plane);
     }
   }
@@ -225,7 +228,7 @@ export default class DataTable extends Vue {
     this.planes.push(p1);
   }
 
-  getFaktor(gewicht: number, spannweite: number) {
+  getFaktor(gewicht: number, spannweite: number): number | string {
     if (gewicht && spannweite) {
       return gewicht * spannweite;
     } else return "";
@@ -272,6 +275,16 @@ export default class DataTable extends Vue {
     }
     this.close();
   }
+  editSender(item: Plane): void {
+    console.log("edit item", item, this.planes.indexOf(item));
+    this.editedIndex = this.planes.indexOf(item);
+    this.editedItem = Object.assign({}, item);
+  }
+  saveSender(): void {
+    console.log("item:", this.editedItem.sender, this.editedIndex);
+    Object.assign(this.planes[this.editedIndex], this.editedItem);
+  }
+
   created(): void {
     this.importPlanes();
   }

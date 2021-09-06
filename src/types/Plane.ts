@@ -59,7 +59,7 @@ export default class Plane {
     return this;
   }
   withImage(value: string): Plane {
-    this.image = "@/assets/"+ value + "_00000.jpg";
+    this.image = value;
     return this;
   }
 
