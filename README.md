@@ -8,6 +8,8 @@ Plane : string name
 Stuck : int gewicht
 
 ```
+⛹️‍♂️ 🛩️ 🔥
+
 ## Project setup
 ```
 npm install
