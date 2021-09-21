@@ -13,7 +13,6 @@
           />
 
           <v-img
-            alt="Vuetify Name"
             class="shrink mt-1 hidden-sm-and-down"
             contain
             min-width="100"
@@ -22,6 +21,11 @@
           />
         </router-link>
       </div>
+      <template v-slot:extension>
+        <v-tabs>
+          <v-tab to="devtest">devTest</v-tab>
+        </v-tabs>
+      </template>
 
       <v-spacer></v-spacer>
 

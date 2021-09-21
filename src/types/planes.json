@@ -17,7 +17,7 @@
     "gewicht": 170,
     "spannweite": 50,
     "faktor": "3,4",
-    "image": ""
+    "image": "trojan"
   },
   {
     "name": "Simprop",
@@ -36,8 +36,9 @@
     "gewicht": 298,
     "spannweite": 66,
     "faktor": "4,5",
-    "image": "image"
-  },
+    "image": ""
+  },,
+
   {
     "name": "Me 109",
     "type": "TD",
