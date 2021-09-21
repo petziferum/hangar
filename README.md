@@ -1,5 +1,15 @@
 # hangar
 
+```mermaid
+classDiagram
+Plane <|-- Stuck
+
+Plane : string name
+Stuck : int gewicht
+
+```
+⛹️‍♂️ 🛩️ 🔥
+
 ## Project setup
 ```
 npm install
