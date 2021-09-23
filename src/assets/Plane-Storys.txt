@@ -1,0 +1,81 @@
+Boomerang
+Am Beginn des Krieges wollten die Australier ihre Häfen vor den Japanern schützen. Deshalb entwickelten sie aus der vorhandenen Commonwealth einen eigenen Jäger
+ mit einem Motor von Pratt&Withney (Doppelstern). Stückzahl etwa 250
+
+Me 109 (Messerschmitt BF 109)
+Ausgeschrieben war ein Jäger ohne Kabine, der auf der Bahn transportierbar war. Also abnehmbare Tragflächen und Fahrwerk am Rumpf. Das bedingte die enge Fahrspur, 
+die ungeübten Piloten öfter zum Verhängnis wurde. Ursprünglich mit einer Kanone bestückt, die durch die Kurbelwelle und den Spinner schoss. Hat sich nicht bewährt.
+
+Polikarpov
+Die Sovietunion brauchte anstelle der Rata einen Jäger, der den deutschen Jägern gewachsen ist. Der Konstrukteur der Rata entwickelte einen Prototyp, aber er 
+hatte Probleme mit Stalin. Deshalb ging die Maschine nicht in Serie.
+
+Mustang (P52)
+Modernster US Jäger, danach wurden nur noch Flugzeuge mit Strahltriebwerk gebaut.
+
+Hurrikane
+Englischer Jäger vor Kriegsbeginn noch in Holz/Metall Konsruktion.
+
+Warhawk
+US Standardjäger im pazifischen Raum. Wurde mehrfach mit modenen Hochleistungsmotoren ausgerüstet, kam aber nicht an die Leistungen der deutschen und englischen
+Jäger heran, vor allem in großen Höhen. Auch auf Flugzeugträgern.
+
+MIG 3
+Sollte ein Jäger werden, der den deutschen gewachsen war. War schwer zu fliegen, wude deshalb nicht Standardjäger wie die Lawoschkin.
+
+Scirocco
+Italienische Konstruktion, im Original mit Zusatztanks an den Flügelenden. Im Modell mit den Winglets nachempfunden. das Modell mit steuerbarem 3Punkt Fahrwerk 
+ausgestattet.
+
+Me 110
+Langstreckenjäger, hoher Blutzoll in der Luftschlacht über England, später erster Nachtjäger mit Radar
+
+Zero
+Japanischer Standardjäger, Gegner der Warhawk.
+
+Bearcat
+Moderner Nachfolger der Hellcat
+
+Spitfire
+Englischer Standardjäger, besondes stömungsgünstiges Design (eliptische Flächen, besonders weicher Übergang Rumf/Fläche)
+
+Lightning
+Landstreckenjäger für extreme Höhen. Auf der Oberseite der Motoren mit 4000 PS die Turbolader.
+
+Lawotschkin
+Mit ihr hatte Russlnd endlich einen Jäger, der den deutschen gewachsen war.
+
+Stuka 8 (Junkers Ju 87 G)
+Engländer nennen ihn den Blitzkriegbomber. Mit Reihenmotor, weil die schlankere Rumpfnase ein besseres Sichtfeld bietet, und damit dem Piloten ermöglicht,
+ länger auf das Ziel zuzuhalten. Bemerkenswert die Sturzflugbremse, die ein späteres Abfangen ermöglicht.
+
+Corsair
+Moderner US Jäger als Ersatz von Hellcat und Warhawk. Da Tests ergaben, dass der Sternmotor von Pratt&Withney nur mit einem Propeller von 2m Durchmesser maximale Leistung Leistung 
+erbringt, bekam sie die charakteristischen Knickflügel, um die Rumpfnase vom Boden abzuheben. für den Trägereinsatz worde die Kanzel um 13 cm angehoben, um dem Piloten bessere sicht zu gewähren.
+
+Focke Wulf
+Zweiter deutscher Jäger, mit Sternmotor, gilt als stärkster Jäger der Welt im WW2. Hatte Probleme mit Überhitzung der unteren Zylinder, deshalb die Haifischkiemen hinter dem Motor. 
+Das Modell mit originalgetreuen Spreizklappen als Landeklappen. Einzeihbares Spornrad.
+
+Courier
+Unser Arbeitspferd mit hunderten Starts und Landungen. 2achs gesteuert.
+
+Islander
+Heute noch in Island gebäuchliches Flugzeug. Modell+ für Fallschirmabwurf ausgerüstet.
+
+Antonow An 2
+Sibirisches "Arbeitspferd", robust und niedrige Abhebegeschwindigkeit von 82 kmh. Wegen des hohen Höhenleitwerks beliebt zum Absetzen vun Fallschirmspringern. Heute statt dem Sternmotor mit Turboprop ausgestattet.
+
+Fokker D9
+Legendärer deutscher Jäger im WW1. Es gab den Spruch: Die Fokker D9 macht aus einem Durchschnittspiloten ein Fliegerass. Es ging das Gerücht, die Stützen zwischen den Flügeln dienten nur der mentalen Beruhigung 
+des Piloten. Am Kriegsende wurden alle Maschinen von den USA beschlagnahmt. Berühmtes Foto einer D9 vor der Freiheitsstatue.
+
+Pitt
+Ursprünglich ein Tiefsecker. Wurde mit der oberen aufgesetzten Tragfläche zum Kunstflieger, auf dem alle amerikanischen Piloten ihren Kunstflugschein gemacht haben. Keine Eigenstabilität, erfordert volle
+Aufmerksamkeit vom Piloten.
+
+Camel
+Allierter Standartjäger WW1, Gegner der Fokker D9
+
+Pitt Phyton
+Neukonstruktion der Pitt als extremer Kunstflieger
