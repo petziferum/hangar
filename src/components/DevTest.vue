@@ -13,56 +13,62 @@
                     :alt="p.image"
                     contain
                     :src="require('@/assets/' + p.image + '_00000.jpg')"
-
                   ></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-form>
                     <v-row>
                       <v-col>
-                        <v-text-field
-                          v-model="p.name"
-                          label="name"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.name).color">{{
+                          checkIfNotEmpty(p.name).icon
+                        }}</v-icon>
+                        Name: {{ p.name }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.type"
-                          label="type"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.type).color">{{
+                          checkIfNotEmpty(p.type).icon
+                        }}</v-icon>
+                        Typ: {{ p.type }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.bauweise"
-                          label="Bauweise"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.bauweise).color">{{
+                          checkIfNotEmpty(p.bauweise).icon
+                        }}</v-icon>
+                        Bauweise: {{ p.bauweise }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.gewicht"
-                          label="Gewicht"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.gewicht).color">{{
+                          checkIfNotEmpty(p.gewicht).icon
+                        }}</v-icon>
+                        Gewicht: {{ p.gewicht }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.spannweite"
-                          label="Spannweite"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.spannweite).color">{{
+                          checkIfNotEmpty(p.spannweite).icon
+                        }}</v-icon>
+                        Spannweite: {{ p.spannweite }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.faktor"
-                          label="Faktor"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.faktor).color">{{
+                          checkIfNotEmpty(p.faktor).icon
+                        }}</v-icon>
+                        Faktor: {{ p.faktor }}
                       </v-col>
                       <v-col>
-                        <v-text-field
-                          v-model="p.sender"
-                          label="sender"
-                        ></v-text-field>
+                        <v-icon :color="checkIfNotEmpty(p.sender).color">{{
+                          checkIfNotEmpty(p.sender).icon
+                        }}</v-icon>
+                        Sender: {{ p.sender }}
                       </v-col>
                       <v-col>
-                        <v-btn disabled>Speichern</v-btn>
+                        <v-icon
+                          :color="checkIfNotEmpty(p.beschreibung).color"
+                          >{{ checkIfNotEmpty(p.beschreibung).icon }}</v-icon
+                        >
+                        Beschreibung: {{ p.beschreibung }}
+                      </v-col>
+                      <v-col>
+                        <v-btn @click="dialogOpen(p)">Bearbeiten</v-btn>
                       </v-col>
                     </v-row>
                   </v-form>
@@ -71,6 +77,8 @@
             </v-list>
           </v-card-text>
         </v-card>
+        Editieren: {{ editPlane }}
+        <PlaneDialog v-model="dialog" :plane="editPlane" />
       </v-col>
     </v-row>
   </v-container>
@@ -81,13 +89,38 @@ import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import { default as planes } from "../types/p2.json";
 import Sender from "@/types/Sender";
+import PlaneDialog from "@/components/PlaneDialog.vue";
+
+interface Check {
+  color: string;
+  icon: string;
+}
 
 @Component({
-  components: {},
+  components: { PlaneDialog },
 })
 export default class DevTest extends Vue {
   planes: Array<Plane> = [];
   img = [{ plane: "", img: require("@/assets/logo.png") }];
+  editPlane: Plane | null = null;
+  dialog = false;
+
+  dialogOpen(p: Plane): void {
+    this.editPlane = p;
+    this.dialog = true;
+  }
+
+  checkIfNotEmpty(value: string): Check {
+    if (value != null && value != undefined) {
+      if (value.length > 0 || value.toString().length > 0) {
+        return { color: "green", icon: "mdi-check" };
+      } else {
+        return { color: "red", icon: "mdi-close-box" };
+      }
+    } else {
+      return { color: "red", icon: "mdi-close-box-outline" };
+    }
+  }
 
   importPlanes(): void {
     const liste = planes;
@@ -106,7 +139,7 @@ export default class DevTest extends Vue {
       } else {
         plane.withFaktor(p.faktor);
       }
-      if (p.sender) {
+      if (p.sender != undefined) {
         switch (p.sender) {
           case "Turnigy":
             plane.withSender(Sender.TURNIGY);

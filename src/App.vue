@@ -56,3 +56,8 @@ export default Vue.extend({
   }),
 });
 </script>
+<style>
+.border {
+  border: 1px solid;
+}
+</style>

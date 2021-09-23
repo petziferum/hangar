@@ -28,5 +28,15 @@
     "spannweite": 90,
     "faktor": "3,8",
     "image": "redbull"
+  },
+  {
+    "name": "Me 109",
+    "type": "TD",
+    "bauweise": "",
+    "gewicht": 360,
+    "spannweite": 80,
+    "faktor": "4,5",
+    "image": "me109",
+    "sender": "Turnigy"
   }
-  ]
+]

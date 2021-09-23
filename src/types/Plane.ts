@@ -9,6 +9,7 @@ export default class Plane {
   spannweite: number | undefined;
   faktor: number | undefined;
   image: string | undefined;
+  beschreibung?: string;
 
   constructor(
     name: string | undefined,
@@ -30,6 +31,10 @@ export default class Plane {
     this.image = image;
   }
 
+  withBeschreibung(value: string): Plane {
+    this.beschreibung = value;
+    return this;
+  }
   withName(name: string): Plane {
     this.name = name;
     return this;
