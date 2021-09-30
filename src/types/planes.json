@@ -37,17 +37,9 @@
     "spannweite": 66,
     "faktor": "4,5",
     "image": ""
-  },,
-
-  {
-    "name": "Me 109",
-    "type": "TD",
-    "bauweise": "",
-    "gewicht": 360,
-    "spannweite": 80,
-    "faktor": "4,5",
-    "image": ""
   },
+
+  ,
   {
     "name": "Hellcat -",
     "type": "TD",
@@ -73,15 +65,6 @@
     "gewicht": 500,
     "spannweite": 104,
     "faktor": "4,8",
-    "image": ""
-  },
-  {
-    "name": "US Army",
-    "type": "MD",
-    "bauweise": "",
-    "gewicht": 500,
-    "spannweite": 100,
-    "faktor": 5,
     "image": ""
   },
   {
@@ -165,39 +148,13 @@
     "faktor": 7,
     "image": "redbull"
   },
-  {
-    "name": "Flame",
-    "type": "TD",
-    "bauweise": "",
-    "gewicht": 1280,
-    "spannweite": 183,
-    "faktor": 7,
-    "image": ""
-  },
-  {
-    "name": "Me 110",
-    "type": "TD",
-    "bauweise": "EZF  3  2mot",
-    "gewicht": 760,
-    "spannweite": 108,
-    "faktor": 7,
-    "image": ""
-  },
+
   {
     "name": "Mustang blau",
     "type": "TD",
     "bauweise": "",
     "gewicht": 730,
     "spannweite": 102,
-    "faktor": "7,2",
-    "image": ""
-  },
-  {
-    "name": "E-Zone",
-    "type": "MD",
-    "bauweise": "",
-    "gewicht": 700,
-    "spannweite": 97,
     "faktor": "7,2",
     "image": ""
   },
@@ -219,24 +176,7 @@
     "faktor": "7,3",
     "image": "image"
   },
-  {
-    "name": "Spitfire",
-    "type": "TD",
-    "bauweise": "EZF",
-    "gewicht": 840,
-    "spannweite": 111,
-    "faktor": "7,6",
-    "image": ""
-  },
-  {
-    "name": "Lightning -",
-    "type": "MD",
-    "bauweise": "2mot",
-    "gewicht": 788,
-    "spannweite": 102,
-    "faktor": "7,7",
-    "image": ""
-  },
+
   {
     "name": "Rondo",
     "type": "MD",
@@ -246,15 +186,7 @@
     "faktor": "7,9",
     "image": ""
   },
-  {
-    "name": "Texan",
-    "type": "TD",
-    "bauweise": "EZF",
-    "gewicht": 980,
-    "spannweite": 120,
-    "faktor": "8,2",
-    "image": ""
-  },
+
   {
     "name": "Lawotschkin",
     "type": "TD",
@@ -264,15 +196,7 @@
     "faktor": "8,6",
     "image": "image"
   },
-  {
-    "name": "Scirocco",
-    "type": "TD",
-    "bauweise": "EZF 3",
-    "gewicht": 920,
-    "spannweite": 104,
-    "faktor": "8,8",
-    "image": ""
-  },
+
   {
     "name": "Multibat",
     "type": "MD",
@@ -283,33 +207,6 @@
     "image": ""
   },
   {
-    "name": "Eltra",
-    "type": "MD",
-    "bauweise": "",
-    "gewicht": 1540,
-    "spannweite": 166,
-    "faktor": "9,3",
-    "image": ""
-  },
-  {
-    "name": "Rata",
-    "type": "TD",
-    "bauweise": "",
-    "gewicht": 960,
-    "spannweite": 100,
-    "faktor": "9,6",
-    "image": "image"
-  },
-  {
-    "name": "Stuka",
-    "type": "TD",
-    "bauweise": "L",
-    "gewicht": 1250,
-    "spannweite": 122,
-    "faktor": "10,2",
-    "image": "image"
-  },
-  {
     "name": "Spitfire",
     "type": "TD",
     "bauweise": "Styro",
@@ -317,24 +214,6 @@
     "spannweite": 109,
     "faktor": "10,9",
     "image": ""
-  },
-  {
-    "name": "Lightning+",
-    "type": "MD",
-    "bauweise": "2mot",
-    "gewicht": 1450,
-    "spannweite": 132,
-    "faktor": 11,
-    "image": ""
-  },
-  {
-    "name": "Corsair",
-    "type": "TD",
-    "bauweise": "EZF",
-    "gewicht": 1500,
-    "spannweite": 118,
-    "faktor": "12,7",
-    "image": "image"
   },
   {
     "name": "Focke Wulf",
@@ -390,15 +269,7 @@
     "faktor": "6,2",
     "image": ""
   },
-  {
-    "name": "SE 10",
-    "type": "HD",
-    "bauweise": "",
-    "gewicht": 1200,
-    "spannweite": 138,
-    "faktor": "8,7",
-    "image": ""
-  },
+
   {
     "name": "Skymaster",
     "type": "HD",
@@ -453,15 +324,7 @@
     "faktor": 2,
     "image": ""
   },
-  {
-    "name": "Styro 66",
-    "type": "DD",
-    "bauweise": "",
-    "gewicht": 480,
-    "spannweite": 96,
-    "faktor": 5,
-    "image": ""
-  },
+
   {
     "name": "Rot DD",
     "type": "DD",
@@ -487,24 +350,6 @@
     "gewicht": 1140,
     "spannweite": 132,
     "faktor": "8,6",
-    "image": ""
-  },
-  {
-    "name": "Antonow",
-    "type": "DD",
-    "bauweise": "",
-    "gewicht": 1000,
-    "spannweite": 100,
-    "faktor": 10,
-    "image": "image"
-  },
-  {
-    "name": "Fokker D9",
-    "type": "DD",
-    "bauweise": "",
-    "gewicht": 1270,
-    "spannweite": 113,
-    "faktor": "11,2",
     "image": ""
   },
   {

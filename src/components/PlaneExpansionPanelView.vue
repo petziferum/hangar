@@ -52,6 +52,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-card flat color="#f9f9ff">
+              <v-img :src="require('@/assets/' + p.image + '_00000.jpg')" width="100%" height="300px"></v-img>
               <v-card-title>{{ p.name }}</v-card-title>
               <v-card-actions>
                 <v-btn @click="dialogOpen(p)">Bearbeiten</v-btn>
