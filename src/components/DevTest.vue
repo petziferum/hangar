@@ -6,6 +6,25 @@
         <TestExpansion />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <plane-expansion-panel-view
+          :planes="planes"
+        ></plane-expansion-panel-view>
+      </v-col>
+    </v-row>
+    <v-row no-gutters>
+      <v-col cols="12">
+        <v-toolbar elevation="3" style="z-index: 100; margin-top:20px"> Flugtag Liste </v-toolbar>
+      </v-col>
+      <v-col>
+        <v-card>
+          <v-card-text v-for="(model, i) in flightList" :key="model.name">
+            {{ i+1 }}. Flugzeug: {{ model.name }} Sender: {{ model.sender }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -27,6 +46,10 @@ export default class DevTest extends Vue {
   editPlane: Plane | null = null;
   dialog = false;
   active = false;
+
+  get flightList() {
+    return this.$store.getters.getFlightList;
+  }
 
   importPlanes(): void {
     const liste = planes;

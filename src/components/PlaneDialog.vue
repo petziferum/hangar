@@ -1,10 +1,23 @@
 <template>
-  <v-dialog v-model="isOpen">
+  <v-dialog v-model="isOpen" fullscreen transition="dialog-bottom-transition">
     <template v-if="!p">
       <v-skeleton-loader type="card"></v-skeleton-loader>
     </template>
     <template v-else>
-      <v-card>
+      <v-toolbar color="primary">
+        <v-btn icon @click="isOpen = !isOpen">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-toolbar-title>
+          Bearbeiten
+        </v-toolbar-title>
+        <v-spacer />
+        <v-toolbar-items>
+          <v-btn @click="isOpen = !isOpen" class="mx-2">Abbrechen</v-btn>
+          <v-btn @click="savePlane" color="success">Speichern</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+      <v-card tile>
         <v-card-title>Flugzeug: {{ p.name }}</v-card-title>
         <v-form ref="editPlane">
           <v-card-actions>
@@ -34,9 +47,7 @@
               v-model="p.beschreibung"
             ></v-textarea>
           </v-card-actions>
-          <v-card-actions class="border justify-end">
-            <v-btn @click="isOpen = !isOpen">Abbrechen</v-btn>
-            <v-btn @click="savePlane" color="success">Speichern</v-btn>
+          <v-card-actions class="justify-end">
           </v-card-actions>
         </v-form>
       </v-card>
