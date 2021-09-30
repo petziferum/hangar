@@ -62,6 +62,8 @@
                   @click="addFlightList(p)"
                   >Fliegen
                 </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="error" @click="uploadPlane(p)">Hochladen</v-btn>
               </v-card-actions>
               <v-card-text>
                 <v-row no-gutters>
@@ -89,6 +91,7 @@
             >
           </v-list-item-content>
         </v-list-item>
+        {{ p }}
         <v-divider></v-divider>
       </v-list-group>
     </v-list>
@@ -114,6 +117,7 @@ export default class PlaneExpansionPanelView extends Vue {
 
   img = [{ plane: "", img: require("@/assets/logo.png") }];
   editPlane: Plane | null = null;
+  uploadready: Array<Plane> = []
   dialog = false;
   active = false;
 
@@ -121,6 +125,11 @@ export default class PlaneExpansionPanelView extends Vue {
     console.log(window.innerWidth);
     return window.innerWidth > 500;
   }
+
+  uploadPlane(plane: Plane):void {
+    this.uploadready.push(plane)
+  }
+
   addFlightList(value: Plane) {
     this.$store.dispatch("addToFlightlist", value);
   }

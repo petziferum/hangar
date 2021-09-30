@@ -3,11 +3,6 @@
     DEVTEST
     <v-row>
       <v-col>
-        <TestExpansion />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
         <plane-expansion-panel-view
           :planes="planes"
         ></plane-expansion-panel-view>
