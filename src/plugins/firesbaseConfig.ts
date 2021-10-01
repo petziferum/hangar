@@ -1,8 +1,5 @@
-import "firebase/firestore";
-import "firebase/auth";
-import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat";
-import store from "@/store";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGwO2YDTyZFJsiZlWgfgaqkXYUqCgHsHc",
@@ -14,12 +11,9 @@ const firebaseConfig = {
   measurementId: "G-WGCYMBND6Q",
 };
 
-initializeApp(firebaseConfig);
+const hangarApp = firebase.initializeApp(firebaseConfig)
+const store = hangarApp.firestore();
+const bucket = hangarApp.storage();
+const auth = hangarApp.auth()
 
-const fireAuth = firebase.auth();
-fireAuth.onAuthStateChanged(
-  (user: firebase.User | null): Promise<firebase.User> =>
-    store.dispatch("FETCH_USER", user)
-);
-const firestore = firebase.firestore();
-export default firestore.app;
+export { bucket, auth, store }

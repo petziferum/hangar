@@ -1,6 +1,7 @@
 import Sender from "@/types/Sender";
 
 export default class Plane {
+  id: string | undefined;
   name: string | undefined;
   sender: Sender | undefined;
   type: string | undefined;
@@ -66,6 +67,10 @@ export default class Plane {
   withImage(value: string): Plane {
     this.image = value;
     return this;
+  }
+  withId(value: string): Plane {
+    this.id = value;
+    return this
   }
 
   static createEmptyPlane(): Plane {

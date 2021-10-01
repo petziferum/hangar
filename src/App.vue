@@ -4,7 +4,7 @@
       <div class="d-flex align-center">
         <router-link to="/">
           <v-img
-            alt="Vuetify Logo"
+            alt="Hangar Logo"
             class="shrink mr-2"
             contain
             :src="require('@/assets/hangar-plane.png')"
@@ -24,19 +24,19 @@
       <template v-slot:extension>
         <v-tabs>
           <v-tab to="devtest">devTest</v-tab>
+          <v-tab to="hangar">Hangar</v-tab>
         </v-tabs>
       </template>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn @click="login" text>
+        <span class="mr-2">Login</span>
+        <v-icon>mdi-login</v-icon>
       </v-btn>
+      <div v-if="user">
+       {{user.email}}
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -47,13 +47,28 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { auth } from "@/plugins/firesbaseConfig";
 
 export default Vue.extend({
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
+  methods: {
+    login() {
+      auth
+        .signInWithEmailAndPassword("admin@hangar.de", "asdfasdf")
+        .then((user) => {
+          const u = user.user;
+          this.$store.dispatch("FETCH_USER", u);
+          console.log("eingelogged:", u?.email);
+        });
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.getters.getUser;
+    }
+  }
 });
 </script>
 <style>
