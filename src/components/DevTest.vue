@@ -3,7 +3,7 @@
     DEVTEST
     <v-row justify="center">
       <v-col>
-        <plane-expansion-panel-view :planes="planes"></plane-expansion-panel-view>
+        <edit-plane></edit-plane>
       </v-col>
     </v-row>
   </v-container>
@@ -17,39 +17,18 @@ import Sender from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
 import PlaneExpansionPanelView from "@/components/PlaneExpansionPanelView.vue";
 import TestExpansion from "@/components/TestExpansion.vue";
+import EditPlane from "@/components/EditPlane.vue";
 
 @Component({
-  components: { TestExpansion, PlaneExpansionPanelView, PlaneDialog },
+  components: {
+    EditPlane,
+    TestExpansion,
+    PlaneExpansionPanelView,
+    PlaneDialog,
+  },
 })
 export default class DevTest extends Vue {
-
-  liste = [
-    "Antonov",
-    "Boomerang",
-    "Corsair",
-    "Eltra",
-    "E-Zone",
-    "Flame",
-    "Fokker D9",
-    "Hurricane",
-    "Lighning +",
-    "Lightning -",
-    "Me 109",
-    "Me 110",
-    "Mig 3",
-    "Moth",
-    "Rata",
-    "Red Bull",
-    "Scirocco",
-    "SE 10",
-    "Spitfire",
-    "Stuka",
-    "Styro 66",
-    "Texan",
-    "Twin",
-    "US Army"
-  ]
-  planes: Array<Plane> = []
+  planes: Array<Plane> = [];
   img = [{ plane: "", img: require("@/assets/logo.png") }];
   dialog = false;
   active = false;
@@ -99,7 +78,6 @@ export default class DevTest extends Vue {
   created(): void {
     this.importPlanes();
   }
-
 }
 </script>
 

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Plane from "@/types/Plane";
+import userStore from "./user";
 
 Vue.use(Vuex);
 
@@ -19,7 +20,7 @@ export default new Vuex.Store({
   },
   actions: {
     FETCH_USER({ commit }, user) {
-      console.log("fetch", user)
+      console.log("fetch", user);
       commit("SET_USER", user);
     },
     addToFlightlist({ commit }, payload) {
@@ -30,11 +31,13 @@ export default new Vuex.Store({
   },
   getters: {
     getUser: (state) => {
-      return state.user
+      return state.user;
     },
     getFlightList: (state) => {
       return state.flightList;
     },
   },
-  modules: {},
+  modules: {
+    userStore,
+  },
 });

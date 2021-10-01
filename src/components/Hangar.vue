@@ -25,7 +25,7 @@ export default class Hangar extends Vue {
   planes: Array<Plane> = [];
 
   getPlanes() {
-    console.log("starte fetch")
+    console.log("starte fetch");
     store
       .collection("planes")
       .get()
@@ -52,9 +52,9 @@ export default class Hangar extends Vue {
       .catch(() => {
         console.log("nichts gefunden");
       })
-    .finally(() => {
-      console.info("fertig")
-    });
+      .finally(() => {
+        console.info("fertig");
+      });
   }
 
   created() {

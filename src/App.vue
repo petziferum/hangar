@@ -23,7 +23,7 @@
       </div>
       <template v-slot:extension>
         <v-tabs>
-          <v-tab to="devtest">devTest</v-tab>
+          <!-- <v-tab to="devtest">devTest</v-tab> -->
           <v-tab to="hangar">Hangar</v-tab>
         </v-tabs>
       </template>
@@ -35,7 +35,7 @@
         <v-icon>mdi-login</v-icon>
       </v-btn>
       <div v-if="user">
-       {{user.email}}
+        {{ user.email }}
       </div>
     </v-app-bar>
 
@@ -67,8 +67,8 @@ export default Vue.extend({
   computed: {
     user() {
       return this.$store.getters.getUser;
-    }
-  }
+    },
+  },
 });
 </script>
 <style>
