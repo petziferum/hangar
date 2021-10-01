@@ -1,23 +1,9 @@
 <template>
   <v-container>
     DEVTEST
-    <v-row>
+    <v-row justify="center">
       <v-col>
-        <plane-expansion-panel-view
-          :planes="planes"
-        ></plane-expansion-panel-view>
-      </v-col>
-    </v-row>
-    <v-row no-gutters>
-      <v-col cols="12">
-        <v-toolbar elevation="3" style="z-index: 100; margin-top:20px"> Flugtag Liste </v-toolbar>
-      </v-col>
-      <v-col>
-        <v-card>
-          <v-card-text v-for="(model, i) in flightList" :key="model.name">
-            {{ i+1 }}. Flugzeug: {{ model.name }} Sender: {{ model.sender }}
-          </v-card-text>
-        </v-card>
+        <plane-expansion-panel-view :planes="planes"></plane-expansion-panel-view>
       </v-col>
     </v-row>
   </v-container>
@@ -26,7 +12,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-import { default as planes } from "../types/p2.json";
+import { default as planes } from "../types/p3.json";
 import Sender from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
 import PlaneExpansionPanelView from "@/components/PlaneExpansionPanelView.vue";
@@ -36,15 +22,37 @@ import TestExpansion from "@/components/TestExpansion.vue";
   components: { TestExpansion, PlaneExpansionPanelView, PlaneDialog },
 })
 export default class DevTest extends Vue {
-  planes: Array<Plane> = [];
+
+  liste = [
+    "Antonov",
+    "Boomerang",
+    "Corsair",
+    "Eltra",
+    "E-Zone",
+    "Flame",
+    "Fokker D9",
+    "Hurricane",
+    "Lighning +",
+    "Lightning -",
+    "Me 109",
+    "Me 110",
+    "Mig 3",
+    "Moth",
+    "Rata",
+    "Red Bull",
+    "Scirocco",
+    "SE 10",
+    "Spitfire",
+    "Stuka",
+    "Styro 66",
+    "Texan",
+    "Twin",
+    "US Army"
+  ]
+  planes: Array<Plane> = []
   img = [{ plane: "", img: require("@/assets/logo.png") }];
-  editPlane: Plane | null = null;
   dialog = false;
   active = false;
-
-  get flightList() {
-    return this.$store.getters.getFlightList;
-  }
 
   importPlanes(): void {
     const liste = planes;
@@ -56,7 +64,6 @@ export default class DevTest extends Vue {
         .withGewicht(p.gewicht)
         .withSpannweite(p.spannweite)
         .withImage(p.image);
-
       if (p.beschreibung) {
         plane.withBeschreibung(p.beschreibung);
       } else {
@@ -80,7 +87,6 @@ export default class DevTest extends Vue {
             plane.withSender(Sender.UNKNOWN);
         }
       }
-
       const image = {
         plane: p.image,
         img: require("@/assets/" + p.image + "_00000.jpg"),
@@ -93,6 +99,7 @@ export default class DevTest extends Vue {
   created(): void {
     this.importPlanes();
   }
+
 }
 </script>
 
