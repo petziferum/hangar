@@ -8,9 +8,7 @@
         <v-btn icon @click="isOpen = !isOpen">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title>
-          Bearbeiten
-        </v-toolbar-title>
+        <v-toolbar-title> Bearbeiten </v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn @click="isOpen = !isOpen" class="mx-2">Abbrechen</v-btn>
@@ -47,8 +45,7 @@
               v-model="p.beschreibung"
             ></v-textarea>
           </v-card-actions>
-          <v-card-actions class="justify-end">
-          </v-card-actions>
+          <v-card-actions class="justify-end"> </v-card-actions>
         </v-form>
       </v-card>
     </template>
