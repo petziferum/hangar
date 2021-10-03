@@ -1,28 +1,41 @@
 <template>
   <v-container>
-   <v-expansion-panels flat>
-     <v-expansion-panel v-for="plane in planes" :key="plane.id">
-       <v-expansion-panel-header>{{plane.name}}<v-spacer></v-spacer>{{ plane.id }}</v-expansion-panel-header>
-       <v-expansion-panel-content class="border content ">
-         <div width="100%" class="border">hallo</div>
-         <v-img :src="plane.image"  class="contImg" width="100%" height="100px"></v-img>
-       </v-expansion-panel-content>
-     </v-expansion-panel>
-   </v-expansion-panels>
+    <v-expansion-panels flat>
+      <v-expansion-panel v-for="plane in planes" :key="plane.id">
+        <v-expansion-panel-header
+          >{{ plane.name }}<v-spacer></v-spacer
+          >{{ plane.id }}</v-expansion-panel-header
+        >
+        <v-expansion-panel-content class="border content">
+          <div width="100%" class="border">hallo</div>
+          <v-img
+            :src="plane.image"
+            class="contImg"
+            width="100%"
+            height="100px"
+          ></v-img>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-import { fireStore } from "@/plugins/firesbaseConfig";
+import firebaseService from "@/store/api/firebaseService";
 
 @Component
 export default class Hangar extends Vue {
-  planes: Array<Plane> = [];
+  planes: Plane[] | void = [];
 
   getPlanes() {
     console.log("starte fetch");
+    firebaseService.getAllPlanes()
+    .then(planesList => {
+      this.planes= planesList;
+    });
+    /*
     fireStore
       .collection("planes")
       .get()
@@ -52,13 +65,13 @@ export default class Hangar extends Vue {
       .finally(() => {
         console.info("fertig");
       });
+
+     */
   }
 
   created() {
     this.getPlanes();
   }
-
-
 }
 </script>
 <style scoped>
