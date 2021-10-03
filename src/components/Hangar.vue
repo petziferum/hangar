@@ -3,8 +3,9 @@
    <v-expansion-panels flat>
      <v-expansion-panel v-for="plane in planes" :key="plane.id">
        <v-expansion-panel-header>{{plane.name}}<v-spacer></v-spacer>{{ plane.id }}</v-expansion-panel-header>
-       <v-expansion-panel-content>
-         <v-img :src="plane.image" width="100%" height="100px"></v-img>
+       <v-expansion-panel-content class="border content ">
+         <div width="100%" class="border">hallo</div>
+         <v-img :src="plane.image"  class="contImg" width="100%" height="100px"></v-img>
        </v-expansion-panel-content>
      </v-expansion-panel>
    </v-expansion-panels>
@@ -14,14 +15,15 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
+import { fireStore } from "@/plugins/firesbaseConfig";
 
 @Component
 export default class Hangar extends Vue {
   planes: Array<Plane> = [];
-/*
+
   getPlanes() {
     console.log("starte fetch");
-    store
+    fireStore
       .collection("planes")
       .get()
       .then((res) => {
@@ -56,8 +58,16 @@ export default class Hangar extends Vue {
     this.getPlanes();
   }
 
- */
+
 }
 </script>
-
-<style scoped></style>
+<style scoped>
+.contImg {
+  width: 100% !important;
+  margin-left: 0 !important;
+  left: 0px;
+}
+.content {
+  padding: 0 !important;
+}
+</style>
