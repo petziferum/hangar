@@ -47,14 +47,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { auth } from "@/plugins/firesbaseConfig";
 
 export default Vue.extend({
   name: "App",
 
   data: () => ({}),
   methods: {
+
     login() {
+      console.log("login... off")
+      /*
       auth
         .signInWithEmailAndPassword("admin@hangar.de", "asdfasdf")
         .then((user) => {
@@ -62,7 +64,11 @@ export default Vue.extend({
           this.$store.dispatch("FETCH_USER", u);
           console.log("eingelogged:", u?.email);
         });
+
+       */
     },
+
+
   },
   computed: {
     user() {

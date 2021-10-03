@@ -157,7 +157,6 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import PlaneDialog from "@/components/PlaneDialog.vue";
-import { bucket, store } from "@/plugins/firesbaseConfig";
 import Sender from "@/types/Sender";
 
 interface Check {
@@ -208,6 +207,7 @@ export default class PlaneExpansionPanelView extends Vue {
     });
     console.log("imageSrc:", this.imageSrc, "src: ", src);
   }
+  /*
   uploadImage(plane: Plane) {
     if (!plane.sender) plane.sender = Sender.UNKNOWN;
     if (!plane.bauweise) plane.bauweise = "";
@@ -254,6 +254,8 @@ export default class PlaneExpansionPanelView extends Vue {
         });
     } else console.log("kein Bild");
   }
+
+   */
   uploadPlane(plane: Plane): void {
     this.uploadready.push(plane);
   }

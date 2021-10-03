@@ -1,29 +1,24 @@
 <template>
   <v-container>
-    Planes: <v-btn @click="getPlanes">fetch</v-btn>
-    <v-row>
-      <v-col cols="12" sm="6" md="4" lg="3" v-for="p in planes" :key="p.id">
-        <v-card>
-          <v-card-title>{{ p.name }}</v-card-title>
-          <v-img :src="p.image"> </v-img>
-          <v-card-text>
-            {{ p }}
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+   <v-expansion-panels flat>
+     <v-expansion-panel v-for="plane in planes" :key="plane.id">
+       <v-expansion-panel-header>{{plane.name}}<v-spacer></v-spacer>{{ plane.id }}</v-expansion-panel-header>
+       <v-expansion-panel-content>
+         <v-img :src="plane.image" width="100%" height="100px"></v-img>
+       </v-expansion-panel-content>
+     </v-expansion-panel>
+   </v-expansion-panels>
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-import { store } from "@/plugins/firesbaseConfig";
 
 @Component
 export default class Hangar extends Vue {
   planes: Array<Plane> = [];
-
+/*
   getPlanes() {
     console.log("starte fetch");
     store
@@ -60,6 +55,8 @@ export default class Hangar extends Vue {
   created() {
     this.getPlanes();
   }
+
+ */
 }
 </script>
 

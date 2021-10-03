@@ -1,5 +1,4 @@
-import firebase from "firebase/compat";
-
+import firebase from "firebase"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGwO2YDTyZFJsiZlWgfgaqkXYUqCgHsHc",
@@ -11,9 +10,6 @@ const firebaseConfig = {
   measurementId: "G-WGCYMBND6Q",
 };
 
-const hangarApp = firebase.initializeApp(firebaseConfig)
-const store = hangarApp.firestore();
-const bucket = hangarApp.storage();
-const auth = hangarApp.auth()
+const firebaseApp = firebase.initializeApp(firebaseConfig)
 
-export { bucket, auth, store }
+export default firebaseApp;
