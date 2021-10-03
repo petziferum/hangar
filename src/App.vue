@@ -30,13 +30,11 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn @click="login" text>
-        <span class="mr-2">Login</span>
-        <v-icon>mdi-login</v-icon>
-      </v-btn>
-      <div v-if="user">
-        {{ user.email }}
-      </div>
+      <v-btn @click="user ? logout() : login()" text>
+        <span class="mr-2">{{ user ? "Logout" : "Login" }}</span>
+        <v-icon>{{ user ? "mdi-logout" : "mdi-login" }}</v-icon>
+      </v-btn><br>
+      <div v-if="user">{{ user.email }}</div>
     </v-app-bar>
 
     <v-main>
@@ -47,6 +45,8 @@
 
 <script lang="ts">
 import Vue from "vue";
+import firebaseService from "@/store/api/firebaseService";
+import firebaseApp from "@/plugins/firesbaseConfig";
 
 export default Vue.extend({
   name: "App",
@@ -55,20 +55,14 @@ export default Vue.extend({
   methods: {
 
     login() {
-      console.log("login... off")
-      /*
-      auth
-        .signInWithEmailAndPassword("admin@hangar.de", "asdfasdf")
-        .then((user) => {
-          const u = user.user;
-          this.$store.dispatch("FETCH_USER", u);
-          console.log("eingelogged:", u?.email);
-        });
+      firebaseService.firebaseLogin()
 
-       */
+
     },
 
-
+    logout() {
+      firebaseService.firebaseLogout();
+    },
   },
   computed: {
     user() {

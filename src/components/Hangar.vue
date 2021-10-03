@@ -4,16 +4,64 @@
       <v-expansion-panel v-for="plane in planes" :key="plane.id">
         <v-expansion-panel-header
           >{{ plane.name }}<v-spacer></v-spacer
-          >{{ plane.id }}</v-expansion-panel-header
+          >{{ plane.type }}</v-expansion-panel-header
         >
-        <v-expansion-panel-content class="border content">
-          <div width="100%" class="border">hallo</div>
+        <v-expansion-panel-content>
           <v-img
             :src="plane.image"
             class="contImg"
             width="100%"
-            height="100px"
+            height="200px"
           ></v-img>
+          <v-card tile elevation="4">
+            <v-row v-if="screenMobile" no-gutters>
+              <v-col cols="3">
+                <v-card-text>Gewicht: {{ plane.gewicht }}</v-card-text>
+              </v-col>
+              <v-col cols="3">
+                <v-card-text>Spannweite: {{ plane.spannweite }}</v-card-text>
+              </v-col>
+              <v-col cols="3">
+                <v-card-text>Faktor: {{ plane.faktor }}</v-card-text>
+              </v-col>
+              <v-col cols="3">
+                <v-card-text>Sender: {{ plane.sender }}</v-card-text>
+              </v-col>
+            </v-row>
+            <v-row v-else>
+              <v-col cols="12">
+                <v-list dense>
+                  <v-list-item-group>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>Gewicht:
+                          {{ plane.gewicht }}g</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item two-line>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>Spannweite:
+                          {{ plane.spannweite }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item two-line>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>Faktor:
+                          {{ plane.faktor }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item two-line>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>Sender:
+                          {{ plane.sender }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-col>
+            </v-row>
+            <v-card-text v-html="plane.beschreibung"></v-card-text>
+          </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -29,44 +77,18 @@ import firebaseService from "@/store/api/firebaseService";
 export default class Hangar extends Vue {
   planes: Plane[] | void = [];
 
+  get screenMobile() {
+    return window.innerWidth > 500;
+  }
+
   getPlanes() {
     console.log("starte fetch");
-    firebaseService.getAllPlanes()
-    .then(planesList => {
-      this.planes= planesList;
+    firebaseService.getAllPlanes().then((planesList) => {
+      this.planes = planesList;
     });
-    /*
-    fireStore
-      .collection("planes")
-      .get()
-      .then((res) => {
-        res.forEach((doc) => {
-          const data = doc.data();
-          data.id = doc.id;
-          console.log("planes online", data);
-          const plane = Plane.createEmptyPlane()
-            .withImage(data.image)
-            .withName(data.name)
-            .withBeschreibung(data.beschreibung)
-            .withFaktor(data.faktor)
-            .withSender(data.sender)
-            .withSpannweite(data.spannweite)
-            .withGewicht(data.gewicht)
-            .withBauweise(data.bauweise)
-            .withType(data.type)
-            .withId(data.id);
-
-          this.planes.push(plane);
-        });
-      })
-      .catch(() => {
-        console.log("nichts gefunden");
-      })
-      .finally(() => {
-        console.info("fertig");
-      });
-
-     */
+  }
+  updateBeschreibung(id: string, text: string) {
+    firebaseService.updatePlane(id, text);
   }
 
   created() {
@@ -77,10 +99,10 @@ export default class Hangar extends Vue {
 <style scoped>
 .contImg {
   width: 100% !important;
-  margin-left: 0 !important;
+  margin: 0 !important;
   left: 0px;
 }
-.content {
+.v-expansion-panel-content >>> .v-expansion-panel-content__wrap {
   padding: 0 !important;
 }
 </style>
