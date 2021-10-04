@@ -2,8 +2,10 @@
   <v-container>
     <v-expansion-panels>
       <v-expansion-panel v-for="plane in planes" :key="plane.id">
-        <v-expansion-panel-header ripple
-          >{{ plane.name }}<v-spacer></v-spacer>{{ plane.type }}
+        <v-expansion-panel-header
+          ripple
+          :style="panelImage(plane.image)"
+          ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{ plane.type }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-img
@@ -31,14 +33,14 @@
               <v-col cols="12">
                 <v-list dense>
                   <v-list-item-group>
-                    <v-list-item>
+                    <v-list-item dense>
                       <v-list-item-content>
                         <v-list-item-subtitle
                           >Gewicht: {{ plane.gewicht }}g</v-list-item-subtitle
                         >
                       </v-list-item-content>
                     </v-list-item>
-                    <v-list-item two-line>
+                    <v-list-item dense>
                       <v-list-item-content>
                         <v-list-item-subtitle
                           >Spannweite:
@@ -46,14 +48,14 @@
                         >
                       </v-list-item-content>
                     </v-list-item>
-                    <v-list-item two-line>
+                    <v-list-item dense>
                       <v-list-item-content>
                         <v-list-item-subtitle
                           >Faktor: {{ plane.faktor }}</v-list-item-subtitle
                         >
                       </v-list-item-content>
                     </v-list-item>
-                    <v-list-item two-line>
+                    <v-list-item dense>
                       <v-list-item-content>
                         <v-list-item-subtitle
                           >Sender: {{ plane.sender }}</v-list-item-subtitle
@@ -64,7 +66,10 @@
                 </v-list>
               </v-col>
             </v-row>
-            <v-card-text v-html="plane.beschreibung"></v-card-text>
+            <v-card-text
+              class="descriptionBox elevation-4"
+              v-html="plane.beschreibung"
+            ></v-card-text>
             <v-card-actions></v-card-actions>
           </v-card>
         </v-expansion-panel-content>
@@ -97,6 +102,11 @@ export default class Hangar extends Vue {
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
   }
+  panelImage(image:string) {
+
+    const style = "backgroundImage: url("+image+"); background-size: contain";
+    return style;
+  }
 
   created(): void {
     this.getPlanes();
@@ -111,5 +121,13 @@ export default class Hangar extends Vue {
 }
 .v-expansion-panel-content >>> .v-expansion-panel-content__wrap {
   padding: 0 !important;
+}
+.descriptionBox {
+  position: relative;
+  border: 0px solid grey;
+  border-radius: 5px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
