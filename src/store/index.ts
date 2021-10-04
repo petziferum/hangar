@@ -20,7 +20,6 @@ export default new Vuex.Store({
   },
   actions: {
     FETCH_USER({ commit }, user) {
-      console.log("fetch", user);
       commit("SET_USER", user);
     },
     addToFlightlist({ commit }, payload) {

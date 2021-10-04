@@ -145,7 +145,6 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import PlaneDialog from "@/components/PlaneDialog.vue";
-import Sender from "@/types/Sender";
 
 interface Check {
   color: string;
@@ -170,13 +169,16 @@ export default class PlaneExpansionPanelView extends Vue {
   imageLoading = false;
   googleImg = "";
 
-  get screenWidth() {
+  get screenWidth(): boolean {
     return window.innerWidth > 500;
   }
 
-  picImageFile(event: any) {
-    const files = event.target.files;
-    const file = files[0];
+  // eslint-disable-next-line
+  picImageFile(e: any): void {
+    //let t = event.currentTarget as HTMLInputElement;
+
+    const file = e.target.files[0];
+
     this.imageName = file.name;
     console.log("bild", file);
     const fr = new FileReader();
@@ -187,7 +189,8 @@ export default class PlaneExpansionPanelView extends Vue {
     this.image = file;
     console.log("fileReader", fr);
   }
-  setImageFile(img: string) {
+
+  setImageFile(img: string): void {
     const src = "@/assets/" + img + "_00000.jpg";
     const fr = new FileReader();
     fr.addEventListener("load", () => {
@@ -248,10 +251,10 @@ export default class PlaneExpansionPanelView extends Vue {
     this.uploadready.push(plane);
   }
 
-  addFlightList(value: Plane) {
+  addFlightList(value: Plane): void {
     this.$store.dispatch("addToFlightlist", value);
   }
-  isOnFlightList(value: string): any {
+  isOnFlightList(value: string): Plane {
     return this.$store.getters.getFlightList.some(
       (el: { name: string }) => el.name === value
     );

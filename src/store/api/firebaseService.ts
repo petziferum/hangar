@@ -1,13 +1,13 @@
 import firebaseApp, { fireStore } from "@/plugins/firesbaseConfig";
 import Plane from "@/types/Plane";
-import store from "@/store"
+import store from "@/store";
 
 export default class HangarService {
-
-  static firebaseLogin() {
-    console.log("login... off");
-    firebaseApp.auth()
-      .signInWithEmailAndPassword("admin@hangar.de", "asdfasdf")
+  static firebaseLogin(password: string): Promise<void> {
+    console.log("login...");
+    return firebaseApp
+      .auth()
+      .signInWithEmailAndPassword("admin@hangar.de", password)
       .then((user) => {
         const u = user.user;
         store.dispatch("FETCH_USER", u);
@@ -15,16 +15,18 @@ export default class HangarService {
       });
   }
 
-  static firebaseLogout() {
-    console.info("melde ab...")
-    firebaseApp.auth().signOut()
+  static firebaseLogout(): Promise<void> {
+    console.info("melde ab...");
+    return firebaseApp
+      .auth()
+      .signOut()
       .then(() => {
-        store.commit("SET_USER", null)
-      })
+        store.commit("SET_USER", null);
+      });
   }
 
   static getAllPlanes(): Promise<void | Plane[]> {
-   return fireStore
+    return fireStore
       .collection("planes")
       .get()
       .then((res) => {
@@ -43,7 +45,7 @@ export default class HangarService {
             .withBauweise(data.bauweise)
             .withType(data.type)
             .withId(data.id);
-          planesList.push(plane)
+          planesList.push(plane);
         });
         return planesList;
       })
@@ -56,13 +58,14 @@ export default class HangarService {
   }
 
   static updatePlane(id: string, beschreibung: string): void {
-     fireStore.collection("planes")
+    fireStore
+      .collection("planes")
       .doc(id)
       .update({
-        beschreibung: beschreibung
+        beschreibung: beschreibung,
       })
-       .then(()=> {
-         console.log("update erfolgreich")
-       })
+      .then(() => {
+        console.log("update erfolgreich");
+      });
   }
 }

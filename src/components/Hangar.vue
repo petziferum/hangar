@@ -34,26 +34,31 @@
                   <v-list-item-group>
                     <v-list-item>
                       <v-list-item-content>
-                        <v-list-item-subtitle>Gewicht:
-                          {{ plane.gewicht }}g</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Gewicht: {{ plane.gewicht }}g</v-list-item-subtitle
+                        >
                       </v-list-item-content>
                     </v-list-item>
                     <v-list-item two-line>
                       <v-list-item-content>
-                        <v-list-item-subtitle>Spannweite:
-                          {{ plane.spannweite }}</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Spannweite:
+                          {{ plane.spannweite }}</v-list-item-subtitle
+                        >
                       </v-list-item-content>
                     </v-list-item>
                     <v-list-item two-line>
                       <v-list-item-content>
-                        <v-list-item-subtitle>Faktor:
-                          {{ plane.faktor }}</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Faktor: {{ plane.faktor }}</v-list-item-subtitle
+                        >
                       </v-list-item-content>
                     </v-list-item>
                     <v-list-item two-line>
                       <v-list-item-content>
-                        <v-list-item-subtitle>Sender:
-                          {{ plane.sender }}</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Sender: {{ plane.sender }}</v-list-item-subtitle
+                        >
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
@@ -77,21 +82,21 @@ import firebaseService from "@/store/api/firebaseService";
 export default class Hangar extends Vue {
   planes: Plane[] | void = [];
 
-  get screenMobile() {
+  get screenMobile(): boolean {
     return window.innerWidth > 500;
   }
 
-  getPlanes() {
+  getPlanes(): void {
     console.log("starte fetch");
     firebaseService.getAllPlanes().then((planesList) => {
       this.planes = planesList;
     });
   }
-  updateBeschreibung(id: string, text: string) {
+  updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlane(id, text);
   }
 
-  created() {
+  created(): void {
     this.getPlanes();
   }
 }
