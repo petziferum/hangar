@@ -65,9 +65,7 @@
               </v-col>
             </v-row>
             <v-card-text v-html="plane.beschreibung"></v-card-text>
-            <v-card-actions
-              ><v-btn to="/admin">Bearbeiten</v-btn></v-card-actions
-            >
+            <v-card-actions></v-card-actions>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -79,6 +77,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import firebaseService from "@/store/api/firebaseService";
+import AdminBoard from "@/components/admin/AdminBoard.vue";
+import EditPlane from "@/components/EditPlane.vue";
 
 @Component
 export default class Hangar extends Vue {

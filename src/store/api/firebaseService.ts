@@ -1,6 +1,9 @@
 import firebaseApp, { fireStore } from "@/plugins/firesbaseConfig";
 import Plane from "@/types/Plane";
 import store from "@/store";
+import firebase from "firebase";
+import DocumentReference = firebase.firestore.DocumentReference;
+import DocumentData = firebase.firestore.DocumentData;
 
 export default class HangarService {
   static firebaseLogin(password: string): Promise<void> {
@@ -56,6 +59,36 @@ export default class HangarService {
         console.info("fertig");
       });
   }
+  static saveNewPlane(
+    imageName: string,
+    image: Blob,
+    plane: Plane
+  ): Promise<void | DocumentReference<DocumentData>> {
+    return firebaseApp
+      .storage()
+      .ref("planes/" + imageName)
+      .put(image)
+      .then((snap) => {
+        console.log("snap", snap);
+        return firebaseApp
+          .storage()
+          .ref("planes/" + imageName)
+          .getDownloadURL();
+      })
+      .then((URL) => {
+        console.log("url", URL);
+        plane.image = URL;
+        console.log("plane", plane);
+      })
+      .then(() => {
+        fireStore
+          .collection("planes")
+          .add(Object.assign({}, plane))
+          .then((res) => {
+            return res;
+          });
+      });
+  }
 
   static updatePlaneDescription(id: string, beschreibung: string): void {
     fireStore
@@ -69,9 +102,9 @@ export default class HangarService {
       });
   }
   static updatePlane(id: string, plane: Plane): Promise<Plane> {
-    if(!plane.beschreibung) {
-      console.log("keine Beschreibung")
-      plane.beschreibung = ""
+    if (!plane.beschreibung) {
+      console.log("keine Beschreibung");
+      plane.beschreibung = "";
     }
     return fireStore
       .collection("planes")

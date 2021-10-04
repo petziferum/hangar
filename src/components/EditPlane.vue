@@ -15,6 +15,7 @@
             <v-text-field label="Spannweite" v-model="p.spannweite"></v-text-field>
             <v-select :items="sender" label="Sender" item-value="sender" v-model="p.sender"></v-select>
             <v-textarea :rules="[this.error]" v-model="p.beschreibung" label="Beschreibung"></v-textarea>
+
             <v-btn @click="update">Speichern</v-btn>
           </v-form>
         </v-col>
