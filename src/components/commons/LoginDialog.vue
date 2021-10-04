@@ -37,7 +37,7 @@ import firebase from "firebase";
 
 @Component
 export default class LoginDialog extends Vue {
-  password = "asdfasdf";
+  password = "";
   email = "admin@hangar.de";
   errorMessage = "";
 

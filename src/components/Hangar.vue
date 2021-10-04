@@ -1,11 +1,10 @@
 <template>
   <v-container>
-    <v-expansion-panels flat>
+    <v-expansion-panels>
       <v-expansion-panel v-for="plane in planes" :key="plane.id">
-        <v-expansion-panel-header
-          >{{ plane.name }}<v-spacer></v-spacer
-          >{{ plane.type }}</v-expansion-panel-header
-        >
+        <v-expansion-panel-header ripple
+          >{{ plane.name }}<v-spacer></v-spacer>{{ plane.type }}
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-img
             :src="plane.image"
@@ -66,6 +65,9 @@
               </v-col>
             </v-row>
             <v-card-text v-html="plane.beschreibung"></v-card-text>
+            <v-card-actions
+              ><v-btn to="/admin">Bearbeiten</v-btn></v-card-actions
+            >
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -93,7 +95,7 @@ export default class Hangar extends Vue {
     });
   }
   updateBeschreibung(id: string, text: string): void {
-    firebaseService.updatePlane(id, text);
+    firebaseService.updatePlaneDescription(id, text);
   }
 
   created(): void {

@@ -151,7 +151,7 @@ export default class DataTable extends Vue {
   planes: Array<Plane> = [];
   editedItem: Plane = Plane.createEmptyPlane();
   defaultItem: Plane = Plane.createEmptyPlane();
-  jPlanes = [];
+  jPlanes: Plane[] = [];
   tableOptions = {
     itemsPerPage: -1,
   };

@@ -42,7 +42,7 @@ export default class AppBar extends Vue {
     return this.$store.getters.getUser;
   }
   login(): void {
-    firebaseService.firebaseLogin("asdfasdf");
+    this.$router.push("/login")
   }
 }
 </script>

@@ -70,7 +70,7 @@ export default class Plane {
   }
   withId(value: string): Plane {
     this.id = value;
-    return this
+    return this;
   }
 
   static createEmptyPlane(): Plane {

@@ -57,15 +57,28 @@ export default class HangarService {
       });
   }
 
-  static updatePlane(id: string, beschreibung: string): void {
+  static updatePlaneDescription(id: string, beschreibung: string): void {
     fireStore
       .collection("planes")
       .doc(id)
-      .update({
+      .set({
         beschreibung: beschreibung,
       })
       .then(() => {
         console.log("update erfolgreich");
+      });
+  }
+  static updatePlane(id: string, plane: Plane): Promise<Plane> {
+    if(!plane.beschreibung) {
+      console.log("keine Beschreibung")
+      plane.beschreibung = ""
+    }
+    return fireStore
+      .collection("planes")
+      .doc(id)
+      .update(Object.assign({}, plane))
+      .then(() => {
+        return plane;
       });
   }
 }

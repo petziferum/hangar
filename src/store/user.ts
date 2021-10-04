@@ -10,7 +10,7 @@ export default {
   actions: {},
   getters: {
     //getter wird durch this.$state.getters["UserStore/getUserInfo"] abgefragt
-    getUserInfo: (state: UserState) => {
+    getUserInfo: (state: UserState): string => {
       return state.userInfo.text;
     },
   },
