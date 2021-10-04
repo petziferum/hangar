@@ -98,13 +98,6 @@
           <v-card-title>
             Upload single Plane<v-spacer />
             <v-dialog width="30%" v-model="saveDialog">
-              <!--
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" color="error" @click="uploadPlane(p)"
-                  >Hochladen</v-btn
-                ></template
-              >
-              -->
               <v-card>
                 <v-card-title>Upload</v-card-title>
                 <v-card-text>
@@ -123,11 +116,6 @@
                       />
                       <v-icon v-if="imageLoading">mdi-loading mdi-spin</v-icon>
                       <br />
-                      <!--
-                      <v-btn class="ma-3" @click="uploadImage(p)"
-                        >Flugzeug Hochladen</v-btn
-                      >
-                      -->
                     </v-col>
                   </v-row>
                   <v-row>
