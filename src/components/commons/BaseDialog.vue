@@ -7,9 +7,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-card tile>
-      <v-card-title>Base Dialog</v-card-title>
-    </v-card>
+    <slot />
   </v-dialog>
 </template>
 

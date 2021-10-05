@@ -108,7 +108,7 @@
           @update="update"
           @cancel="cancelEdit"
         ></plane-dialog>
-        <base-dialog ref="basedialog" v-model="basedialog" />
+        <add-plane ref="addplanedialog" v-model="newPlane" />
       </v-col>
     </v-row>
   </v-container>
@@ -121,9 +121,9 @@ import Plane from "@/types/Plane";
 import EditPlane from "@/components/EditPlane.vue";
 import { SenderAsRecord } from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
-import BaseDialog from "@/components/commons/BaseDialog.vue";
+import AddPlane from "@/components/AddPlane.vue";
 @Component({
-  components: { EditPlane, PlaneDialog, BaseDialog },
+  components: { EditPlane, PlaneDialog, AddPlane },
 })
 export default class AdminBoard extends Vue {
   planes: void | Plane[] = [];
@@ -158,7 +158,9 @@ export default class AdminBoard extends Vue {
     this.newPlane = Plane.createEmptyPlane();
   }
   addNewPlaneDialog() {
-    const dialog = this.$refs.basedialog as BaseDialog;
+    const dialog = this.$refs.addplanedialog as AddPlane;
+    this.newPlane = Plane.createEmptyPlane().withName("Flugzeug")
+    Object.assign(dialog, this.newPlane)
     dialog.openDialog();
   }
   saveNewPlane() {
