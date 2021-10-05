@@ -29,7 +29,7 @@
     <v-alert class="red--text">{{ message }}</v-alert>
     <v-row>
       <v-col cols="2" class="text-center">
-        <v-btn fab @click="addNewPlane"><v-icon>mdi-plus</v-icon></v-btn>
+        <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
         <v-card-text color="primary">Flugzeug Hinzufügen</v-card-text>
       </v-col>
       <v-col>
@@ -101,13 +101,14 @@
     </v-row>
     <v-row>
       <v-col>
-    <plane-dialog
-      ref="planedialog"
-      v-model="dialog"
-      :plane="editPlane"
-      @update="update"
-      @cancel="cancelEdit"
-    ></plane-dialog>
+        <plane-dialog
+          ref="planedialog"
+          v-model="dialog"
+          :plane="editPlane"
+          @update="update"
+          @cancel="cancelEdit"
+        ></plane-dialog>
+        <base-dialog ref="basedialog" v-model="basedialog" />
       </v-col>
     </v-row>
   </v-container>
@@ -120,8 +121,9 @@ import Plane from "@/types/Plane";
 import EditPlane from "@/components/EditPlane.vue";
 import { SenderAsRecord } from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
+import BaseDialog from "@/components/commons/BaseDialog.vue";
 @Component({
-  components: { EditPlane, PlaneDialog },
+  components: { EditPlane, PlaneDialog, BaseDialog },
 })
 export default class AdminBoard extends Vue {
   planes: void | Plane[] = [];
@@ -136,6 +138,7 @@ export default class AdminBoard extends Vue {
   imageLoading = false;
   googleImg = "";
   dialog = false;
+  basedialog = false;
 
   startEdit(plane: Plane) {
     const planeDialog = this.$refs.planedialog as PlaneDialog;
@@ -153,6 +156,10 @@ export default class AdminBoard extends Vue {
   addNewPlane() {
     this.newModel = true;
     this.newPlane = Plane.createEmptyPlane();
+  }
+  addNewPlaneDialog() {
+    const dialog = this.$refs.basedialog as BaseDialog;
+    dialog.openDialog();
   }
   saveNewPlane() {
     const f = this.newPlane.spannweite / this.newPlane.gewicht;

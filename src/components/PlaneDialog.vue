@@ -5,10 +5,10 @@
     </template>
     <template v-else>
       <v-toolbar color="primary">
-        <v-btn x-small class="ml-0 mr-1" @click="cancel">
+        <v-btn fab x-small class="ml-0 mr-1" color="error" @click="cancel">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title class="text-caption text-sm-h6 text-md-h4">
+        <v-toolbar-title class="text-h6 text-sm-h6 text-md-h4">
           Bearbeiten
         </v-toolbar-title>
         <v-spacer />
