@@ -3,7 +3,16 @@
     DEVTEST
     <v-row justify="center">
       <v-col>
-        <edit-plane></edit-plane>
+        <v-btn @click="editPlane(planes[0])">{{ planes[0].name }}</v-btn>
+        <template v-if="active">
+        <edit-plane :plane="planeEdit"></edit-plane>
+        </template>
+        {{planeEdit}}
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <plane-dialog ref="planedialog" v-model="dialog" :plane="planeEdit" @cancel="cancelEdit"></plane-dialog>
       </v-col>
     </v-row>
   </v-container>
@@ -12,12 +21,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
-import { default as planes } from "../types/p3.json";
-import Sender from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
 import PlaneExpansionPanelView from "@/components/PlaneExpansionPanelView.vue";
 import TestExpansion from "@/components/TestExpansion.vue";
 import EditPlane from "@/components/EditPlane.vue";
+import firebaseService from "@/store/api/firebaseService";
 
 @Component({
   components: {
@@ -28,55 +36,29 @@ import EditPlane from "@/components/EditPlane.vue";
   },
 })
 export default class DevTest extends Vue {
-  planes: Array<Plane> = [];
+  planes: void | Plane[] = [];
   img = [{ plane: "", img: require("@/assets/logo.png") }];
   dialog = false;
   active = false;
+  planeEdit: Plane | null = null;
 
-  importPlanes(): void {
-    const liste = planes;
-    for (let p of liste) {
-      const plane = Plane.createEmptyPlane()
-        .withName(p.name)
-        .withType(p.type)
-        .withBauweise(p.bauweise)
-        .withGewicht(p.gewicht)
-        .withSpannweite(p.spannweite)
-        .withImage(p.image);
-      if (p.beschreibung) {
-        plane.withBeschreibung(p.beschreibung);
-      } else {
-        plane.withBeschreibung("");
-      }
-      if (typeof p.faktor === "string") {
-        const newfaktor = p.faktor.replace(",", ".");
-        plane.withFaktor(parseFloat(newfaktor));
-      } else {
-        plane.withFaktor(p.faktor);
-      }
-      if (p.sender != undefined) {
-        switch (p.sender) {
-          case "Turnigy":
-            plane.withSender(Sender.TURNIGY);
-            break;
-          case "Spektrum":
-            plane.withSender(Sender.SPEKTRUM);
-            break;
-          default:
-            plane.withSender(Sender.UNKNOWN);
-        }
-      }
-      const image = {
-        plane: p.image,
-        img: require("@/assets/" + p.image + "_00000.jpg"),
-      };
-      this.img.push(image);
-      this.planes.push(plane);
-    }
+  loadPlanes() {
+    firebaseService.getAllPlanes().then((res) => {
+      this.planes = res;
+    });
+  }
+
+  editPlane(plane: Plane) {
+    this.planeEdit = plane
+    const planeDialog = this.$refs.planedialog as PlaneDialog
+    planeDialog.open()
+  }
+  cancelEdit(): void {
+    this.planeEdit = null;
   }
 
   created(): void {
-    this.importPlanes();
+    this.loadPlanes();
   }
 }
 </script>

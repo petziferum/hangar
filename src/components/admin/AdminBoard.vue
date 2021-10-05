@@ -11,7 +11,7 @@
     <v-row>
       <v-col>
         <v-autocomplete
-          class="mx-2"
+          class="mx-2 mt-2"
           validate-on-blur
           :items="planes"
           item-text="name"
@@ -19,6 +19,7 @@
           v-model="editPlane"
           @click="loadPlanes"
           @click:clear="clearEdit"
+          @change="startEdit"
           @focus="clearEdit"
           label="Flugzeug bearbeiten"
           clearable
@@ -100,11 +101,13 @@
     </v-row>
     <v-row>
       <v-col>
-        <edit-plane
-          v-if="editPlane"
-          @update="update"
-          :plane="editPlane"
-        ></edit-plane>
+    <plane-dialog
+      ref="planedialog"
+      v-model="dialog"
+      :plane="editPlane"
+      @update="update"
+      @cancel="cancelEdit"
+    ></plane-dialog>
       </v-col>
     </v-row>
   </v-container>
@@ -116,8 +119,9 @@ import firebaseService from "@/store/api/firebaseService";
 import Plane from "@/types/Plane";
 import EditPlane from "@/components/EditPlane.vue";
 import { SenderAsRecord } from "@/types/Sender";
+import PlaneDialog from "@/components/PlaneDialog.vue";
 @Component({
-  components: { EditPlane },
+  components: { EditPlane, PlaneDialog },
 })
 export default class AdminBoard extends Vue {
   planes: void | Plane[] = [];
@@ -131,6 +135,15 @@ export default class AdminBoard extends Vue {
   image: Blob | null = null;
   imageLoading = false;
   googleImg = "";
+  dialog = false;
+
+  startEdit(plane: Plane) {
+    const planeDialog = this.$refs.planedialog as PlaneDialog;
+    planeDialog.open();
+  }
+  cancelEdit(): void {
+    this.editPlane = null;
+  }
 
   loadPlanes(): void {
     firebaseService.getAllPlanes().then((p) => {
@@ -185,6 +198,7 @@ export default class AdminBoard extends Vue {
     firebaseService.updatePlane(p.id, p).then((res) => {
       this.message = res;
       this.editPlane = null;
+      this.dialog = false;
     });
   }
   logout(): void {

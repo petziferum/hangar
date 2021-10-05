@@ -5,7 +5,7 @@
         <v-expansion-panel-header
           ripple
           :style="panelImage(plane.image)"
-          ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{ plane.type }}
+          ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{ plane.sender }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-img

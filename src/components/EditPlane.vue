@@ -5,7 +5,7 @@
     </v-toolbar>
     <v-card-text>
       Daten: {{ p.name }} {{ p.id }}
-      <v-row>
+      <v-row v-if="p">
         <v-col cols="12">
           <v-form>
             <v-text-field label="Flugzeug Name" v-model="p.name"></v-text-field>
