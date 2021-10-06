@@ -2,18 +2,22 @@
   <v-container>
     <v-expansion-panels>
       <v-expansion-panel v-for="plane in planes" :key="plane.id">
-        <v-expansion-panel-header
-          ripple
-          :style="panelImage(plane.image)"
+        <v-expansion-panel-header ripple :style="panelImage(plane.image)"
           ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{ plane.sender }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <v-img
-            :src="plane.image"
-            class="contImg"
-            width="100%"
-            height="200px"
-          ></v-img>
+          <v-dialog>
+            <template v-slot:activator="{ on }">
+              <v-img
+                :src="plane.image"
+                class="contImg"
+                width="100%"
+                height="200px"
+                v-on="on"
+              ></v-img>
+            </template>
+            <v-img :src="plane.image" width="100%" v-on="on"></v-img>
+          </v-dialog>
           <v-card tile elevation="4">
             <v-row v-if="screenMobile" no-gutters>
               <v-col cols="3">
@@ -82,12 +86,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import firebaseService from "@/store/api/firebaseService";
-import AdminBoard from "@/components/admin/AdminBoard.vue";
-import EditPlane from "@/components/EditPlane.vue";
 
 @Component
 export default class Hangar extends Vue {
   planes: Plane[] | void = [];
+
+  imageLightBox = false;
 
   get screenMobile(): boolean {
     return window.innerWidth > 500;
@@ -102,9 +106,9 @@ export default class Hangar extends Vue {
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
   }
-  panelImage(image:string) {
-
-    const style = "backgroundImage: url("+image+"); background-size: contain";
+  panelImage(image: string) {
+    const style =
+      "backgroundImage: url(" + image + "); background-size: contain";
     return style;
   }
 
@@ -116,6 +120,7 @@ export default class Hangar extends Vue {
 <style scoped>
 .contImg {
   width: 100% !important;
+  cursor: pointer;
   margin: 0 !important;
   left: 0px;
 }
