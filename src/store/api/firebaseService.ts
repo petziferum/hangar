@@ -28,6 +28,18 @@ export default class HangarService {
       });
   }
 
+  static setPlaneSchrott(p: Plane): Promise<void | Plane> {
+    return fireStore
+      .collection("planes")
+      .doc(p.id)
+      .update({
+        crash: true,
+      })
+      .then(() => {
+        return p;
+      });
+  }
+
   static getAllPlanes(): Promise<void | Plane[]> {
     return fireStore
       .collection("planes")
@@ -47,7 +59,8 @@ export default class HangarService {
             .withGewicht(data.gewicht)
             .withBauweise(data.bauweise)
             .withType(data.type)
-            .withId(data.id);
+            .withId(data.id)
+            .withCrash(data.crash);
           planesList.push(plane);
         });
         return planesList;

@@ -14,9 +14,18 @@
                 width="100%"
                 height="200px"
                 v-on="on"
-              ></v-img>
+              >
+                <v-overlay
+                  v-if="plane.crash"
+                  color="red"
+                  absolute
+                  class="red--text text-h1"
+                >
+                  Schrott
+                </v-overlay>
+              </v-img>
             </template>
-            <v-img :src="plane.image" width="100%" v-on="on"></v-img>
+            <v-img :src="plane.image" width="100%"></v-img>
           </v-dialog>
           <v-card tile elevation="4">
             <v-row v-if="screenMobile" no-gutters>
@@ -40,7 +49,7 @@
                     <v-list-item dense>
                       <v-list-item-content>
                         <v-list-item-subtitle
-                          >Gewicht: {{ plane.gewicht }}g</v-list-item-subtitle
+                          >Crash: {{ plane.crash }}g</v-list-item-subtitle
                         >
                       </v-list-item-content>
                     </v-list-item>
@@ -74,7 +83,15 @@
               class="descriptionBox elevation-4"
               v-html="plane.beschreibung"
             ></v-card-text>
-            <v-card-actions></v-card-actions>
+            <template v-if="adminUser">
+              <v-card-actions>
+                <v-toolbar elevation="1" dense>
+                  <v-toolbar-items>
+                    <v-btn color="red" @click="updateSchrott(plane)">Schrott!</v-btn>
+                  </v-toolbar-items>
+                </v-toolbar>
+              </v-card-actions>
+            </template>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -97,6 +114,13 @@ export default class Hangar extends Vue {
     return window.innerWidth > 500;
   }
 
+  get adminUser(): boolean {
+    const user = this.$store.getters.getUser;
+    if (user) {
+      return user.uid === "C6SQTqeWWohygB48Qce0WZ5juxl1";
+    } else return false;
+  }
+
   getPlanes(): void {
     console.log("starte fetch");
     firebaseService.getAllPlanes().then((planesList) => {
@@ -105,6 +129,12 @@ export default class Hangar extends Vue {
   }
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
+  }
+  updateSchrott(p:Plane):void {
+    firebaseService.setPlaneSchrott(p)
+    .then((res) => { console.info("Schrott", res )
+    this.getPlanes()
+    })
   }
   panelImage(image: string) {
     const style =
