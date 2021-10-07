@@ -11,7 +11,7 @@ export default class Plane {
   faktor: number | undefined;
   image: string | undefined;
   beschreibung?: string;
-  crash?: boolean
+  crash?: boolean;
 
   constructor(
     name: string | undefined,
@@ -40,7 +40,7 @@ export default class Plane {
   withCrash(value: boolean): Plane {
     this.crash = value;
     return this;
-}
+  }
   withName(name: string): Plane {
     this.name = name;
     return this;

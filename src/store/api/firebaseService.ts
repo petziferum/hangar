@@ -5,6 +5,10 @@ import firebase from "firebase";
 import DocumentReference = firebase.firestore.DocumentReference;
 import DocumentData = firebase.firestore.DocumentData;
 
+interface ImageItem {
+  name: string;
+  url: string;
+}
 export default class HangarService {
   static firebaseLogin(password: string): Promise<void> {
     console.log("login...");
@@ -81,17 +85,14 @@ export default class HangarService {
       .storage()
       .ref("planes/" + imageName)
       .put(image)
-      .then((snap) => {
-        console.log("snap", snap);
+      .then(() => {
         return firebaseApp
           .storage()
           .ref("planes/" + imageName)
           .getDownloadURL();
       })
       .then((URL) => {
-        console.log("url", URL);
         plane.image = URL;
-        console.log("plane", plane);
       })
       .then(() => {
         fireStore
@@ -103,6 +104,26 @@ export default class HangarService {
       });
   }
 
+  static getImages(): Promise<ImageItem[] | void> {
+    return firebaseApp
+      .storage()
+      .ref("planes/")
+      .listAll()
+      .then((list) => {
+        const itemList: ImageItem[] = [];
+        list.items.forEach((i) => {
+          const name = i.name;
+          i.getDownloadURL().then((u) => {
+            const url = u;
+            itemList.push({ name: name, url: url });
+          });
+        });
+        return itemList;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   static updatePlaneDescription(id: string, beschreibung: string): void {
     fireStore
       .collection("planes")
