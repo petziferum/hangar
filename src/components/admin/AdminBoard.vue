@@ -29,8 +29,10 @@
     <v-alert class="red--text">{{ message }}</v-alert>
     <v-row>
       <v-col cols="2" class="text-center">
+
         <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
         <v-card-text color="primary">Flugzeug Hinzufügen</v-card-text>
+        <add-plane ref="addplanedialog" v-model="newPlane" />
       </v-col>
       <v-col>
         <template v-if="newModel">
@@ -108,7 +110,7 @@
           @update="update"
           @cancel="cancelEdit"
         ></plane-dialog>
-        <add-plane ref="addplanedialog" v-model="newPlane" />
+
       </v-col>
       <v-col>
       </v-col>
@@ -165,7 +167,7 @@ export default class AdminBoard extends Vue {
   }
   addNewPlaneDialog() {
     const dialog = this.$refs.addplanedialog as AddPlane;
-    this.newPlane = Plane.createEmptyPlane().withName("Flugzeug");
+    this.newPlane = Plane.createEmptyPlane().withName("p")
     Object.assign(dialog, this.newPlane);
     dialog.openDialog();
   }
@@ -194,14 +196,6 @@ export default class AdminBoard extends Vue {
     fr.readAsDataURL(file);
     this.image = file;
     console.log("fileReader", fr);
-  }
-  setImageFile(img: string): void {
-    const src = "@/assets/" + img + "_00000.jpg";
-    const fr = new FileReader();
-    fr.addEventListener("load", () => {
-      this.imageSrc = fr.result;
-    });
-    console.log("imageSrc:", this.imageSrc, "src: ", src);
   }
   setEditPlane(value: Plane): void {
     this.editPlane = value;
