@@ -8,6 +8,7 @@
         contain
         :src="require('@/assets/hangar-plane-text.png')"
         min-width="100"
+        max-width="60%"
         height="80%"
       />
     </router-link>
@@ -24,7 +25,7 @@
         {{ user.email }}
       </template>
       <template v-else>
-        <v-btn @click="login">Login</v-btn>
+        <v-btn text @click="login">Login</v-btn>
       </template>
     </template>
     <v-spacer></v-spacer>
