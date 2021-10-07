@@ -29,76 +29,13 @@
     <v-alert class="red--text">{{ message }}</v-alert>
     <v-row>
       <v-col cols="2" class="text-center">
-
         <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
         <v-card-text color="primary">Flugzeug Hinzufügen</v-card-text>
-        <add-plane ref="addplanedialog" v-model="newPlane" />
-      </v-col>
-      <v-col>
-        <template v-if="newModel">
-          <v-card>
-            <v-card-title>Modell Hinzufügen</v-card-title>
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  v-model="newPlane.name"
-                  label="Name"
-                ></v-text-field>
-                <v-text-field
-                  v-model="newPlane.type"
-                  label="Typ"
-                ></v-text-field>
-                <v-text-field
-                  v-model="newPlane.bauweise"
-                  label="Bauweise"
-                ></v-text-field>
-                <v-text-field
-                  v-model="newPlane.gewicht"
-                  label="Gewicht"
-                ></v-text-field>
-                <v-text-field
-                  v-model="newPlane.spannweite"
-                  label="Spannweite"
-                ></v-text-field>
-                <v-textarea
-                  v-model="newPlane.beschreibung"
-                  label="Beschreibung"
-                ></v-textarea>
-                <v-select
-                  :items="sender"
-                  label="Sender"
-                  item-value="sender"
-                  v-model="newPlane.sender"
-                ></v-select>
-                <input
-                  type="file"
-                  ref="fileInput"
-                  class="ma-2"
-                  @change="picImageFile"
-                />
-                <v-btn @click="saveNewPlane">Speichern</v-btn>
-              </v-form>
-            </v-card-text>
-            <v-card class="mx-auto" color="primary" width="50%" v-if="newPlane">
-              <v-card-title
-                >{{ newPlane.name }}
-                <v-img
-                  :src="require('@/assets/undefined.jpg')"
-                  style="right: 0"
-                  contain
-                  height="50px"
-                ></v-img>
-              </v-card-title>
-              <v-card-subtitle>{{ newPlane.type }}</v-card-subtitle>
-              <v-card-text>
-                <ul>
-                  <li>Bauweise: {{ newPlane.bauweise }}</li>
-                </ul>
-              </v-card-text>
-              <v-card-text>{{ newPlane }}</v-card-text>
-            </v-card>
-          </v-card>
-        </template>
+        <add-plane
+          ref="addplanedialog"
+          v-model="newPlane"
+          @save="saveNewPlane"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -110,10 +47,8 @@
           @update="update"
           @cancel="cancelEdit"
         ></plane-dialog>
-
       </v-col>
-      <v-col>
-      </v-col>
+      <v-col> </v-col>
     </v-row>
   </v-container>
 </template>
@@ -134,7 +69,7 @@ export default class AdminBoard extends Vue {
   editPlane: Plane | null = null;
   message: null | Plane = null;
   newModel = false;
-  newPlane: null | Plane = null;
+  newPlane: null | Plane = Plane.createEmptyPlane();
   sender = SenderAsRecord;
   imageSrc: string | ArrayBuffer | null = null;
   imageName: string | undefined;
@@ -167,20 +102,20 @@ export default class AdminBoard extends Vue {
   }
   addNewPlaneDialog() {
     const dialog = this.$refs.addplanedialog as AddPlane;
-    this.newPlane = Plane.createEmptyPlane().withName("p")
     Object.assign(dialog, this.newPlane);
     dialog.openDialog();
   }
-  saveNewPlane() {
+  saveNewPlane(event: Plane) {
+    /*
     const f = this.newPlane.spannweite / this.newPlane.gewicht;
     this.newPlane.faktor = f;
-    this.newPlane.image = "";
-
     firebaseService
       .saveNewPlane(this.imageName, this.image, this.newPlane)
       .then((res) => {
         console.log(res);
       });
+
+     */
   }
   picImageFile(e: any): void {
     //let t = event.currentTarget as HTMLInputElement;
