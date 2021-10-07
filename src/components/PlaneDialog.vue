@@ -4,13 +4,25 @@
       <v-skeleton-loader type="card"></v-skeleton-loader>
     </template>
     <template v-else>
-      <v-toolbar color="primary">
-        <v-btn fab x-small class="ml-0 mr-1" color="error" @click="cancel">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
+      <v-toolbar :color="p.crash ? 'error' : 'primary'">
         <v-toolbar-title class="text-h6 text-sm-h6 text-md-h4">
           Bearbeiten
         </v-toolbar-title>
+        <template v-if="p.crash">
+          <v-spacer></v-spacer>
+          <v-alert
+            rounded
+            width="400"
+            height="60"
+            colored-border
+            border="left"
+            type="error"
+            class="text-center align-center"
+            elevation="2"
+          >
+            Modell ist Schrott
+          </v-alert>
+        </template>
         <v-spacer />
         <v-toolbar-items>
           <v-btn @click="cancel" class="mx-2">Abbrechen</v-btn>
@@ -88,7 +100,8 @@
               <template v-slot:activator="{ on }">
                 <v-btn color="secondary" v-on="on">
                   <v-icon>mdi-camera</v-icon>
-                   Bild auswählen </v-btn>
+                  Bild auswählen
+                </v-btn>
               </template>
               <v-card
                 dark
@@ -115,7 +128,11 @@
           </v-card-actions>
           <v-img width="100%" :src="p.image" contain></v-img>
           <v-card-actions class="justify-end">
-            <v-btn block color="error">IST KAPUTT!</v-btn>
+
+              <v-btn block :color="p.crash ? 'success' : 'error'" @click="setCrash"
+                >{{ p.crash ? 'Schrott-Status entfernen' : 'Modell ist Schrott!' }}</v-btn
+              >
+
           </v-card-actions>
         </v-form>
       </v-card>
@@ -156,6 +173,11 @@ export default class PlaneDialog extends Vue {
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
   }
+  setCrash(): void {
+    this.p.crash = !this.p.crash;
+    this.$emit("update", this.p);
+  }
+
   selectImage(picUrl: string) {
     this.p.image = picUrl;
   }
