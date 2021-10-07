@@ -1,20 +1,30 @@
 <template>
   <base-dialog v-model="open">
+    <template v-slot:toolbar>
+      <v-btn color="success" elevation="0" @click="savePlane">Save</v-btn>
+    </template>
     <v-row justify="center">
       <v-col cols="12" md="6">
-        {{p}}
         <v-card tile max-width="700" class="mt-3">
           <v-card-title>Neues Modell</v-card-title>
           <v-form ref="editPlane">
             <v-row class="mx-3">
               <v-col cols="12">
-                <v-text-field filled label="Name" v-model="p.name" clearable></v-text-field>
+                <v-text-field
+                  filled
+                  label="Name"
+                  v-model="p.name"
+                  clearable
+                  validate-on-blur
+                  :rules="rules"
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4" lg="2">
                 <v-text-field
                   outlined
                   label="Typ"
                   v-model="p.type"
+                  :rules="rules"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -22,6 +32,7 @@
                   outlined
                   label="Bauweise"
                   v-model="p.bauweise"
+                  :rules="rules"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -29,16 +40,18 @@
                   outlined
                   label="Spannweite"
                   v-model="p.spannweite"
+                  :rules="rules"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row class="mx-3">
               <v-col cols="12" sm="6" md="4" lg="2">
                 <v-select
-                  :items="sender"
+                  :items="senderRecord"
                   label="Sender"
                   item-value="sender"
                   v-model="p.sender"
+                  :rules="rules"
                 ></v-select>
               </v-col>
               <v-col>
@@ -46,13 +59,15 @@
                   outlined
                   label="Gewicht"
                   v-model="p.gewicht"
+                  :rules="rules"
                 ></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
+                  disabled
                   outlined
                   label="Faktor"
-                  v-model="p.faktor"
+                  :value="faktor"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -65,6 +80,14 @@
             </v-card-actions>
             <v-card-title>Bild auswählen</v-card-title>
             <v-card-subtitle>aktuell: {{ p.image }}</v-card-subtitle>
+            <v-card-actions>
+              <input
+                type="file"
+                ref="fileInput"
+                class="ma-2"
+                @change="picLocalImageFile"
+              />
+            </v-card-actions>
             <v-card-actions>
               <v-menu
                 :return-value="p.image"
@@ -93,7 +116,9 @@
                         @click="selectImage(pic.url)"
                       >
                         <v-img :src="pic.url"></v-img>
-                        <v-card-text class="caption">{{ pic.name }}</v-card-text>
+                        <v-card-text class="caption">{{
+                          pic.name
+                        }}</v-card-text>
                       </v-card>
                     </v-col>
                   </v-row>
@@ -105,7 +130,6 @@
         </v-card>
       </v-col>
     </v-row>
-
   </base-dialog>
 </template>
 
@@ -114,6 +138,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import BaseDialog from "@/components/commons/BaseDialog.vue";
 import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
+import firebaseService from "@/store/api/firebaseService";
+
 @Component({
   components: { BaseDialog },
 })
@@ -122,25 +148,72 @@ export default class AddPlane extends Vue {
   value!: Plane;
 
   open = false;
-  sender = SenderAsRecord;
+  senderRecord = SenderAsRecord;
+  imageName = "";
+  imageSrc: string | ArrayBuffer;
+  image: Blob;
+  rules = [
+  (v: string | number) => !!v || "Feld muss ausgefüllt sein!",
+  ];
+
   get p(): Plane {
     return this.value;
   }
   set p(value: Plane) {
-    this.$emit("input", value);
+    this.$emit("faktor", value);
   }
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
+  }
+  get faktor(): number {
+    if (this.p.spannweite && this.p.gewicht) {
+      const f = this.p.spannweite / this.p.gewicht;
+      this.p.faktor = f;
+      return f;
+    } else return 0;
+  }
+  set faktor(value: number) {
+    this.$emit("faktor", value);
   }
 
   openDialog(): void {
     this.open = !this.open;
   }
+  picLocalImageFile(e: any): void {
+    //let t = event.currentTarget as HTMLInputElement;
+
+    const file = e.target.files[0];
+
+    this.imageName = file.name;
+    console.log("bild", file);
+    const fr = new FileReader();
+    fr.addEventListener("load", () => {
+      this.imageSrc = fr.result;
+    });
+    fr.readAsDataURL(file);
+    this.image = file;
+    console.log("fileReader", fr);
+  }
   selectImage(picUrl: string) {
     this.p.image = picUrl;
   }
-  savePlane(): void{
-    this.$emit('save', this.p)
+  savePlane(): void {
+    this.p.faktor = this.faktor;
+    for (let key of Object.entries(this.p)) {
+      key.forEach((el) => {
+        if (el === undefined) {
+          console.log(key, "ist undefiniert");
+        }
+      });
+    }
+    /*
+    firebaseService
+      .saveNewPlane(this.imageName, this.image, this.p)
+      .then((res: any) => {
+        console.log(res);
+      });
+
+     */
   }
 }
 </script>
