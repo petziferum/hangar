@@ -34,7 +34,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
-import firebaseService from "@/store/api/firebaseService";
 
 @Component
 export default class AppBar extends Vue {
@@ -50,15 +49,12 @@ export default class AppBar extends Vue {
 <style scoped>
 .logo {
   position: relative;
-  top:40px;
+  top: 40px;
 }
 .routerlink {
   position: relative;
   top: 10px;
   height: 200px;
   width: 100%;
-}
-.title {
-  font-family: "nunito", sans-serif !important;
 }
 </style>
