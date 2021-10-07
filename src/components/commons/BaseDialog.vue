@@ -7,7 +7,9 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <v-sheet height="100%">
     <slot />
+    </v-sheet>
   </v-dialog>
 </template>
 
