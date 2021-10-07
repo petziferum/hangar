@@ -1,21 +1,21 @@
 <template>
-  <v-app-bar app color="#507144" dark>
-    <div class="d-flex align-center">
-      <router-link to="/">
-        <v-img
-          alt="Hangar Logo"
-          class="shrink mr-2"
-          contain
-          :src="require('@/assets/hangar-plane.png')"
-          min-width="100"
-          width="100"
-        />
-      </router-link>
-    </div>
+  <v-app-bar app color="primary" dark>
+    <router-link to="/" class="routerlink">
+      <v-img
+        transition="slide-x-reverse-transition"
+        alt="Hangar Logo"
+        class="mx-auto logo"
+        contain
+        :src="require('@/assets/hangar-plane-text.png')"
+        min-width="100"
+        height="80%"
+      />
+    </router-link>
+
     <template v-slot:extension>
       <v-tabs>
         <!-- <v-tab to="devtest">devTest</v-tab> -->
-        <v-tab to="/">Hangar</v-tab>
+        <v-tab to="/hangar">Hangar</v-tab>
         <v-tab v-show="user" to="/admin">Admin</v-tab>
       </v-tabs>
 
@@ -42,9 +42,23 @@ export default class AppBar extends Vue {
     return this.$store.getters.getUser;
   }
   login(): void {
-    this.$router.push("/login")
+    this.$router.push("/login");
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.logo {
+  position: relative;
+  top:40px;
+}
+.routerlink {
+  position: relative;
+  top: 10px;
+  height: 200px;
+  width: 100%;
+}
+.title {
+  font-family: "nunito", sans-serif !important;
+}
+</style>

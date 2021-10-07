@@ -1,16 +1,19 @@
 <template>
-  <DevTest />
+  <LandingPage />
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import DevTest from "@/components/DevTest.vue";
+import LandingPage from "@/views/LandingPage.vue";
 
 export default Vue.extend({
   name: "Home",
 
   components: {
-    DevTest,
+    LandingPage,
   },
 });
 </script>
+<style scoped>
+
+</style>

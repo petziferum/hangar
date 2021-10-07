@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <app-bar />
-    <v-main>
+    <v-main class="appolive">
       <router-view />
     </v-main>
   </v-app>
@@ -26,5 +26,8 @@ export default Vue.extend({
 <style>
 .border {
   border: 1px solid;
+}
+.appolive {
+  background-color: #5a664b;
 }
 </style>
