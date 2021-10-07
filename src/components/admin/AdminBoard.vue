@@ -110,6 +110,8 @@
         ></plane-dialog>
         <add-plane ref="addplanedialog" v-model="newPlane" />
       </v-col>
+      <v-col>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -140,7 +142,11 @@ export default class AdminBoard extends Vue {
   dialog = false;
   basedialog = false;
 
-  startEdit(plane: Plane) {
+  get imageList(): any[] {
+    return this.$store.getters.GET_IMAGELIST;
+  }
+
+  startEdit(): void {
     const planeDialog = this.$refs.planedialog as PlaneDialog;
     planeDialog.open();
   }
@@ -159,8 +165,8 @@ export default class AdminBoard extends Vue {
   }
   addNewPlaneDialog() {
     const dialog = this.$refs.addplanedialog as AddPlane;
-    this.newPlane = Plane.createEmptyPlane().withName("Flugzeug")
-    Object.assign(dialog, this.newPlane)
+    this.newPlane = Plane.createEmptyPlane().withName("Flugzeug");
+    Object.assign(dialog, this.newPlane);
     dialog.openDialog();
   }
   saveNewPlane() {
@@ -197,7 +203,7 @@ export default class AdminBoard extends Vue {
     });
     console.log("imageSrc:", this.imageSrc, "src: ", src);
   }
-  setEditPlane(value: Plane) {
+  setEditPlane(value: Plane): void {
     this.editPlane = value;
   }
   clearEdit(): void {
@@ -214,6 +220,10 @@ export default class AdminBoard extends Vue {
     firebaseService.firebaseLogout().then(() => {
       this.$router.push("/");
     });
+  }
+
+  created(): void {
+    this.$store.dispatch("FETCH_IMAGES");
   }
 }
 </script>
