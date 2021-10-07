@@ -28,7 +28,7 @@
                 v-model="p.name"
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col cols="12" sm="6" md="4" lg="2">
               <v-text-field
                 outlined
                 label="Typ"
@@ -49,13 +49,6 @@
                 v-model="p.spannweite"
               ></v-text-field>
             </v-col>
-            <v-col>
-              <v-text-field
-                outlined
-                label="Faktor"
-                v-model="p.faktor"
-              ></v-text-field>
-            </v-col>
           </v-row>
           <v-row class="mx-3">
             <v-col cols="12" sm="6" md="4" lg="2">
@@ -65,6 +58,20 @@
                 item-value="sender"
                 v-model="p.sender"
               ></v-select>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                label="Gewicht"
+                v-model="p.gewicht"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                label="Faktor"
+                v-model="p.faktor"
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-card-actions class="pa-3 ma-3">
@@ -124,6 +131,7 @@ export default class PlaneDialog extends Vue {
   }
 
   update(): void {
+    this.p.image = "https://firebasestorage.googleapis.com/v0/b/hangar-7334.appspot.com/o/planes%2Fcorsair_00000.jpg?alt=media&token=de81c6a1-3173-4d70-8bff-2e567749501d"
     this.$emit("update", this.p);
   }
 }
