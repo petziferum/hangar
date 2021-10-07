@@ -87,7 +87,9 @@
               <v-card-actions>
                 <v-toolbar elevation="1" dense>
                   <v-toolbar-items>
-                    <v-btn color="red" @click="updateSchrott(plane)">Schrott!</v-btn>
+                    <v-btn color="red" @click="updateSchrott(plane)"
+                      >Schrott!</v-btn
+                    >
                   </v-toolbar-items>
                 </v-toolbar>
               </v-card-actions>
@@ -130,11 +132,11 @@ export default class Hangar extends Vue {
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
   }
-  updateSchrott(p:Plane):void {
-    firebaseService.setPlaneSchrott(p)
-    .then((res) => { console.info("Schrott", res )
-    this.getPlanes()
-    })
+  updateSchrott(p: Plane): void {
+    firebaseService.setPlaneSchrott(p).then((res) => {
+      console.info("Schrott", res);
+      this.getPlanes();
+    });
   }
   panelImage(image: string) {
     const style =
