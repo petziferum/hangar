@@ -1,9 +1,11 @@
-import firebaseApp, { fireStore } from "@/plugins/firesbaseConfig";
+import firebaseApp, { fireBucket, fireStore } from "@/plugins/firesbaseConfig";
 import Plane from "@/types/Plane";
 import store from "@/store";
 import firebase from "firebase";
 import DocumentReference = firebase.firestore.DocumentReference;
 import DocumentData = firebase.firestore.DocumentData;
+import database = firebase.database;
+import firestore = firebase.firestore;
 
 interface ImageItem {
   name: string;
@@ -103,6 +105,38 @@ export default class HangarService {
           });
       });
   }
+  static uploadImage(
+    imageName: string,
+    imageFile: Blob,
+    id: string
+  ): Promise<void | string> {
+    return fireBucket
+      .ref("planes/" + imageName)
+      .put(imageFile)
+      .then(() => {
+        return firebaseApp
+          .storage()
+          .ref("planes/" + imageName)
+          .getDownloadURL();
+      })
+      .then((URL) => {
+        console.log("update ", id, " 516513265653321 ", URL);
+        return fireStore
+          .collection("planes")
+          .doc(id)
+          .update({ image: URL })
+          .then(() => {
+            return URL;
+          });
+      })
+      .then((URL) => {
+        console.log("neue URL:", URL)
+        return URL;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   static getImages(): Promise<ImageItem[] | void> {
     return firebaseApp
@@ -140,6 +174,7 @@ export default class HangarService {
       console.log("keine Beschreibung");
       plane.beschreibung = "";
     }
+    if (!plane.crash) plane.crash = false;
     return fireStore
       .collection("planes")
       .doc(id)

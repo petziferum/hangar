@@ -11,6 +11,8 @@
     <v-row>
       <v-col>
         <v-autocomplete
+          filled
+          dark
           class="mx-2 mt-2"
           validate-on-blur
           :items="planes"

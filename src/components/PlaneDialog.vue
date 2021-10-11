@@ -66,7 +66,7 @@
                 item-value="sender"
                 v-model="p.sender"
               ></v-select>
-              {{sender}}
+              {{ sender }}
             </v-col>
             <v-col>
               <v-text-field
@@ -79,7 +79,8 @@
               <v-text-field
                 outlined
                 label="Faktor"
-                v-model="p.faktor"
+                :value="faktor"
+                readonly
               ></v-text-field>
             </v-col>
           </v-row>
@@ -134,15 +135,24 @@
               class="ma-2"
               @change="pickImage"
             />
-            <v-btn @click.prevent="uploadImage">Upload</v-btn>
+            <v-btn
+              :disabled="!imageFile && !imageName"
+              :loading="uploading"
+              @click.prevent="uploadImage"
+              >Upload</v-btn
+            >
+            {{ uploadMessage }}
           </v-card-actions>
           <v-img width="100%" :src="p.image" contain></v-img>
           <v-card-actions class="justify-end">
-
-              <v-btn block :color="p.crash ? 'success' : 'error'" @click="setCrash"
-                >{{ p.crash ? 'Schrott-Status entfernen' : 'Modell ist Schrott!' }}</v-btn
-              >
-
+            <v-btn
+              block
+              :color="p.crash ? 'success' : 'error'"
+              @click="setCrash"
+              >{{
+                p.crash ? "Schrott-Status entfernen" : "Modell ist Schrott!"
+              }}</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
@@ -154,6 +164,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
+import firebaseService from "@/store/api/firebaseService";
 
 @Component
 export default class PlaneDialog extends Vue {
@@ -164,9 +175,11 @@ export default class PlaneDialog extends Vue {
   plane!: Plane;
 
   sender = SenderAsRecord;
-  imageName =""
-  imageSrc: ArrayBuffer | string = ""
-  imageFile: Blob;
+  imageName: string | null = null;
+  imageSrc: ArrayBuffer | string;
+  imageFile: Blob | null = null;
+  uploading = false;
+  uploadMessage: void | string = null;
 
   get p(): Plane {
     return this.plane;
@@ -185,6 +198,16 @@ export default class PlaneDialog extends Vue {
   }
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
+  }
+  get faktor(): number {
+    if (this.plane.spannweite && this.p.gewicht) {
+      const f = this.p.gewicht / this.p.spannweite;
+      this.plane.faktor = f;
+      return f;
+    } else return 0;
+  }
+  set faktor(value: number) {
+    this.$emit("faktor", value);
   }
   setCrash(): void {
     this.p.crash = !this.p.crash;
@@ -207,7 +230,23 @@ export default class PlaneDialog extends Vue {
     console.log("fileReader", fr);
   }
   uploadImage(): void {
-
+    this.uploading = true;
+    firebaseService
+      .uploadImage(this.imageName, this.imageFile, this.plane.id)
+      .then((res) => {
+        if (res) {
+          this.plane.image = res;
+        }
+      })
+      .then(() => {
+        firebaseService.getAllPlanes();
+        this.imageName = null;
+        this.imageFile = null;
+        this.imageSrc = null;
+      })
+      .then(() => {
+        this.uploading = false;
+      });
   }
   cancel(): void {
     this.isOpen = !this.isOpen;
