@@ -101,9 +101,10 @@
               <template v-slot:activator="{ on }">
                 <v-btn color="secondary" v-on="on">
                   <v-icon>mdi-camera</v-icon>
-                  Bild auswählen
+                  Bild Online auswählen
                 </v-btn>
               </template>
+
               <v-card
                 dark
                 tile
@@ -126,6 +127,14 @@
                 </v-row>
               </v-card>
             </v-menu>
+            <div class="mx-2">Oder Hochloaden:</div>
+            <input
+              type="file"
+              ref="fileInput"
+              class="ma-2"
+              @change="pickImage"
+            />
+            <v-btn @click.prevent="uploadImage">Upload</v-btn>
           </v-card-actions>
           <v-img width="100%" :src="p.image" contain></v-img>
           <v-card-actions class="justify-end">
@@ -155,6 +164,9 @@ export default class PlaneDialog extends Vue {
   plane!: Plane;
 
   sender = SenderAsRecord;
+  imageName =""
+  imageSrc: ArrayBuffer | string = ""
+  imageFile: Blob;
 
   get p(): Plane {
     return this.plane;
@@ -181,6 +193,21 @@ export default class PlaneDialog extends Vue {
 
   selectImage(picUrl: string) {
     this.p.image = picUrl;
+  }
+  pickImage(e: any): void {
+    const file = e.target.files[0];
+    this.imageName = file.name;
+    console.log("bild", file);
+    const fr = new FileReader();
+    fr.addEventListener("load", () => {
+      this.imageSrc = fr.result;
+    });
+    fr.readAsDataURL(file);
+    this.imageFile = file;
+    console.log("fileReader", fr);
+  }
+  uploadImage(): void {
+
   }
   cancel(): void {
     this.isOpen = !this.isOpen;
