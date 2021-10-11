@@ -85,11 +85,14 @@
             ></v-card-text>
             <template v-if="adminUser">
               <v-card-actions>
+
                 <v-toolbar elevation="1" dense>
                   <v-toolbar-items>
+                    <v-spacer />
                     <v-btn color="red" @click="updateSchrott(plane)"
                       >Schrott!</v-btn
                     >
+                    <v-btn color="success" @click="updateBeschreibung(plane.id, 'flame')">Beschreibung aktualisieren</v-btn>
                   </v-toolbar-items>
                 </v-toolbar>
               </v-card-actions>

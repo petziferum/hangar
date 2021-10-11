@@ -12,6 +12,7 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const fireStore = firebaseApp.firestore();
+const fireBucket = firebaseApp.storage();
 
-export { fireStore };
+export { fireStore, fireBucket };
 export default firebaseApp;
