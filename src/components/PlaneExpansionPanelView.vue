@@ -199,7 +199,6 @@ export default class PlaneExpansionPanelView extends Vue {
     console.log("imageSrc:", this.imageSrc, "src: ", src);
   }
 
-
   addFlightList(value: Plane): void {
     this.$store.dispatch("addToFlightlist", value);
   }

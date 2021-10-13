@@ -1,9 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12">
-        <v-select :items="orderList" :value="orderBy"></v-select>
-        {{ orderBy }}
+      <v-col cols="12" md="6" lg="3">
+        <v-select
+          prefix="Sortieren nach:    "
+          dark
+          filled
+          :items="orderList" v-model="orderBy" @input="getByOrder"></v-select>
+        <div class="white--text">Flugzeuge: {{ planes.length }}</div>
       </v-col>
     </v-row>
     <v-row>
@@ -93,7 +97,7 @@
                 </v-row>
                 <v-card-text
                   class="descriptionBox elevation-4"
-                  v-html="plane.beschreibung"
+                  v-text="plane.beschreibung"
                 ></v-card-text>
                 <template v-if="adminUser">
                   <v-card-actions>
@@ -102,11 +106,6 @@
                         <v-spacer />
                         <v-btn color="red" @click="updateSchrott(plane)"
                           >Schrott!</v-btn
-                        >
-                        <v-btn
-                          color="success"
-                          @click="updateBeschreibung(plane.id, 'flame')"
-                          >Beschreibung aktualisieren</v-btn
                         >
                       </v-toolbar-items>
                     </v-toolbar>
@@ -146,7 +145,7 @@ export default class Hangar extends Vue {
   }
 
   getByOrder(): void {
-    this.orderBy = this.orderList[2];
+    console.info("order by", this.orderBy)
     this.getPlanes();
   }
 
