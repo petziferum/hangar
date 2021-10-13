@@ -152,9 +152,7 @@ export default class AddPlane extends Vue {
   imageName = "";
   imageSrc: string | ArrayBuffer;
   image: Blob;
-  rules = [
-  (v: string | number) => !!v || "Feld muss ausgefüllt sein!",
-  ];
+  rules = [(v: string | number) => !!v || "Feld muss ausgefüllt sein!"];
 
   get p(): Plane {
     return this.value;

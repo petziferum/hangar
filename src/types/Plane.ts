@@ -78,6 +78,19 @@ export default class Plane {
     return this;
   }
 
+  static createFirePlane(obj: Plane): Plane {
+    return new Plane(
+      obj.name || undefined,
+      obj.sender || undefined,
+      obj.type || undefined,
+      obj.bauweise || undefined,
+      obj.gewicht || undefined,
+      obj.spannweite || undefined,
+      obj.faktor || undefined,
+      obj.image || undefined
+    );
+  }
+
   static createEmptyPlane(): Plane {
     return new Plane(
       undefined,

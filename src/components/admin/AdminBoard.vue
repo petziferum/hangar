@@ -28,7 +28,7 @@
         ></v-autocomplete>
       </v-col>
     </v-row>
-    <v-alert class="red--text">{{ message }}</v-alert>
+    <v-alert class="red--text" v-if="message">{{ message }}</v-alert>
     <v-row>
       <v-col cols="2" class="text-center">
         <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
@@ -39,6 +39,11 @@
           @save="saveNewPlane"
         />
       </v-col>
+      <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
+      <v-col cols="10">
+        <v-btn @click="copyCollection">copy</v-btn>
+      </v-col>
+      -->
     </v-row>
     <v-row>
       <v-col>
@@ -94,20 +99,23 @@ export default class AdminBoard extends Vue {
   }
 
   loadPlanes(): void {
-    firebaseService.getAllPlanes().then((p) => {
+    firebaseService.getAllPlanes(undefined).then((p) => {
       this.planes = p;
     });
   }
-  addNewPlane() {
+  addNewPlane(): void {
     this.newModel = true;
     this.newPlane = Plane.createEmptyPlane();
   }
-  addNewPlaneDialog() {
+  copyCollection(): void {
+    firebaseService.copyCollection();
+  }
+  addNewPlaneDialog(): void {
     const dialog = this.$refs.addplanedialog as AddPlane;
     Object.assign(dialog, this.newPlane);
     dialog.openDialog();
   }
-  saveNewPlane(event: Plane) {
+  saveNewPlane(event: Plane): void {
     /*
     const f = this.newPlane.spannweite / this.newPlane.gewicht;
     this.newPlane.faktor = f;
