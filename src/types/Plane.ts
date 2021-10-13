@@ -21,7 +21,8 @@ export default class Plane {
     gewicht: number | undefined,
     spannweite: number | undefined,
     faktor: number | undefined,
-    image: string | undefined
+    image: string | undefined,
+    beschreibung: string | undefined
   ) {
     this.name = name;
     this.sender = sender;
@@ -31,6 +32,7 @@ export default class Plane {
     this.spannweite = spannweite;
     this.faktor = faktor;
     this.image = image;
+    this.beschreibung = beschreibung;
   }
 
   withBeschreibung(value: string): Plane {
@@ -87,7 +89,8 @@ export default class Plane {
       obj.gewicht || undefined,
       obj.spannweite || undefined,
       obj.faktor || undefined,
-      obj.image || undefined
+      obj.image || undefined,
+      obj.beschreibung || undefined
     );
   }
 
@@ -100,7 +103,8 @@ export default class Plane {
       undefined,
       undefined,
       undefined,
-      undefined
+      undefined,
+      undefined,
     );
   }
 }
