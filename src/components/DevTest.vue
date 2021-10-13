@@ -5,14 +5,19 @@
       <v-col>
         <v-btn @click="editPlane(planes[0])">{{ planes[0].name }}</v-btn>
         <template v-if="active">
-        <edit-plane :plane="planeEdit"></edit-plane>
+          <edit-plane :plane="planeEdit"></edit-plane>
         </template>
-        {{planeEdit}}
+        {{ planeEdit }}
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <plane-dialog ref="planedialog" v-model="dialog" :plane="planeEdit" @cancel="cancelEdit"></plane-dialog>
+        <plane-dialog
+          ref="planedialog"
+          v-model="dialog"
+          :plane="planeEdit"
+          @cancel="cancelEdit"
+        ></plane-dialog>
       </v-col>
     </v-row>
   </v-container>
@@ -43,15 +48,15 @@ export default class DevTest extends Vue {
   planeEdit: Plane | null = null;
 
   loadPlanes() {
-    firebaseService.getAllPlanes().then((res) => {
+    firebaseService.getAllPlanes(undefined).then((res) => {
       this.planes = res;
     });
   }
 
   editPlane(plane: Plane) {
-    this.planeEdit = plane
-    const planeDialog = this.$refs.planedialog as PlaneDialog
-    planeDialog.open()
+    this.planeEdit = plane;
+    const planeDialog = this.$refs.planedialog as PlaneDialog;
+    planeDialog.open();
   }
   cancelEdit(): void {
     this.planeEdit = null;

@@ -4,8 +4,6 @@ import store from "@/store";
 import firebase from "firebase";
 import DocumentReference = firebase.firestore.DocumentReference;
 import DocumentData = firebase.firestore.DocumentData;
-import database = firebase.database;
-import firestore = firebase.firestore;
 
 interface ImageItem {
   name: string;
@@ -46,15 +44,17 @@ export default class HangarService {
       });
   }
 
-  static getAllPlanes(): Promise<void | Plane[]> {
+  static getAllPlanes(orderby: string | undefined): Promise<void | Plane[]> {
     return fireStore
       .collection("planes")
+      .orderBy(orderby)
       .get()
       .then((res) => {
         const planesList: Array<Plane> = [];
         res.forEach((doc) => {
           const data = doc.data();
           data.id = doc.id;
+          /*
           const plane = Plane.createEmptyPlane()
             .withImage(data.image)
             .withName(data.name)
@@ -67,6 +67,12 @@ export default class HangarService {
             .withType(data.type)
             .withId(data.id)
             .withCrash(data.crash);
+           */
+          const plane = Plane.createFirePlane(data as Plane);
+          plane.faktor =
+            Math.round(
+              (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
+            ) / 100;
           planesList.push(plane);
         });
         return planesList;
@@ -130,7 +136,7 @@ export default class HangarService {
           });
       })
       .then((URL) => {
-        console.log("neue URL:", URL)
+        console.log("neue URL:", URL);
         return URL;
       })
       .catch((err) => {
@@ -182,5 +188,13 @@ export default class HangarService {
       .then(() => {
         return plane;
       });
+  }
+
+  static async copyCollection(): Promise<void> {
+    const documents = await fireStore.collection("planes").get();
+    const planesCopy = fireStore.collection("planesCopy");
+    documents.docs.forEach((doc) => {
+      planesCopy.doc(doc.get("id")).set(doc.data());
+    });
   }
 }

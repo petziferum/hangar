@@ -1,106 +1,123 @@
 <template>
   <v-container>
-    <v-expansion-panels>
-      <v-expansion-panel v-for="plane in planes" :key="plane.id">
-        <v-expansion-panel-header ripple :style="panelImage(plane.image)"
-          ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{ plane.sender }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-dialog>
-            <template v-slot:activator="{ on }">
-              <v-img
-                :src="plane.image"
-                class="contImg"
-                width="100%"
-                height="200px"
-                v-on="on"
-              >
-                <v-overlay
-                  v-if="plane.crash"
-                  color="red"
-                  absolute
-                  class="red--text text-h1"
-                >
-                  Schrott
-                </v-overlay>
-              </v-img>
-            </template>
-            <v-img :src="plane.image" width="100%"></v-img>
-          </v-dialog>
-          <v-card tile elevation="4">
-            <v-row v-if="screenMobile" no-gutters>
-              <v-col cols="3">
-                <v-card-text>Gewicht: {{ plane.gewicht }}</v-card-text>
-              </v-col>
-              <v-col cols="3">
-                <v-card-text>Spannweite: {{ plane.spannweite }}</v-card-text>
-              </v-col>
-              <v-col cols="3">
-                <v-card-text>Faktor: {{ plane.faktor }}</v-card-text>
-              </v-col>
-              <v-col cols="3">
-                <v-card-text>Sender: {{ plane.sender }}</v-card-text>
-              </v-col>
-            </v-row>
-            <v-row v-else>
-              <v-col cols="12">
-                <v-list dense>
-                  <v-list-item-group>
-                    <v-list-item dense>
-                      <v-list-item-content>
-                        <v-list-item-subtitle
-                          >Crash: {{ plane.crash }}g</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item dense>
-                      <v-list-item-content>
-                        <v-list-item-subtitle
-                          >Spannweite:
-                          {{ plane.spannweite }}</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item dense>
-                      <v-list-item-content>
-                        <v-list-item-subtitle
-                          >Faktor: {{ plane.faktor }}</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item dense>
-                      <v-list-item-content>
-                        <v-list-item-subtitle
-                          >Sender: {{ plane.sender }}</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list-item-group>
-                </v-list>
-              </v-col>
-            </v-row>
-            <v-card-text
-              class="descriptionBox elevation-4"
-              v-html="plane.beschreibung"
-            ></v-card-text>
-            <template v-if="adminUser">
-              <v-card-actions>
-
-                <v-toolbar elevation="1" dense>
-                  <v-toolbar-items>
-                    <v-spacer />
-                    <v-btn color="red" @click="updateSchrott(plane)"
-                      >Schrott!</v-btn
+    <v-row>
+      <v-col cols="12">
+        <v-select :items="orderList" :value="orderBy"></v-select>
+        {{ orderBy }}
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-expansion-panels>
+          <v-expansion-panel v-for="plane in planes" :key="plane.id">
+            <v-expansion-panel-header ripple :style="panelImage(plane.image)"
+              ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{
+                plane.sender
+              }}
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-dialog>
+                <template v-slot:activator="{ on }">
+                  <v-img
+                    :src="plane.image"
+                    class="contImg"
+                    width="100%"
+                    height="200px"
+                    v-on="on"
+                  >
+                    <v-overlay
+                      v-if="plane.crash"
+                      color="red"
+                      absolute
+                      class="red--text text-h1"
                     >
-                    <v-btn color="success" @click="updateBeschreibung(plane.id, 'flame')">Beschreibung aktualisieren</v-btn>
-                  </v-toolbar-items>
-                </v-toolbar>
-              </v-card-actions>
-            </template>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+                      Schrott
+                    </v-overlay>
+                  </v-img>
+                </template>
+                <v-img :src="plane.image" width="100%"></v-img>
+              </v-dialog>
+              <v-card tile elevation="4">
+                <v-row v-if="screenMobile" no-gutters>
+                  <v-col cols="3">
+                    <v-card-text>Gewicht: {{ plane.gewicht }}</v-card-text>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-card-text
+                      >Spannweite: {{ plane.spannweite }}</v-card-text
+                    >
+                  </v-col>
+                  <v-col cols="3">
+                    <v-card-text>Faktor: {{ plane.faktor }}</v-card-text>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-card-text>Sender: {{ plane.sender }}</v-card-text>
+                  </v-col>
+                </v-row>
+                <v-row v-else>
+                  <v-col cols="12">
+                    <v-list dense>
+                      <v-list-item-group>
+                        <v-list-item dense>
+                          <v-list-item-content>
+                            <v-list-item-subtitle
+                              >Crash: {{ plane.crash }}g</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item dense>
+                          <v-list-item-content>
+                            <v-list-item-subtitle
+                              >Spannweite:
+                              {{ plane.spannweite }}</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item dense>
+                          <v-list-item-content>
+                            <v-list-item-subtitle
+                              >Faktor: {{ plane.faktor }}</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item dense>
+                          <v-list-item-content>
+                            <v-list-item-subtitle
+                              >Sender: {{ plane.sender }}</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list-item-group>
+                    </v-list>
+                  </v-col>
+                </v-row>
+                <v-card-text
+                  class="descriptionBox elevation-4"
+                  v-html="plane.beschreibung"
+                ></v-card-text>
+                <template v-if="adminUser">
+                  <v-card-actions>
+                    <v-toolbar elevation="1" dense>
+                      <v-toolbar-items>
+                        <v-spacer />
+                        <v-btn color="red" @click="updateSchrott(plane)"
+                          >Schrott!</v-btn
+                        >
+                        <v-btn
+                          color="success"
+                          @click="updateBeschreibung(plane.id, 'flame')"
+                          >Beschreibung aktualisieren</v-btn
+                        >
+                      </v-toolbar-items>
+                    </v-toolbar>
+                  </v-card-actions>
+                </template>
+              </v-card>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -114,6 +131,8 @@ export default class Hangar extends Vue {
   planes: Plane[] | void = [];
 
   imageLightBox = false;
+  orderList = ["name", "id", "faktor", "gewicht", "spannweite"];
+  orderBy = "name";
 
   get screenMobile(): boolean {
     return window.innerWidth > 500;
@@ -126,9 +145,14 @@ export default class Hangar extends Vue {
     } else return false;
   }
 
+  getByOrder(): void {
+    this.orderBy = this.orderList[2];
+    this.getPlanes();
+  }
+
   getPlanes(): void {
     console.log("starte fetch");
-    firebaseService.getAllPlanes().then((planesList) => {
+    firebaseService.getAllPlanes(this.orderBy).then((planesList) => {
       this.planes = planesList;
     });
   }

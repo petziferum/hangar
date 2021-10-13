@@ -239,7 +239,7 @@ export default class PlaneDialog extends Vue {
         }
       })
       .then(() => {
-        firebaseService.getAllPlanes();
+        firebaseService.getAllPlanes("name");
         this.imageName = null;
         this.imageFile = null;
         this.imageSrc = null;
