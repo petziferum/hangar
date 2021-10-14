@@ -6,7 +6,10 @@
           prefix="Sortieren nach:    "
           dark
           filled
-          :items="orderList" v-model="orderBy" @input="getByOrder"></v-select>
+          :items="orderList"
+          v-model="orderBy"
+          @input="getByOrder"
+        ></v-select>
         <div class="white--text">Flugzeuge: {{ planes.length }}</div>
       </v-col>
     </v-row>
@@ -95,22 +98,55 @@
                     </v-list>
                   </v-col>
                 </v-row>
-                <v-card-text
-                  class="descriptionBox elevation-4"
-                  v-text="plane.beschreibung"
-                ></v-card-text>
-                <template v-if="adminUser">
-                  <v-card-actions>
-                    <v-toolbar elevation="1" dense>
-                      <v-toolbar-items>
-                        <v-spacer />
-                        <v-btn color="red" @click="updateSchrott(plane)"
-                          >Schrott!</v-btn
-                        >
-                      </v-toolbar-items>
-                    </v-toolbar>
-                  </v-card-actions>
-                </template>
+                <v-row>
+                  <v-col>
+                    <v-card-text
+                      class="descriptionBox elevation-4"
+                      v-text="plane.beschreibung"
+                    ></v-card-text>
+                  </v-col>
+                </v-row>
+
+                <v-card-text class="pa-0">
+                  <template v-if="adminUser">
+                    <v-card elevation="0" tile class="my-5" color="info">
+                      <v-toolbar flat>
+                        <v-app-bar-nav-icon />
+                        <v-toolbar-title>Aktionen</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-menu min-width="200px" offset-x left>
+                          <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on">
+                              <v-icon>mdi-dots-vertical</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-card>
+                            <v-list dense>
+                              <v-list-item-group>
+                                <v-list-item color="error" dense>
+                                <v-list-item-avatar>
+                                  <v-icon>mdi-delete-empty</v-icon>
+                                </v-list-item-avatar>
+                                <v-list-item-content @click="action('schrott')">
+                                  Schrott
+                                </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item dense>
+                                  <v-list-item-avatar>
+                                    <v-icon>mdi-clipboard-list</v-icon>
+                                  </v-list-item-avatar>
+                                  <v-list-item-content @click="action('fliegen')">
+                                    Fliegen
+                                  </v-list-item-content>
+                                </v-list-item>
+                              </v-list-item-group>
+                            </v-list>
+                          </v-card>
+                        </v-menu>
+                      </v-toolbar>
+                    </v-card>
+                  </template>
+                </v-card-text>
               </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -145,8 +181,12 @@ export default class Hangar extends Vue {
   }
 
   getByOrder(): void {
-    console.info("order by", this.orderBy)
+    console.info("order by", this.orderBy);
     this.getPlanes();
+  }
+
+  action(value: string) {
+    console.log(value)
   }
 
   getPlanes(): void {
