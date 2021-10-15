@@ -66,7 +66,6 @@
                 item-value="sender"
                 v-model="p.sender"
               ></v-select>
-              {{ sender }}
             </v-col>
             <v-col>
               <v-text-field

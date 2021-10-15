@@ -22,10 +22,11 @@
           @click="loadPlanes"
           @click:clear="clearEdit"
           @change="startEdit"
-          @focus="clearEdit"
+          @blur="clearEdit"
           label="Flugzeug bearbeiten"
           clearable
-        ></v-autocomplete>
+        >
+        </v-autocomplete>
       </v-col>
     </v-row>
     <v-alert class="red--text" v-if="message">{{ message }}</v-alert>
@@ -99,7 +100,7 @@ export default class AdminBoard extends Vue {
   }
 
   loadPlanes(): void {
-    firebaseService.getAllPlanes(undefined).then((p) => {
+    firebaseService.getAllPlanes('name').then((p) => {
       this.planes = p;
     });
   }
