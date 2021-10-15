@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <v-app-bar-nav-icon />
       <v-toolbar-title>{{ plane.name }}</v-toolbar-title>
-      <v-subheader>{{plane}}</v-subheader>
+      <v-subheader>{{ plane.id }} crash: {{ plane.crash }}</v-subheader>
       <v-spacer></v-spacer>
       <v-menu min-width="200px" offset-x left>
         <template v-slot:activator="{ on }">
@@ -45,28 +45,26 @@ import Plane from "@/types/Plane";
 
 @Component
 export default class AdminActionBar extends Vue {
-
   @Prop()
   plane: Plane;
-  action(value: string) {
+  action(value: string): void {
     switch (value) {
       case "schrott":
         this.updateSchrott(this.plane.id);
         return;
       case "fliegen":
-        console.log("funktion wird noch eingebaut")
+        console.log("funktion wird noch eingebaut");
     }
   }
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
   }
   updateSchrott(planeId: string): void {
-    console.info("update", planeId)
-    firebaseService.setPlaneSchrott(planeId)
+    firebaseService.setPlaneSchrott(planeId).then(() => {
+      this.$emit("update");
+    });
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

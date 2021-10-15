@@ -190,7 +190,10 @@ export default class PlaneDialog extends Vue {
   imageFile: Blob | null = null;
   uploading = false;
   uploadMessage: void | string = null;
-  rules = [(v: string | number) => !!v || "Feld muss ausgefüllt sein!"];
+  rules = [
+    (v: string | number): boolean | string =>
+      !!v || "Feld muss ausgefüllt sein!",
+  ];
 
   get p(): Plane {
     return this.plane;
@@ -225,7 +228,7 @@ export default class PlaneDialog extends Vue {
     this.$emit("update", this.p);
   }
 
-  selectImage(picUrl: string) {
+  selectImage(picUrl: string): void {
     this.p.image = picUrl;
   }
   pickImage(e: any): void {
