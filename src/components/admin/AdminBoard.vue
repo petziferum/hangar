@@ -34,11 +34,7 @@
       <v-col cols="2" class="text-center">
         <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
         <v-card-text color="primary">Flugzeug Hinzufügen</v-card-text>
-        <add-plane
-          ref="addplanedialog"
-          v-model="newPlane"
-          @save="saveNewPlane"
-        />
+        <add-plane ref="addplanedialog" v-model="newPlane" />
       </v-col>
       <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
       <v-col cols="10">
@@ -100,7 +96,7 @@ export default class AdminBoard extends Vue {
   }
 
   loadPlanes(): void {
-    firebaseService.getAllPlanes('name').then((p) => {
+    firebaseService.getAllPlanes("name").then((p) => {
       this.planes = p;
     });
   }
@@ -115,33 +111,6 @@ export default class AdminBoard extends Vue {
     const dialog = this.$refs.addplanedialog as AddPlane;
     Object.assign(dialog, this.newPlane);
     dialog.openDialog();
-  }
-  saveNewPlane(event: Plane): void {
-    /*
-    const f = this.newPlane.spannweite / this.newPlane.gewicht;
-    this.newPlane.faktor = f;
-    firebaseService
-      .saveNewPlane(this.imageName, this.image, this.newPlane)
-      .then((res) => {
-        console.log(res);
-      });
-
-     */
-  }
-  picImageFile(e: any): void {
-    //let t = event.currentTarget as HTMLInputElement;
-
-    const file = e.target.files[0];
-
-    this.imageName = file.name;
-    console.log("bild", file);
-    const fr = new FileReader();
-    fr.addEventListener("load", () => {
-      this.imageSrc = fr.result;
-    });
-    fr.readAsDataURL(file);
-    this.image = file;
-    console.log("fileReader", fr);
   }
   setEditPlane(value: Plane): void {
     this.editPlane = value;

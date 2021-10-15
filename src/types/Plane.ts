@@ -22,7 +22,8 @@ export default class Plane {
     spannweite: number | undefined,
     faktor: number | undefined,
     image: string | undefined,
-    beschreibung: string | undefined
+    beschreibung: string | undefined,
+    crash: boolean | undefined
   ) {
     this.name = name;
     this.sender = sender;
@@ -33,6 +34,7 @@ export default class Plane {
     this.faktor = faktor;
     this.image = image;
     this.beschreibung = beschreibung;
+    this.crash = crash;
   }
 
   withBeschreibung(value: string): Plane {
@@ -90,7 +92,8 @@ export default class Plane {
       obj.spannweite || undefined,
       obj.faktor || undefined,
       obj.image || undefined,
-      obj.beschreibung || undefined
+      obj.beschreibung || undefined,
+      obj.crash || undefined
     );
   }
 
@@ -105,6 +108,7 @@ export default class Plane {
       undefined,
       undefined,
       undefined,
+      undefined
     );
   }
 }

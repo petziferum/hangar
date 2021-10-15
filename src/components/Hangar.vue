@@ -24,7 +24,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <template v-if="adminUser">
-                <AdminActionBar :plane="plane" />
+                <AdminActionBar :plane="plane" @update="getPlanes" />
               </template>
               <v-dialog>
                 <template v-slot:activator="{ on }">
@@ -124,7 +124,7 @@ import Plane from "@/types/Plane";
 import firebaseService from "@/store/api/firebaseService";
 import AdminActionBar from "@/components/features/AdminActionBar.vue";
 @Component({
-  components: { AdminActionBar }
+  components: { AdminActionBar },
 })
 export default class Hangar extends Vue {
   planes: Plane[] | void = [];
@@ -156,7 +156,7 @@ export default class Hangar extends Vue {
     });
   }
 
-  panelImage(image: string) {
+  panelImage(image: string): string {
     const style =
       "backgroundImage: url(" + image + "); background-size: contain";
     return style;

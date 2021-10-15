@@ -152,7 +152,10 @@ export default class AddPlane extends Vue {
   imageName = "";
   imageSrc: string | ArrayBuffer;
   image: Blob;
-  rules = [(v: string | number) => !!v || "Feld muss ausgefüllt sein!"];
+  rules = [
+    (v: string | number): boolean | string =>
+      !!v || "Feld muss ausgefüllt sein!",
+  ];
 
   get p(): Plane {
     return this.value;
@@ -192,7 +195,7 @@ export default class AddPlane extends Vue {
     this.image = file;
     console.log("fileReader", fr);
   }
-  selectImage(picUrl: string) {
+  selectImage(picUrl: string): void {
     this.p.image = picUrl;
   }
   savePlane(): void {
