@@ -23,6 +23,9 @@
               }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
+              <template v-if="adminUser">
+                <AdminActionBar :plane="plane" />
+              </template>
               <v-dialog>
                 <template v-slot:activator="{ on }">
                   <v-img
@@ -106,47 +109,6 @@
                     ></v-card-text>
                   </v-col>
                 </v-row>
-
-                <v-card-text class="pa-0">
-                  <template v-if="adminUser">
-                    <v-card elevation="0" tile class="my-5" color="info">
-                      <v-toolbar flat>
-                        <v-app-bar-nav-icon />
-                        <v-toolbar-title>Aktionen</v-toolbar-title>
-                        <v-spacer></v-spacer>
-                        <v-menu min-width="200px" offset-x left>
-                          <template v-slot:activator="{ on }">
-                            <v-btn icon v-on="on">
-                              <v-icon>mdi-dots-vertical</v-icon>
-                            </v-btn>
-                          </template>
-                          <v-card>
-                            <v-list dense>
-                              <v-list-item-group>
-                                <v-list-item color="error" dense>
-                                <v-list-item-avatar>
-                                  <v-icon>mdi-delete-empty</v-icon>
-                                </v-list-item-avatar>
-                                <v-list-item-content @click="action('schrott')">
-                                  Schrott
-                                </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item dense>
-                                  <v-list-item-avatar>
-                                    <v-icon>mdi-clipboard-list</v-icon>
-                                  </v-list-item-avatar>
-                                  <v-list-item-content @click="action('fliegen')">
-                                    Fliegen
-                                  </v-list-item-content>
-                                </v-list-item>
-                              </v-list-item-group>
-                            </v-list>
-                          </v-card>
-                        </v-menu>
-                      </v-toolbar>
-                    </v-card>
-                  </template>
-                </v-card-text>
               </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -160,8 +122,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import firebaseService from "@/store/api/firebaseService";
-
-@Component
+import AdminActionBar from "@/components/features/AdminActionBar.vue";
+@Component({
+  components: { AdminActionBar }
+})
 export default class Hangar extends Vue {
   planes: Plane[] | void = [];
 
@@ -185,25 +149,13 @@ export default class Hangar extends Vue {
     this.getPlanes();
   }
 
-  action(value: string) {
-    console.log(value)
-  }
-
   getPlanes(): void {
     console.log("starte fetch");
     firebaseService.getAllPlanes(this.orderBy).then((planesList) => {
       this.planes = planesList;
     });
   }
-  updateBeschreibung(id: string, text: string): void {
-    firebaseService.updatePlaneDescription(id, text);
-  }
-  updateSchrott(p: Plane): void {
-    firebaseService.setPlaneSchrott(p).then((res) => {
-      console.info("Schrott", res);
-      this.getPlanes();
-    });
-  }
+
   panelImage(image: string) {
     const style =
       "backgroundImage: url(" + image + "); background-size: contain";

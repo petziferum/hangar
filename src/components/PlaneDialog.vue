@@ -5,7 +5,7 @@
     </template>
     <template v-else>
       <v-toolbar :color="p.crash ? 'error' : 'primary'">
-        <v-toolbar-title class="text-h6 text-sm-h6 text-md-h4">
+        <v-toolbar-title class="text-h6 text-sm-h6 text-md-h4 white--text">
           Bearbeiten
         </v-toolbar-title>
         <template v-if="p.crash">
@@ -30,17 +30,23 @@
         </v-toolbar-items>
       </v-toolbar>
       <v-card tile>
-        <v-card-title>Flugzeug: {{ p.name }}</v-card-title>
+        <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
         <v-form ref="editPlane">
           <v-row class="mx-3">
             <v-col cols="12">
-              <v-text-field filled label="Name" v-model="p.name"></v-text-field>
+              <v-text-field
+                filled
+                label="Name"
+                v-model="p.name"
+                :rules="rules"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4" lg="2">
               <v-text-field
                 outlined
                 label="Typ"
                 v-model="p.type"
+                :rules="rules"
               ></v-text-field>
             </v-col>
             <v-col>
@@ -48,6 +54,7 @@
                 outlined
                 label="Bauweise"
                 v-model="p.bauweise"
+                :rules="rules"
               ></v-text-field>
             </v-col>
             <v-col>
@@ -55,6 +62,7 @@
                 outlined
                 label="Spannweite"
                 v-model="p.spannweite"
+                :rules="rules"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -65,6 +73,7 @@
                 label="Sender"
                 item-value="sender"
                 v-model="p.sender"
+                :rules="rules"
               ></v-select>
             </v-col>
             <v-col>
@@ -72,6 +81,7 @@
                 outlined
                 label="Gewicht"
                 v-model="p.gewicht"
+                :rules="rules"
               ></v-text-field>
             </v-col>
             <v-col>
@@ -79,6 +89,7 @@
                 outlined
                 label="Faktor"
                 :value="faktor"
+                :rules="rules"
                 readonly
               ></v-text-field>
             </v-col>
@@ -179,6 +190,7 @@ export default class PlaneDialog extends Vue {
   imageFile: Blob | null = null;
   uploading = false;
   uploadMessage: void | string = null;
+  rules = [(v: string | number) => !!v || "Feld muss ausgefüllt sein!"];
 
   get p(): Plane {
     return this.plane;
@@ -256,7 +268,12 @@ export default class PlaneDialog extends Vue {
   }
 
   update(): void {
-    this.$emit("update", this.p);
+    const valid = (
+      this.$refs.editPlane as Vue & { validate: () => boolean }
+    ).validate();
+    if (valid) {
+      this.$emit("update", this.p);
+    }
   }
 }
 </script>
