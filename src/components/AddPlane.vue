@@ -204,11 +204,16 @@ export default class AddPlane extends Vue {
         }
       });
     }
-    firebaseService
-      .saveNewPlane(this.imageName, this.image, this.p)
-      .then((res: any) => {
-        console.log(res);
-      });
+    const valid = (
+      this.$refs.editPlane as Vue & { validate: () => boolean }
+    ).validate();
+    if (valid) {
+      firebaseService
+        .saveNewPlane(this.imageName, this.image, this.p)
+        .then((res: any) => {
+          console.log(res);
+        });
+    }
   }
 }
 </script>

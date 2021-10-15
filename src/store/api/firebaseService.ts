@@ -32,15 +32,15 @@ export default class HangarService {
       });
   }
 
-  static setPlaneSchrott(p: Plane): Promise<void | Plane> {
+  static setPlaneSchrott(id: string): Promise<void | Plane> {
     return fireStore
       .collection("planes")
-      .doc(p.id)
+      .doc(id)
       .update({
         crash: true,
       })
       .then(() => {
-        return p;
+        this.getAllPlanes("name");
       });
   }
 
@@ -69,6 +69,7 @@ export default class HangarService {
             .withCrash(data.crash);
            */
           const plane = Plane.createFirePlane(data as Plane);
+          plane.id = data.id;
           plane.faktor =
             Math.round(
               (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
@@ -181,6 +182,13 @@ export default class HangarService {
       plane.beschreibung = "";
     }
     if (!plane.crash) plane.crash = false;
+
+    for (const [key, value] of Object.entries(plane)) {
+      if (value === undefined) {
+        console.info(key, "ist noch undefined");
+      }
+    }
+
     return fireStore
       .collection("planes")
       .doc(id)
