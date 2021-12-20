@@ -107,7 +107,7 @@ export default class Plane {
       undefined,
       undefined,
       undefined,
-      undefined,
+      "",
       undefined
     );
   }
