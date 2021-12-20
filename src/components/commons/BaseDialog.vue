@@ -9,7 +9,7 @@
         <slot name="toolbar"></slot>
       </v-toolbar-items>
     </v-toolbar>
-    <v-sheet height="100%">
+    <v-sheet height="100%" class="dialog">
       <slot />
     </v-sheet>
   </v-dialog>
@@ -36,4 +36,8 @@ export default class BaseDialog extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.dialog {
+  overflow: scroll;
+}
+</style>

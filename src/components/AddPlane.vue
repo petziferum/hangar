@@ -160,12 +160,15 @@ export default class AddPlane extends Vue {
   get p(): Plane {
     return this.value;
   }
+
   set p(value: Plane) {
     this.$emit("faktor", value);
   }
+
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
   }
+
   get faktor(): number {
     if (this.p.spannweite && this.p.gewicht) {
       const f = this.p.spannweite / this.p.gewicht;
@@ -173,6 +176,7 @@ export default class AddPlane extends Vue {
       return f;
     } else return 0;
   }
+
   set faktor(value: number) {
     this.$emit("faktor", value);
   }
@@ -180,8 +184,9 @@ export default class AddPlane extends Vue {
   openDialog(): void {
     this.open = !this.open;
   }
+
   picLocalImageFile(e: any): void {
-    //let t = event.currentTarget as HTMLInputElement;
+    let t = e.currentTarget as HTMLInputElement;
 
     const file = e.target.files[0];
 
@@ -195,11 +200,14 @@ export default class AddPlane extends Vue {
     this.image = file;
     console.log("fileReader", fr);
   }
+
   selectImage(picUrl: string): void {
     this.p.image = picUrl;
   }
+
   savePlane(): void {
     this.p.faktor = this.faktor;
+    this.p.crash = false;
     for (let key of Object.entries(this.p)) {
       key.forEach((el) => {
         if (el === undefined) {
