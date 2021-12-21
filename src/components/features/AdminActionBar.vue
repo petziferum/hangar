@@ -14,9 +14,17 @@
         <v-card>
           <v-list dense>
             <v-list-item-group>
-              <v-list-item color="error" dense>
+              <v-list-item dense>
                 <v-list-item-avatar>
-                  <v-icon>mdi-delete-empty</v-icon>
+                  <v-icon color="success">mdi-pencil</v-icon>
+                </v-list-item-avatar>
+                <v-list-item-content @click="action('edit')">
+                  Bearbeiten
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item dense>
+                <v-list-item-avatar>
+                  <v-icon color="error">mdi-delete-empty</v-icon>
                 </v-list-item-avatar>
                 <v-list-item-content @click="action('schrott')">
                   Schrott
@@ -34,6 +42,13 @@
           </v-list>
         </v-card>
       </v-menu>
+      <plane-dialog
+        ref="planedialog"
+        v-model="dialog"
+        :plane="p"
+        @update="update"
+        @cancel="cancelEdit"
+      ></plane-dialog>
     </v-toolbar>
   </v-card>
 </template>
@@ -42,20 +57,51 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebaseService from "@/store/api/firebaseService";
 import Plane from "@/types/Plane";
+import PlaneDialog from "@/components/PlaneDialog.vue";
 
-@Component
+@Component({ components: { PlaneDialog } })
 export default class AdminActionBar extends Vue {
   @Prop()
   plane: Plane;
+
+  dialog = false;
+
+  get p(): Plane {
+    return this.plane;
+  }
+
+  set p(value: Plane) {
+    this.$emit("input", value);
+  }
+
   action(value: string): void {
     switch (value) {
+      case "edit":
+        this.startEdit();
+        return;
       case "schrott":
         this.updateSchrott(this.plane.id);
         return;
       case "fliegen":
-        console.log("funktion wird noch eingebaut");
+        this.$toast("Funktion wird noch eingebaut")
     }
   }
+
+  update(p: Plane): void {
+    firebaseService.updatePlane(p.id, p).then((res) => {
+      this.dialog = false;
+    });
+  }
+
+  cancelEdit(): void {
+    console.info("cancel Edit");
+  }
+
+  startEdit(): void {
+    const planeDialog = this.$refs.planedialog as PlaneDialog;
+    planeDialog.open();
+  }
+
   updateBeschreibung(id: string, text: string): void {
     firebaseService.updatePlaneDescription(id, text);
   }
