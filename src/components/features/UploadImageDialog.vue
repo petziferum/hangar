@@ -23,19 +23,47 @@
             </div>
           </v-card-text>
           <template v-if="imgString != null">
-            <v-fab-transition>
-              <v-img
-                :src="imgString"
-                max-width="300px"
-                max-height="300px"
-                contain
-                style="background-color: black"
-              ></v-img>
-            </v-fab-transition>
-            <v-card-actions>
-              <v-btn @click="uploadImage">Hochladen</v-btn>
-            </v-card-actions>
+            <v-row>
+              <v-col cols="6">
+                <v-fab-transition>
+                  <v-img
+                    :src="imgString"
+                    max-width="300px"
+                    max-height="300px"
+                    contain
+                    style="background-color: black"
+                  >
+                    <v-overlay
+                      absolute
+                      color="green"
+                      :value="uploadSuccess"
+                    >
+                      <p><span class="headline">Upload erfolgreich!</span></p>
+                      <v-btn
+                        color="green lighten-2"
+                        @click="resetImage"
+                      >
+                        Neues Bild hochladen
+                      </v-btn>
+                    </v-overlay>
+                  </v-img>
+                </v-fab-transition>
+              </v-col>
+              <v-col cols="6">
+                <template v-if="uploadSuccess">
+                  Hochladen erfolgreich!
+                </template>
+                <template v-else>
+                <v-card-actions>
+                  <v-btn @click="uploadImage">Hochladen</v-btn>
+                </v-card-actions>
+                </template>
+              </v-col>
+            </v-row>
           </template>
+          <v-progress-linear height="20px" :value="uploadValue">{{
+            uploadValue
+          }}</v-progress-linear>
         </v-card>
       </v-col>
     </v-row>
@@ -55,9 +83,10 @@ export default class UploadImageDialog extends Vue {
   img: any = null;
   imageData: any = null;
   imageFile: any = null;
-  imgString: string | ArrayBuffer = "";
+  imgString: string | ArrayBuffer | null = null;
   filePath = "";
   processing = false;
+  uploadSuccess = false;
 
   openDialog(): void {
     this.open = !this.open;
@@ -73,7 +102,7 @@ export default class UploadImageDialog extends Vue {
         fr.addEventListener("load", () => {
           this.imgString = fr.result;
         });
-        this.filePath = `planes/${Date.now()}-${file.name}`;
+        this.filePath = `test/${Date.now()}-${file.name}`;
       }
     } catch (e) {
       console.error(e);
@@ -98,13 +127,37 @@ export default class UploadImageDialog extends Vue {
         metaData
       );
       //Firebase Upload
-      await fireBucket.ref().child(this.filePath).put(this.imageFile, metaData);
+      const storage = fireBucket
+        .ref()
+        .child(this.filePath)
+        .put(this.imageFile, metaData);
+      await storage.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.error(error.message);
+        }
+      );
       console.log("filePath", this.filePath);
     } catch (e) {
       console.error(e);
     } finally {
       this.processing = false;
+      this.uploadSuccess = true;
+      this.imageFile = null;
     }
+  }
+
+  resetImage(): void {
+    this.imageFile = null;
+    this.uploadSuccess = false;
+    this.processing = false;
+    this.uploadValue = 0;
+    this.filePath = null;
+    this.imgString = null;
   }
 
   click1() {
