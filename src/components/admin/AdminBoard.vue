@@ -32,9 +32,16 @@
     <v-alert class="red--text" v-if="message">{{ message }}</v-alert>
     <v-row>
       <v-col cols="2" class="text-center">
-        <v-btn fab @click="addNewPlaneDialog"><v-icon>mdi-plus</v-icon></v-btn>
-        <v-card-text color="primary">Flugzeug Hinzufügen</v-card-text>
+        <v-btn class="rounded-pill" @click="addNewPlaneDialog"
+          ><v-icon>mdi-plus</v-icon>Neues Flugzeug</v-btn
+        >
         <add-plane ref="addplanedialog" v-model="newPlane" />
+      </v-col>
+      <v-col>
+        <v-btn class="rounded-pill" @click="uploadImageDialog"
+          ><v-icon>mdi-upload</v-icon>Bild hochladen</v-btn
+        >
+        <upload-image-dialog ref="uploadimagedialog"></upload-image-dialog>
       </v-col>
       <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
       <v-col cols="10">
@@ -65,8 +72,9 @@ import EditPlane from "@/components/EditPlane.vue";
 import { SenderAsRecord } from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
 import AddPlane from "@/components/AddPlane.vue";
+import UploadImageDialog from "@/components/features/UploadImageDialog.vue";
 @Component({
-  components: { EditPlane, PlaneDialog, AddPlane },
+  components: { EditPlane, PlaneDialog, AddPlane, UploadImageDialog },
 })
 export default class AdminBoard extends Vue {
   planes: void | Plane[] = [];
@@ -112,12 +120,20 @@ export default class AdminBoard extends Vue {
     Object.assign(dialog, this.newPlane);
     dialog.openDialog();
   }
+
+  uploadImageDialog(): void {
+    const dialog = this.$refs.uploadimagedialog as UploadImageDialog;
+    dialog.openDialog();
+  }
+
   setEditPlane(value: Plane): void {
     this.editPlane = value;
   }
+
   clearEdit(): void {
     this.message = null;
   }
+
   update(p: Plane): void {
     firebaseService.updatePlane(p.id, p).then((res) => {
       this.message = res;
