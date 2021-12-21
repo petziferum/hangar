@@ -203,6 +203,7 @@ export default class AddPlane extends Vue {
 
   selectImage(picUrl: string): void {
     this.p.image = picUrl;
+    console.log("ausgewählt", picUrl)
   }
 
   savePlane(): void {
@@ -220,9 +221,11 @@ export default class AddPlane extends Vue {
     ).validate();
     if (valid) {
       firebaseService
-        .saveNewPlane(this.imageName, this.image, this.p)
+        .saveNewPlane(this.p)
         .then((res: any) => {
-          console.log(res);
+          console.log("Upload erfolgreich", res);
+          this.$emit("uploaded")
+          this.openDialog();
         });
     }
   }
