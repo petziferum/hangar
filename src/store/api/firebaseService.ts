@@ -86,30 +86,13 @@ export default class HangarService {
       });
   }
   static saveNewPlane(
-    imageName: string,
-    image: Blob,
     plane: Plane
   ): Promise<void | DocumentReference<DocumentData>> {
-    return firebaseApp
-      .storage()
-      .ref("planes/" + imageName)
-      .put(image)
-      .then(() => {
-        return firebaseApp
-          .storage()
-          .ref("planes/" + imageName)
-          .getDownloadURL();
-      })
-      .then((URL) => {
-        plane.image = URL;
-      })
-      .then(() => {
-        fireStore
-          .collection("planes")
-          .add(Object.assign({}, plane))
-          .then((res) => {
-            return res;
-          });
+    return fireStore
+      .collection("planes")
+      .add(Object.assign({}, plane))
+      .then((res) => {
+        return res;
       });
   }
   static uploadImage(

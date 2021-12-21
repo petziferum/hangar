@@ -35,7 +35,7 @@
         <v-btn class="rounded-pill" @click="addNewPlaneDialog"
           ><v-icon>mdi-plus</v-icon>Neues Flugzeug</v-btn
         >
-        <add-plane ref="addplanedialog" v-model="newPlane" />
+        <add-plane ref="addplanedialog" v-model="newPlane" @uploaded="resetPlane" />
       </v-col>
       <v-col>
         <v-btn class="rounded-pill" @click="uploadImageDialog"
@@ -101,6 +101,12 @@ export default class AdminBoard extends Vue {
   }
   cancelEdit(): void {
     this.editPlane = null;
+  }
+
+  resetPlane(): void {
+    this.newPlane = null;
+    this.newPlane = Plane.createEmptyPlane()
+    console.log("reset?", this.newPlane)
   }
 
   loadPlanes(): void {
