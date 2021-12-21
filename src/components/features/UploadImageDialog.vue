@@ -102,7 +102,7 @@ export default class UploadImageDialog extends Vue {
         fr.addEventListener("load", () => {
           this.imgString = fr.result;
         });
-        this.filePath = `test/${Date.now()}-${file.name}`;
+        this.filePath = `planes/${Date.now()}-${file.name}`;
       }
     } catch (e) {
       console.error(e);
