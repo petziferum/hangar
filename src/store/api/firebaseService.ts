@@ -88,6 +88,10 @@ export default class HangarService {
   static saveNewPlane(
     plane: Plane
   ): Promise<void | DocumentReference<DocumentData>> {
+    if(plane.image === undefined) {
+      console.log("Dummy Image")
+      plane.image = "https://firebasestorage.googleapis.com/v0/b/hangar-7334.appspot.com/o/planes%2Fhangar-plane-text.png?alt=media&token=eb990547-807f-4ea1-a6b5-89de4494defa"
+    }
     return fireStore
       .collection("planes")
       .add(Object.assign({}, plane))
