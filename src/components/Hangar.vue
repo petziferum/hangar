@@ -17,10 +17,34 @@
       <v-col cols="12">
         <v-expansion-panels>
           <v-expansion-panel v-for="plane in planes" :key="plane.id">
-            <v-expansion-panel-header ripple :style="panelImage(plane.image)"
-              ><v-spacer></v-spacer>{{ plane.name }} <v-spacer />{{
-                plane.sender
-              }}
+            <v-expansion-panel-header
+              ripple
+              :style="panelImage(plane.image)"
+              v-slot="{ open }"
+            >
+              <v-row>
+                <v-fade-transition leave-absolute>
+                  <v-col :cols="open ? 2 : 3" class="red--text font-weight-bold" style="transform: rotate(-25deg)"
+                    ><span v-if="plane.crash" >CRASHED</span></v-col
+                  >
+                </v-fade-transition>
+              </v-row>
+              <v-spacer />
+              <v-row no-gutters>
+                <v-col cols="3">
+                  {{ plane.name }}
+                </v-col>
+                <v-col cols="3" class="grey--text caption">
+                  Gewicht: {{ plane.gewicht }}
+                </v-col>
+                <v-col cols="3" class="grey--text caption">
+                  Spannweite: {{ plane.spannweite }}
+                </v-col>
+                <v-col cols="3" class="grey--text caption">
+                  Faktor: {{ plane.faktor }}
+                </v-col>
+              </v-row>
+              <v-spacer />{{ plane.sender }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <template v-if="adminUser">
