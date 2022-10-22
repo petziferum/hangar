@@ -31,11 +31,15 @@
     </v-row>
     <v-alert class="red--text" v-if="message">{{ message }}</v-alert>
     <v-row>
-      <v-col cols="2" class="text-center">
+      <v-col class="text-center">
         <v-btn class="rounded-pill" @click="addNewPlaneDialog"
           ><v-icon>mdi-plus</v-icon>Neues Flugzeug</v-btn
         >
-        <add-plane ref="addplanedialog" v-model="newPlane" @uploaded="resetPlane" />
+        <add-plane
+          ref="addplanedialog"
+          v-model="newPlane"
+          @uploaded="resetPlane"
+        />
       </v-col>
       <v-col>
         <v-btn class="rounded-pill" @click="uploadImageDialog"
@@ -43,11 +47,25 @@
         >
         <upload-image-dialog ref="uploadimagedialog"></upload-image-dialog>
       </v-col>
+      <v-col>
+        <v-btn @click="createFlugzeugliste">Neue Liste anlegen</v-btn>
+      </v-col>
       <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
       <v-col cols="10">
         <v-btn @click="copyCollection">copy</v-btn>
       </v-col>
       -->
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <div v-for="liste in flugzeugListen" :key="liste.id">
+          id: {{liste.id}}<br>
+          name: {{ liste.name }}<br>
+          date: {{ liste.date }}<br>
+          flugzeuge {{ liste.flugzeuge }}
+        </div>
+      </v-col>
     </v-row>
     <v-row>
       <v-col>
@@ -73,6 +91,7 @@ import { SenderAsRecord } from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
 import AddPlane from "@/components/AddPlane.vue";
 import UploadImageDialog from "@/components/features/UploadImageDialog.vue";
+import Flugzeugliste from "@/types/Flugzeugliste";
 @Component({
   components: { EditPlane, PlaneDialog, AddPlane, UploadImageDialog },
 })
@@ -90,9 +109,22 @@ export default class AdminBoard extends Vue {
   googleImg = "";
   dialog = false;
   basedialog = false;
+  flugzeugListen: Flugzeugliste[] = [];
 
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
+  }
+
+  createFlugzeugliste(): void {
+    const liste = Flugzeugliste.createEmtptyFlugzeugliste()
+      .withDate(new Date(Date.now()))
+      .withName("2022-10-22")
+      .withId("öalksd89a8usdf8a9");
+    if (this.flugzeugListen.length < 1) {
+      this.flugzeugListen.push(liste);
+    } else {
+      this.$toast.info("Es ist schon eine Liste vorhanden.")
+    }
   }
 
   startEdit(): void {
@@ -105,8 +137,8 @@ export default class AdminBoard extends Vue {
 
   resetPlane(): void {
     this.newPlane = null;
-    this.newPlane = Plane.createEmptyPlane()
-    console.log("reset?", this.newPlane)
+    this.newPlane = Plane.createEmptyPlane();
+    console.log("reset?", this.newPlane);
   }
 
   loadPlanes(): void {
