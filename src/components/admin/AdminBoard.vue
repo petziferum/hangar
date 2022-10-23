@@ -48,7 +48,7 @@
         <upload-image-dialog ref="uploadimagedialog"></upload-image-dialog>
       </v-col>
       <v-col>
-        <v-btn @click="createFlugzeugliste">Neue Liste anlegen</v-btn>
+        <flugplan-dialog></flugplan-dialog>
       </v-col>
       <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
       <v-col cols="10">
@@ -60,9 +60,9 @@
     <v-row>
       <v-col cols="12">
         <div v-for="liste in flugzeugListen" :key="liste.id">
-          id: {{liste.id}}<br>
-          name: {{ liste.name }}<br>
-          date: {{ liste.date }}<br>
+          id: {{ liste.id }}<br />
+          name: {{ liste.name }}<br />
+          date: {{ liste.date }}<br />
           flugzeuge {{ liste.flugzeuge }}
         </div>
       </v-col>
@@ -92,8 +92,15 @@ import PlaneDialog from "@/components/PlaneDialog.vue";
 import AddPlane from "@/components/AddPlane.vue";
 import UploadImageDialog from "@/components/features/UploadImageDialog.vue";
 import Flugzeugliste from "@/types/Flugzeugliste";
+import FlugplanDialog from "@/components/features/FlugplanDialog.vue";
 @Component({
-  components: { EditPlane, PlaneDialog, AddPlane, UploadImageDialog },
+  components: {
+    FlugplanDialog,
+    EditPlane,
+    PlaneDialog,
+    AddPlane,
+    UploadImageDialog,
+  },
 })
 export default class AdminBoard extends Vue {
   planes: void | Plane[] = [];
@@ -113,18 +120,6 @@ export default class AdminBoard extends Vue {
 
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
-  }
-
-  createFlugzeugliste(): void {
-    const liste = Flugzeugliste.createEmtptyFlugzeugliste()
-      .withDate(new Date(Date.now()))
-      .withName("2022-10-22")
-      .withId("öalksd89a8usdf8a9");
-    if (this.flugzeugListen.length < 1) {
-      this.flugzeugListen.push(liste);
-    } else {
-      this.$toast.info("Es ist schon eine Liste vorhanden.")
-    }
   }
 
   startEdit(): void {
