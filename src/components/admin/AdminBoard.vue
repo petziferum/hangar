@@ -48,7 +48,7 @@
         <upload-image-dialog ref="uploadimagedialog"></upload-image-dialog>
       </v-col>
       <v-col>
-        <flugplan-dialog></flugplan-dialog>
+        <flugplan-dialog @save="addNewFlugplan"></flugplan-dialog>
       </v-col>
       <!-- Funktion um alle Flugzeuge in der Collection 'planesCopy' zu sichern
       <v-col cols="10">
@@ -120,6 +120,11 @@ export default class AdminBoard extends Vue {
 
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
+  }
+
+  addNewFlugplan(value: Flugzeugliste): void {
+    console.info("flugplan erstellt");
+    this.flugzeugListen.push(value);
   }
 
   startEdit(): void {

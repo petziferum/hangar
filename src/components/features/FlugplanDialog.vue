@@ -7,12 +7,15 @@
     </template>
     <v-card>
       <v-card-title>Neuer Flugplan für {{ date }}</v-card-title>
-      <template v-if="flugplan">
-        <v-card-text>
-          <v-form ref="flugplanform">
+      <v-form ref="flugplanform" @submit.prevent="submitFlugplan">
+      <v-card-text>
+          <template v-if="flugplan">
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Flugplan Name" v-model="flugplan.name"></v-text-field>
+                <v-text-field
+                  label="Flugplan Name"
+                  v-model="flugplan.name"
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row>
@@ -24,18 +27,22 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
-                <v-text-field label="Id" readonly v-model="flugplan.id"></v-text-field>
+                <v-text-field
+                  label="Id"
+                  readonly
+                  v-model="flugplan.id"
+                ></v-text-field>
               </v-col>
             </v-row>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn @click="dialog=false">Abbrechen</v-btn>
-          <v-btn @click="dialog=false">Speichern</v-btn>
-        </v-card-actions>
-      </template>
-      <template v-else> kein Flugplan vorhanden </template>
+          </template>
+          <template v-else> kein Flugplan vorhanden </template>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn @click="dialog = false">Abbrechen</v-btn>
+        <v-btn type="submit">Speichern</v-btn>
+      </v-card-actions>
+      </v-form>
     </v-card>
   </v-dialog>
 </template>
@@ -46,7 +53,6 @@ import Flugzeugliste from "@/types/Flugzeugliste";
 
 @Component
 export default class FlugplanDialog extends Vue {
-
   dialog = false;
   date = new Date(Date.now());
   flugplan: Flugzeugliste = Flugzeugliste.createEmtptyFlugzeugliste();
@@ -56,6 +62,11 @@ export default class FlugplanDialog extends Vue {
       .withDate(new Date(Date.now()))
       .withName("2022-10-22")
       .withId("öalksd89a8usdf8a9");
+  }
+
+  submitFlugplan(): void {
+    this.$emit("save", this.flugplan);
+    this.dialog = false;
   }
 }
 </script>
