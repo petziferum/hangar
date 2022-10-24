@@ -1,8 +1,11 @@
 <template>
   <v-container>
     DEVTEST
+    <v-spacer></v-spacer>
+    <v-btn @click="loadPlanes">laden</v-btn>
     <v-row justify="center">
-      <v-col>
+      <v-col v-if="planes.length > 0">
+        Mit klick wird Flugzeug bearbeitet
         <v-btn @click="editPlane(planes[0])">{{ planes[0].name }}</v-btn>
         <template v-if="active">
           <edit-plane :plane="planeEdit"></edit-plane>
@@ -47,13 +50,13 @@ export default class DevTest extends Vue {
   active = false;
   planeEdit: Plane | null = null;
 
-  loadPlanes() {
-    firebaseService.getAllPlanes(undefined).then((res) => {
+  loadPlanes(): void {
+    firebaseService.getAllPlanes("name").then((res) => {
       this.planes = res;
     });
   }
 
-  editPlane(plane: Plane) {
+  editPlane(plane: Plane): void {
     this.planeEdit = plane;
     const planeDialog = this.$refs.planedialog as PlaneDialog;
     planeDialog.open();
