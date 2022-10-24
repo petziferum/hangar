@@ -33,16 +33,9 @@
                     contain
                     style="background-color: black"
                   >
-                    <v-overlay
-                      absolute
-                      color="green"
-                      :value="uploadSuccess"
-                    >
+                    <v-overlay absolute color="green" :value="uploadSuccess">
                       <p><span class="headline">Upload erfolgreich!</span></p>
-                      <v-btn
-                        color="green lighten-2"
-                        @click="resetImage"
-                      >
+                      <v-btn color="green lighten-2" @click="resetImage">
                         Neues Bild hochladen
                       </v-btn>
                     </v-overlay>
@@ -54,9 +47,9 @@
                   Hochladen erfolgreich!
                 </template>
                 <template v-else>
-                <v-card-actions>
-                  <v-btn @click="uploadImage">Hochladen</v-btn>
-                </v-card-actions>
+                  <v-card-actions>
+                    <v-btn @click="uploadImage">Hochladen</v-btn>
+                  </v-card-actions>
                 </template>
               </v-col>
             </v-row>

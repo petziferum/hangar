@@ -5,8 +5,6 @@ export default class SenderClass {
   plane?: string;
   speicherNummer?: number;
 
-  constructor() {}
-
   withName(value: Sender): SenderClass {
     this.name = value;
     return this;
@@ -22,7 +20,7 @@ export default class SenderClass {
     return this;
   }
 
-  createEmptySenderClass() {
+  createEmptySenderClass(): SenderClass {
     return new SenderClass();
   }
 }

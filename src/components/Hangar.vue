@@ -24,8 +24,11 @@
             >
               <v-row>
                 <v-fade-transition leave-absolute>
-                  <v-col :cols="open ? 2 : 3" class="red--text font-weight-bold" style="transform: rotate(-25deg)"
-                    ><span v-if="plane.crash" >CRASHED</span></v-col
+                  <v-col
+                    :cols="open ? 2 : 3"
+                    class="red--text font-weight-bold"
+                    style="transform: rotate(-25deg)"
+                    ><span v-if="plane.crash">CRASHED</span></v-col
                   >
                 </v-fade-transition>
               </v-row>

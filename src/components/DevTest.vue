@@ -14,6 +14,11 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="12">
+        <plane-factor-diagram />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col>
         <plane-dialog
           ref="planedialog"
@@ -34,9 +39,11 @@ import PlaneExpansionPanelView from "@/components/PlaneExpansionPanelView.vue";
 import TestExpansion from "@/components/TestExpansion.vue";
 import EditPlane from "@/components/EditPlane.vue";
 import firebaseService from "@/store/api/firebaseService";
+import PlaneFactorDiagram from "@/components/features/PlaneFactorDiagram.vue";
 
 @Component({
   components: {
+    PlaneFactorDiagram,
     EditPlane,
     TestExpansion,
     PlaneExpansionPanelView,

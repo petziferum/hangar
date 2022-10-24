@@ -83,7 +83,7 @@ export default class AdminActionBar extends Vue {
         this.updateSchrott(this.plane.id);
         return;
       case "fliegen":
-        this.$toast("Funktion wird noch eingebaut")
+        this.$toast("Funktion wird noch eingebaut");
     }
   }
 
