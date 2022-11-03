@@ -1,9 +1,11 @@
 import Sender from "@/types/Sender";
+import Battery from "@/types/Battery";
 
 export default class Plane {
   id: string | undefined;
   name: string | undefined;
   sender: Sender | undefined;
+  battery: Battery | undefined;
   type: string | undefined;
   bauweise: string | undefined;
   gewicht: number | undefined;
@@ -16,6 +18,7 @@ export default class Plane {
   constructor(
     name: string | undefined,
     sender: Sender | undefined,
+    battery: Battery | undefined,
     type: string | undefined,
     bauweise: string | undefined,
     gewicht: number | undefined,
@@ -27,6 +30,7 @@ export default class Plane {
   ) {
     this.name = name;
     this.sender = sender;
+    this.battery = battery;
     this.type = type;
     this.bauweise = bauweise;
     this.gewicht = gewicht;
@@ -51,6 +55,10 @@ export default class Plane {
   }
   withSender(value: Sender): Plane {
     this.sender = value;
+    return this;
+  }
+  withBattery(value: Battery): Plane {
+    this.battery = value;
     return this;
   }
   withType(value: string): Plane {
@@ -86,6 +94,7 @@ export default class Plane {
     return new Plane(
       obj.name || undefined,
       obj.sender || undefined,
+      obj.battery || undefined,
       obj.type || undefined,
       obj.bauweise || undefined,
       obj.gewicht || undefined,
@@ -108,6 +117,7 @@ export default class Plane {
       undefined,
       undefined,
       "",
+      undefined,
       undefined
     );
   }

@@ -33,13 +33,23 @@
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
         <v-form ref="editPlane">
           <v-row class="mx-3">
-            <v-col cols="12">
+            <v-col cols="8">
               <v-text-field
                 filled
                 label="Name"
                 v-model="p.name"
                 :rules="rules"
               ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-select
+                :items="batteryItems"
+                item-text="text"
+                item-value="value"
+                v-model="p.battery"
+                label="Akku"
+              ></v-select>
+              Akku: {{ p.battery }}
             </v-col>
             <v-col cols="12" sm="6" md="4" lg="2">
               <v-text-field
@@ -165,6 +175,9 @@
             >
           </v-card-actions>
         </v-form>
+        <v-card-text>
+          {{ plane }}
+        </v-card-text>
       </v-card>
     </template>
   </v-dialog>
@@ -175,6 +188,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
 import firebaseService from "@/store/api/firebaseService";
+import Battery, { BatteryAsRecord } from "@/types/Battery";
 
 @Component
 export default class PlaneDialog extends Vue {
@@ -190,6 +204,7 @@ export default class PlaneDialog extends Vue {
   imageFile: Blob | null = null;
   uploading = false;
   uploadMessage: void | string = null;
+  batteryItems: Record<string, string>[] = BatteryAsRecord;
   rules = [
     (v: string | number): boolean | string =>
       !!v || "Feld muss ausgefüllt sein!",
