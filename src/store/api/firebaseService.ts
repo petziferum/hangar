@@ -51,7 +51,7 @@ export default class HangarService {
       .orderBy(orderby ? orderby : "name")
       .get()
       .then((res) => {
-        console.info("res: ", res.docs);
+        console.info("response: ", res.docs);
         const planesList: Array<Plane> = [];
         res.forEach((doc) => {
           const data = doc.data();

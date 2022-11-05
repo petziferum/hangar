@@ -3,6 +3,7 @@
     <v-toolbar color="secondary" dark width="100%">
       <v-toolbar-title>Admin Board</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn tile @click="loadPlanes">Laden</v-btn>
       <v-toolbar-items>
         <v-btn text @click="logout">Logout</v-btn>
       </v-toolbar-items>
