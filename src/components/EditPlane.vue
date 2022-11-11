@@ -61,7 +61,16 @@ export default class EditPlane extends Vue {
   }
 
   update(): void {
-    this.$emit("update", this.p);
+    console.info("update\n")
+    for (const [key, value] of Object.entries(this.p)) {
+      if (value === undefined) {
+        this.$toast(key+ " ist noch nicht ausgefüllt!")
+        console.info("update: ", key, "ist noch undefined");
+      } else {
+        this.$emit("update", this.p);
+      }
+    }
+
   }
 
   getUserInfo(): void {

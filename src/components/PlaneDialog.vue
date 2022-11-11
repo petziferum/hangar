@@ -47,6 +47,7 @@
                 item-text="text"
                 item-value="value"
                 v-model="p.battery"
+                :rules="rules"
                 label="Akku"
               ></v-select>
             </v-col>
@@ -297,7 +298,14 @@ export default class PlaneDialog extends Vue {
       this.$refs.editPlane as Vue & { validate: () => boolean }
     ).validate();
     if (valid) {
-      this.$emit("update", this.p);
+      for (const [key, value] of Object.entries(this.p)) {
+        if (value === undefined) {
+          this.$toast(key+ " ist noch nicht ausgefüllt!")
+          console.info("update: ", key, "ist noch undefined");
+        } else {
+          this.$emit("update", this.p);
+        }
+      }
     }
   }
 }

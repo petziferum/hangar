@@ -87,23 +87,7 @@
                 <v-img :src="plane.image" width="100%"></v-img>
               </v-dialog>
               <v-card tile elevation="4">
-                <v-row v-if="screenMobile" no-gutters>
-                  <v-col cols="3">
-                    <v-card-text>Gewicht: {{ plane.gewicht }}</v-card-text>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text
-                      >Spannweite: {{ plane.spannweite }}</v-card-text
-                    >
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text>Faktor: {{ plane.faktor }}</v-card-text>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text>Sender: {{ plane.sender }}</v-card-text>
-                  </v-col>
-                </v-row>
-                <v-row v-else>
+                <v-row >
                   <v-col cols="12">
                     <v-simple-table dense>
                       <template v-slot:default>
