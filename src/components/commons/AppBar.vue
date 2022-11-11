@@ -9,7 +9,7 @@
         :src="require('@/assets/hangar-plane-text.png')"
         min-width="100"
         max-width="60%"
-        height="80%"
+        height="50%"
       />
     </router-link>
 
@@ -49,8 +49,10 @@ export default class AppBar extends Vue {
 
 <style scoped>
 .logo {
-  position: relative;
-  top: 40px;
+  position: absolute;
+  border: 0;
+  right: 10px;
+  top: 50px;
 }
 .routerlink {
   position: relative;

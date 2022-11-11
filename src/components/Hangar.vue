@@ -37,13 +37,25 @@
                 <v-col cols="3">
                   {{ plane.name }}
                 </v-col>
-                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Gewicht: {{ plane.gewicht }}
                 </v-col>
-                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Spannweite: {{ plane.spannweite }}
                 </v-col>
-                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Faktor: {{ plane.faktor }}
                 </v-col>
               </v-row>
@@ -93,39 +105,16 @@
                 </v-row>
                 <v-row v-else>
                   <v-col cols="12">
-                    <v-list dense>
-                      <v-list-item-group>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Crash: {{ plane.crash }}g</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Spannweite:
-                              {{ plane.spannweite }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Faktor: {{ plane.faktor }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Sender: {{ plane.sender }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list-item-group>
-                    </v-list>
+                    <v-simple-table dense>
+                      <template v-slot:default>
+                        <tbody>
+                        <tr v-for="(value, key) in plane" :key="key">
+                          <th>{{ key }}</th>
+                          <td>{{ value }}</td>
+                        </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -161,6 +150,7 @@ export default class Hangar extends Vue {
   orderBy = "name";
 
   get screenMobile(): boolean {
+    console.log(window.innerWidth);
     return window.innerWidth > 500;
   }
 
