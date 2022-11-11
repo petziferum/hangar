@@ -37,13 +37,13 @@
                 <v-col cols="3">
                   {{ plane.name }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
                   Gewicht: {{ plane.gewicht }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
                   Spannweite: {{ plane.spannweite }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="3" class="grey--text caption">
                   Faktor: {{ plane.faktor }}
                 </v-col>
               </v-row>
