@@ -167,6 +167,7 @@ export default class HangarService {
         console.info(key, "ist noch undefined");
       }
     }
+    plane.log = null;
 
     return fireStore
       .collection("planes")

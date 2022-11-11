@@ -9,7 +9,7 @@ export const BatteryToBeschreibung = new Map<string, string>([
   [Battery.zwei, "2S"],
   [Battery.drei, "3S"],
   [Battery.vier, "4S"],
-  [Battery.fünf, "4S"],
+  [Battery.fünf, "5S"],
 ]);
 
 export const BatteryAsRecord: Record<string, string>[] = Object.values(

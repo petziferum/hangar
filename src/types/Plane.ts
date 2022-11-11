@@ -1,11 +1,13 @@
 import Sender from "@/types/Sender";
 import Battery from "@/types/Battery";
+import LogEntry from "@/types/LogEntry";
 
 export default class Plane {
   id: string | undefined;
   name: string | undefined;
   sender: Sender | undefined;
   battery: Battery | undefined;
+  mah: number | undefined;
   type: string | undefined;
   bauweise: string | undefined;
   gewicht: number | undefined;
@@ -13,12 +15,14 @@ export default class Plane {
   faktor: number | undefined;
   image: string | undefined;
   beschreibung?: string;
+  log?: LogEntry[];
   crash?: boolean;
 
   constructor(
     name: string | undefined,
     sender: Sender | undefined,
     battery: Battery | undefined,
+    mah: number | undefined,
     type: string | undefined,
     bauweise: string | undefined,
     gewicht: number | undefined,
@@ -26,11 +30,13 @@ export default class Plane {
     faktor: number | undefined,
     image: string | undefined,
     beschreibung: string | undefined,
+    log: LogEntry[] | undefined,
     crash: boolean | undefined
   ) {
     this.name = name;
     this.sender = sender;
     this.battery = battery;
+    this.mah = mah;
     this.type = type;
     this.bauweise = bauweise;
     this.gewicht = gewicht;
@@ -38,7 +44,13 @@ export default class Plane {
     this.faktor = faktor;
     this.image = image;
     this.beschreibung = beschreibung;
+    this.log = log;
     this.crash = crash;
+  }
+
+  withMah(value: number): Plane {
+    this.mah = value;
+    return this;
   }
 
   withBeschreibung(value: string): Plane {
@@ -90,11 +102,16 @@ export default class Plane {
     return this;
   }
 
+  addLogEntry(value: LogEntry): void {
+    this.log.push(value);
+  }
+
   static createFirePlane(obj: Plane): Plane {
     return new Plane(
       obj.name || undefined,
       obj.sender || undefined,
       obj.battery || undefined,
+      obj.mah || undefined,
       obj.type || undefined,
       obj.bauweise || undefined,
       obj.gewicht || undefined,
@@ -102,6 +119,7 @@ export default class Plane {
       obj.faktor || undefined,
       obj.image || undefined,
       obj.beschreibung || undefined,
+      obj.log || undefined,
       obj.crash || undefined
     );
   }
@@ -116,7 +134,9 @@ export default class Plane {
       undefined,
       undefined,
       undefined,
+      undefined,
       "",
+      undefined,
       undefined,
       undefined
     );

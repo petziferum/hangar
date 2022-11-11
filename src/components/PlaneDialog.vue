@@ -41,7 +41,7 @@
                 :rules="rules"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" md="4">
+            <v-col cols="4" md="4">
               <v-select
                 :items="batteryItems"
                 item-text="text"
@@ -49,13 +49,20 @@
                 v-model="p.battery"
                 label="Akku"
               ></v-select>
-              Akku: {{ p.battery }}
             </v-col>
-            <v-col cols="12" sm="6" md="4" lg="2">
+            <v-col cols="6" sm="6" md="4" lg="2">
               <v-text-field
                 outlined
                 label="Typ"
                 v-model="p.type"
+                :rules="rules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" lg="2">
+              <v-text-field
+                outlined
+                label="Mah"
+                v-model="p.mah"
                 :rules="rules"
               ></v-text-field>
             </v-col>

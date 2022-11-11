@@ -9,7 +9,7 @@
           <v-card-title>Neues Modell</v-card-title>
           <v-form ref="editPlane">
             <v-row class="mx-3">
-              <v-col cols="12">
+              <v-col cols="8">
                 <v-text-field
                   filled
                   label="Name"
@@ -18,6 +18,16 @@
                   validate-on-blur
                   :rules="rules"
                 ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-select
+                  :items="batteryItems"
+                  item-text="text"
+                  item-value="value"
+                  v-model="p.battery"
+                  label="Akku"
+                ></v-select>
+                Akku: {{ p.battery }}
               </v-col>
               <v-col cols="12" sm="6" md="4" lg="2">
                 <v-text-field
@@ -139,6 +149,7 @@ import BaseDialog from "@/components/commons/BaseDialog.vue";
 import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
 import firebaseService from "@/store/api/firebaseService";
+import { BatteryAsRecord } from "@/types/Battery";
 
 @Component({
   components: { BaseDialog },
@@ -152,6 +163,7 @@ export default class AddPlane extends Vue {
   imageName = "";
   imageSrc: string | ArrayBuffer;
   image: Blob;
+  batteryItems: Record<string, string>[] = BatteryAsRecord;
   rules = [
     (v: string | number): boolean | string =>
       !!v || "Feld muss ausgefüllt sein!",
@@ -171,7 +183,7 @@ export default class AddPlane extends Vue {
 
   get faktor(): number {
     if (this.p.spannweite && this.p.gewicht) {
-      const f = this.p.spannweite / this.p.gewicht;
+      const f = this.p.gewicht / this.p.spannweite;
       this.p.faktor = f;
       return f;
     } else return 0;
