@@ -45,44 +45,35 @@ export default class HangarService {
   }
 
   static getAllPlanes(orderby: string | undefined): Promise<void | Plane[]> {
+    let count = 0;
     return fireStore
       .collection("planes")
       .orderBy(orderby ? orderby : "name")
       .get()
       .then((res) => {
+        console.info("response: ", res.docs);
         const planesList: Array<Plane> = [];
         res.forEach((doc) => {
           const data = doc.data();
           data.id = doc.id;
-          /*
-          const plane = Plane.createEmptyPlane()
-            .withImage(data.image)
-            .withName(data.name)
-            .withBeschreibung(data.beschreibung)
-            .withFaktor(data.faktor)
-            .withSender(data.sender)
-            .withSpannweite(data.spannweite)
-            .withGewicht(data.gewicht)
-            .withBauweise(data.bauweise)
-            .withType(data.type)
-            .withId(data.id)
-            .withCrash(data.crash);
-           */
           const plane = Plane.createFirePlane(data as Plane);
           plane.id = data.id;
-          plane.faktor =
-            Math.round(
-              (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
-            ) / 100;
+          if(plane.gewicht && plane.spannweite) {
+            plane.faktor =
+              Math.round(
+                (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
+              ) / 100;
+          } else plane.faktor = 0;
           planesList.push(plane);
         });
+        count = planesList.length;
         return planesList;
       })
       .catch(() => {
         console.log("nichts gefunden");
       })
       .finally(() => {
-        console.info("fertig");
+        console.info("Fertig. ", count, " Flugzeuge geladen");
       });
   }
   static saveNewPlane(
@@ -176,6 +167,7 @@ export default class HangarService {
         console.info(key, "ist noch undefined");
       }
     }
+    plane.log = null;
 
     return fireStore
       .collection("planes")

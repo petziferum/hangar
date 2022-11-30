@@ -8,7 +8,7 @@
     <v-card>
       <v-card-title>Neuer Flugplan für {{ date }}</v-card-title>
       <v-form ref="flugplanform" @submit.prevent="submitFlugplan">
-      <v-card-text>
+        <v-card-text>
           <template v-if="flugplan">
             <v-row>
               <v-col cols="12">
@@ -36,12 +36,12 @@
             </v-row>
           </template>
           <template v-else> kein Flugplan vorhanden </template>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer />
-        <v-btn @click="dialog = false">Abbrechen</v-btn>
-        <v-btn type="submit">Speichern</v-btn>
-      </v-card-actions>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn @click="dialog = false">Abbrechen</v-btn>
+          <v-btn type="submit">Speichern</v-btn>
+        </v-card-actions>
       </v-form>
     </v-card>
   </v-dialog>

@@ -24,8 +24,11 @@
             >
               <v-row>
                 <v-fade-transition leave-absolute>
-                  <v-col :cols="open ? 2 : 3" class="red--text font-weight-bold" style="transform: rotate(-25deg)"
-                    ><span v-if="plane.crash" >CRASHED</span></v-col
+                  <v-col
+                    :cols="open ? 2 : 3"
+                    class="red--text font-weight-bold"
+                    style="transform: rotate(-25deg)"
+                    ><span v-if="plane.crash">CRASHED</span></v-col
                   >
                 </v-fade-transition>
               </v-row>
@@ -34,13 +37,25 @@
                 <v-col cols="3">
                   {{ plane.name }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Gewicht: {{ plane.gewicht }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Spannweite: {{ plane.spannweite }}
                 </v-col>
-                <v-col cols="3" class="grey--text caption">
+                <v-col
+                  v-if="$vuetify.breakpoint.mdAndUp"
+                  cols="3"
+                  class="grey--text caption"
+                >
                   Faktor: {{ plane.faktor }}
                 </v-col>
               </v-row>
@@ -72,57 +87,18 @@
                 <v-img :src="plane.image" width="100%"></v-img>
               </v-dialog>
               <v-card tile elevation="4">
-                <v-row v-if="screenMobile" no-gutters>
-                  <v-col cols="3">
-                    <v-card-text>Gewicht: {{ plane.gewicht }}</v-card-text>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text
-                      >Spannweite: {{ plane.spannweite }}</v-card-text
-                    >
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text>Faktor: {{ plane.faktor }}</v-card-text>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-card-text>Sender: {{ plane.sender }}</v-card-text>
-                  </v-col>
-                </v-row>
-                <v-row v-else>
+                <v-row >
                   <v-col cols="12">
-                    <v-list dense>
-                      <v-list-item-group>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Crash: {{ plane.crash }}g</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Spannweite:
-                              {{ plane.spannweite }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Faktor: {{ plane.faktor }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item dense>
-                          <v-list-item-content>
-                            <v-list-item-subtitle
-                              >Sender: {{ plane.sender }}</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list-item-group>
-                    </v-list>
+                    <v-simple-table dense>
+                      <template v-slot:default>
+                        <tbody>
+                        <tr v-for="(value, key) in plane" :key="key">
+                          <th>{{ key }}</th>
+                          <td>{{ value }}</td>
+                        </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -158,6 +134,7 @@ export default class Hangar extends Vue {
   orderBy = "name";
 
   get screenMobile(): boolean {
+    console.log(window.innerWidth);
     return window.innerWidth > 500;
   }
 

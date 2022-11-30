@@ -12,9 +12,21 @@
             <v-text-field label="Typ" v-model="p.type"></v-text-field>
             <v-text-field label="Bauweise" v-model="p.bauweise"></v-text-field>
             <v-text-field label="Gewicht" v-model="p.gewicht"></v-text-field>
-            <v-text-field label="Spannweite" v-model="p.spannweite"></v-text-field>
-            <v-select :items="sender" label="Sender" item-value="sender" v-model="p.sender"></v-select>
-            <v-textarea :rules="[this.error]" v-model="p.beschreibung" label="Beschreibung"></v-textarea>
+            <v-text-field
+              label="Spannweite"
+              v-model="p.spannweite"
+            ></v-text-field>
+            <v-select
+              :items="sender"
+              label="Sender"
+              item-value="sender"
+              v-model="p.sender"
+            ></v-select>
+            <v-textarea
+              :rules="[this.error]"
+              v-model="p.beschreibung"
+              label="Beschreibung"
+            ></v-textarea>
 
             <v-btn @click="update">Speichern</v-btn>
           </v-form>
@@ -35,13 +47,13 @@ export default class EditPlane extends Vue {
   plane!: Plane;
 
   userInfo = "info";
-  sender = SenderAsRecord
-  error: string | boolean = true
+  sender = SenderAsRecord;
+  error: string | boolean = true;
 
   get p(): Plane {
-    if(this.plane.beschreibung === undefined){
-      this.error = "Achtung noch keine Beschreibung vorhanden"
-    } else this.error = true
+    if (this.plane.beschreibung === undefined) {
+      this.error = "Achtung noch keine Beschreibung vorhanden";
+    } else this.error = true;
     return this.plane;
   }
   set p(value: Plane) {
@@ -49,7 +61,16 @@ export default class EditPlane extends Vue {
   }
 
   update(): void {
-    this.$emit("update", this.p);
+    console.info("update\n")
+    for (const [key, value] of Object.entries(this.p)) {
+      if (value === undefined) {
+        this.$toast(key+ " ist noch nicht ausgefüllt!")
+        console.info("update: ", key, "ist noch undefined");
+      } else {
+        this.$emit("update", this.p);
+      }
+    }
+
   }
 
   getUserInfo(): void {
