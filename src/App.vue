@@ -4,16 +4,18 @@
     <v-main class="appolive">
       <router-view />
     </v-main>
+    <Footer />
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import AppBar from "@/components/commons/AppBar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default Vue.extend({
   name: "App",
-  components: { AppBar },
+  components: { AppBar, Footer },
   data: () => ({}),
   methods: {},
   computed: {
