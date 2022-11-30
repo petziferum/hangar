@@ -300,7 +300,8 @@ export default class PlaneDialog extends Vue {
     if (valid) {
       for (const [key, value] of Object.entries(this.p)) {
         if (value === undefined) {
-          this.$toast(key+ " ist noch nicht ausgefüllt!")
+          this.p[key] = null;
+          this.$toast(key+ " ist noch nicht ausgefüllt!");
           console.info("update: ", key, "ist noch undefined");
         } else {
           this.$emit("update", this.p);

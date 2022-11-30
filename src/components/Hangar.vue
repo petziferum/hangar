@@ -141,7 +141,7 @@ export default class Hangar extends Vue {
   get adminUser(): boolean {
     const user = this.$store.getters.getUser;
     if (user) {
-      return user.uid === "C6SQTqeWWohygB48Qce0WZ5juxl1";
+      return user.uid === "Pjkzvd5lIodGknPvC2agDSa3e8r1";
     } else return false;
   }
 

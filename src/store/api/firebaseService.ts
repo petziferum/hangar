@@ -14,7 +14,7 @@ export default class HangarService {
     console.log("login...");
     return firebaseApp
       .auth()
-      .signInWithEmailAndPassword("admin@hangar.de", password)
+      .signInWithEmailAndPassword("daboarderpjb@gmail.com", password) //testtest
       .then((user) => {
         const u = user.user;
         store.dispatch("FETCH_USER", u);

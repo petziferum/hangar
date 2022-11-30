@@ -12,18 +12,21 @@
 import Vue from "vue";
 import AppBar from "@/components/commons/AppBar.vue";
 import Footer from "@/components/Footer.vue";
+import { Component } from "vue-property-decorator";
+import firebase from "firebase";
+import User = firebase.User;
 
-export default Vue.extend({
-  name: "App",
-  components: { AppBar, Footer },
-  data: () => ({}),
-  methods: {},
-  computed: {
-    user() {
-      return this.$store.getters.getUser;
-    },
+@Component({
+  components: {
+    AppBar,
+    Footer,
   },
-});
+})
+export default class App extends Vue {
+  get user(): User {
+    return this.$store.getters.getUser;
+  }
+}
 </script>
 <style>
 .border {
