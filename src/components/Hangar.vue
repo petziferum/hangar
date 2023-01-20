@@ -87,15 +87,15 @@
                 <v-img :src="plane.image" width="100%"></v-img>
               </v-dialog>
               <v-card tile elevation="4">
-                <v-row >
+                <v-row>
                   <v-col cols="12">
                     <v-simple-table dense>
                       <template v-slot:default>
                         <tbody>
-                        <tr v-for="(value, key) in plane" :key="key">
-                          <th>{{ key }}</th>
-                          <td>{{ value }}</td>
-                        </tr>
+                          <tr v-for="(value, key) in plane" :key="key">
+                            <th>{{ key }}</th>
+                            <td>{{ value }}</td>
+                          </tr>
                         </tbody>
                       </template>
                     </v-simple-table>

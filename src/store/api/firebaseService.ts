@@ -1,5 +1,5 @@
 import firebaseApp, { fireBucket, fireStore } from "@/plugins/firesbaseConfig";
-import Plane from "@/types/Plane";
+import Plane, { planeConverter } from "@/types/Plane";
 import store from "@/store";
 import firebase from "firebase";
 import DocumentReference = firebase.firestore.DocumentReference;
@@ -55,15 +55,25 @@ export default class HangarService {
         const planesList: Array<Plane> = [];
         res.forEach((doc) => {
           const data = doc.data();
+          for(const [key, value] of Object.entries(data)) {
+            if(value === undefined) {
+              console.log("undefined", key, value);
+            }
+          }
           data.id = doc.id;
           const plane = Plane.createFirePlane(data as Plane);
           plane.id = data.id;
-          if(plane.gewicht && plane.spannweite) {
+          if (plane.gewicht && plane.spannweite) {
             plane.faktor =
               Math.round(
                 (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
               ) / 100;
           } else plane.faktor = 0;
+          for(const [key, value] of Object.entries(plane)) {
+            if(value === undefined) {
+              console.log(plane.name, "hat", key, value);
+            }
+          }
           planesList.push(plane);
         });
         count = planesList.length;
@@ -157,7 +167,7 @@ export default class HangarService {
   }
   static updatePlane(id: string, plane: Plane): Promise<Plane> {
     if (!plane.beschreibung) {
-      console.log("keine Beschreibung");
+      console.log("keine Beschreibung, - ", plane.beschreibung);
       plane.beschreibung = "";
     }
     if (!plane.crash) plane.crash = false;
@@ -167,11 +177,14 @@ export default class HangarService {
         console.info(key, "ist noch undefined");
       }
     }
+
+    //ToDo: Log muss in den Converter
     plane.log = null;
 
     return fireStore
       .collection("planes")
       .doc(id)
+      .withConverter(planeConverter)
       .update(Object.assign({}, plane))
       .then(() => {
         return plane;

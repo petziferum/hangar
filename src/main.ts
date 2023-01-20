@@ -9,6 +9,7 @@ import "vue-toastification/dist/index.css";
 
 Vue.config.productionTip = false;
 Vue.use(Toast, {
+  timeout: 10000,
   position: "top-center",
   pauseOnHover: true,
   draggable: true,

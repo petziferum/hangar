@@ -1,6 +1,7 @@
 import Sender from "@/types/Sender";
 import Battery from "@/types/Battery";
 import LogEntry from "@/types/LogEntry";
+import PlaneDialog from "@/components/PlaneDialog.vue";
 
 export default class Plane {
   id: string | undefined;
@@ -57,46 +58,57 @@ export default class Plane {
     this.beschreibung = value;
     return this;
   }
+
   withCrash(value: boolean): Plane {
     this.crash = value;
     return this;
   }
+
   withName(name: string): Plane {
     this.name = name;
     return this;
   }
+
   withSender(value: Sender): Plane {
     this.sender = value;
     return this;
   }
+
   withBattery(value: Battery): Plane {
     this.battery = value;
     return this;
   }
+
   withType(value: string): Plane {
     this.type = value;
     return this;
   }
+
   withBauweise(bauweise: string): Plane {
     this.bauweise = bauweise;
     return this;
   }
+
   withGewicht(value: number): Plane {
     this.gewicht = value;
     return this;
   }
+
   withSpannweite(value: number): Plane {
     this.spannweite = value;
     return this;
   }
+
   withFaktor(value: number): Plane {
     this.faktor = value;
     return this;
   }
+
   withImage(value: string): Plane {
     this.image = value;
     return this;
   }
+
   withId(value: string): Plane {
     this.id = value;
     return this;
@@ -118,9 +130,9 @@ export default class Plane {
       obj.spannweite || undefined,
       obj.faktor || undefined,
       obj.image || undefined,
-      obj.beschreibung || undefined,
+      obj.beschreibung,
       obj.log || undefined,
-      obj.crash || undefined
+      obj.crash
     );
   }
 
@@ -142,3 +154,28 @@ export default class Plane {
     );
   }
 }
+export const planeConverter = {
+  toFirestore: (plane) => {
+    console.log("Converter gestartet für ", plane);
+    return {
+      id: plane.id,
+      name: plane.name,
+      sender: plane.sender,
+      battery: plane.battery,
+      mah: plane.mah,
+      type: plane.type,
+      bauweise: plane.bauweise,
+      gewicht: plane.gewicht,
+      spannweite: plane.spannweite,
+      faktor: plane.faktor,
+      image: plane.image,
+      beschreibung: plane.beschreibung,
+      log: plane.log,
+      crash: plane.crash,
+    };
+  },
+  fromFirestore: (snapshot, options) => {
+    const plane = snapshot.data(options);
+    return Plane.createFirePlane(plane);
+  },
+};

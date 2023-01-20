@@ -31,6 +31,7 @@
       </v-toolbar>
       <v-card tile>
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
+        <v-card-subtitle>Log: {{ p.log }}</v-card-subtitle>
         <v-form ref="editPlane">
           <v-row class="mx-3">
             <v-col cols="8">
@@ -197,6 +198,7 @@ import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
 import firebaseService from "@/store/api/firebaseService";
 import Battery, { BatteryAsRecord } from "@/types/Battery";
+import LogEntry from "@/types/LogEntry";
 
 @Component
 export default class PlaneDialog extends Vue {
@@ -293,18 +295,72 @@ export default class PlaneDialog extends Vue {
     this.isOpen = true;
   }
 
-  update(): void {
+  async update(): Promise<void> {
     const valid = (
       this.$refs.editPlane as Vue & { validate: () => boolean }
     ).validate();
-    if (valid) {
+    console.info("valid?", valid);
+    if (!valid) {
+      await this.ergaenzen();
       for (const [key, value] of Object.entries(this.p)) {
         if (value === undefined) {
+          if (key === "log") {
+            this.p[key] = [LogEntry.createEmtptyLogEntry()];
+          } else if (key === "crash") {
+            this.p[key] = false;
+          } else if (key === "beschreibung") {
+            this.p[key] = null;
+          }
+          this.$toast(key + " ist noch nicht ausgefüllt!");
+          console.info("update: ", key, "ist noch ", value);
+        }
+      }
+    } else {
+      // Wenn valid true ist kann es sein das log, crash und beschreibung noch leer sind.
+      try {
+        console.info("start");
+        await this.ergaenzen();
+        console.log("wurde Log ergänzt?", this.p.log);
+        console.info("fertig mit ergänzen");
+      } catch {
+        console.log("catch");
+      } finally {
+        console.log("emit", this.p);
+        this.$emit("update", this.p);
+      }
+    }
+  }
+
+  async ergaenzen(): Promise<void> {
+    for (const [key, value] of Object.entries(this.p)) {
+      console.info("valid. Betrachte", key, value);
+      if (value === undefined) {
+        if (key === "log") {
+          this.p.log = [];
+          this.p.log.push(
+            LogEntry.createEmtptyLogEntry()
+              .withDate(new Date(Date.now()))
+              .withPlaneId(this.p.id)
+              .withText("Bearbeitet/Update")
+          );
+          console.info("Log geändert auf:", this.p.log, ", war: ", value);
+          this.$toast.info(
+            "Log geändert auf: " + this.p.log + ", war: " + value
+          );
+        } else if (key === "crash") {
+          this.p[key] = false;
+          this.$toast.info(
+            "Crash geändert auf: " + this.p.crash + ", war: " + value
+          );
+        } else if (key === "beschreibung") {
           this.p[key] = null;
-          this.$toast(key+ " ist noch nicht ausgefüllt!");
-          console.info("update: ", key, "ist noch undefined");
-        } else {
-          this.$emit("update", this.p);
+          console.info("beschreibung ergänzt", this.p[key], value);
+          this.$toast.info(
+            "Beschreibung geändert auf: " +
+              this.p.beschreibung +
+              ", war: " +
+              value
+          );
         }
       }
     }
