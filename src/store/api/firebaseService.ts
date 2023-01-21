@@ -164,11 +164,11 @@ export default class HangarService {
       });
   }
   static updatePlane(id: string, plane: Plane): Promise<Plane> {
-    if (!plane.beschreibung) {
+    if (plane.beschreibung === undefined) {
       console.log("keine Beschreibung, - ", plane.beschreibung);
       plane.beschreibung = "";
     }
-    if (!plane.crash) plane.crash = false;
+    if (plane.crash === undefined) plane.crash = false;
 
     for (const [key, value] of Object.entries(plane)) {
       if (value === undefined) {
@@ -176,16 +176,15 @@ export default class HangarService {
       }
     }
 
-    //ToDo: Log muss in den Converter
-    plane.log = null;
-
+    console.info("try to update", planeConverter.toFirestore(plane))
     return fireStore
       .collection("planes")
       .doc(id)
-      .withConverter(planeConverter)
-      .update(Object.assign({}, plane))
+      .update(planeConverter.toFirestore(plane))
       .then(() => {
-        return plane;
+        const convertedObject = planeConverter.toFirestore(plane)
+        console.log("udated: ", convertedObject);
+        return Plane.createFirePlane(convertedObject as Plane);
       });
   }
 

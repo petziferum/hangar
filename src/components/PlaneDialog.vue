@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="isOpen" fullscreen transition="dialog-bottom-transition">
+  <v-dialog
+    v-model="isOpen"
+    fullscreen
+    persistent
+    transition="dialog-bottom-transition"
+  >
     <template v-if="!p">
       <v-skeleton-loader type="card"></v-skeleton-loader>
     </template>
@@ -31,7 +36,11 @@
       </v-toolbar>
       <v-card tile>
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
-        <v-card-subtitle>Log: {{ p.log }}</v-card-subtitle>
+        <v-card-subtitle>
+          <span v-if="p.log != null">
+            Zuletzt gespeichert: {{ (new Date((p.log[0].date.seconds)* 1000)).toUTCString() }}
+          </span>
+        </v-card-subtitle>
         <v-form ref="editPlane">
           <v-row class="mx-3">
             <v-col cols="8">
@@ -323,15 +332,19 @@ export default class PlaneDialog extends Vue {
     } else {
       // Wenn valid true ist kann es sein das log, crash und beschreibung noch leer sind.
       try {
-        console.info("start");
+        console.info("fehlende Werte ergänzen, start...");
         await this.ergaenzen();
-        console.log("wurde Log ergänzt?", this.p.log);
+        this.p.addLogEntry(
+          LogEntry.createEmtptyLogEntry()
+            .withDate(new Date(Date.now()))
+            .withPlaneId(this.p.id)
+            .withText("Bearbeitet/Update")
+        );
         console.info("fertig mit ergänzen");
       } catch {
         console.log("catch");
       } finally {
-        console.log("emit", this.p);
-        this.$emit("update", this.p);
+        this.$emit("update", this.p); // löst updatePlane in firebaseService aus
       }
     }
   }
@@ -348,9 +361,9 @@ export default class PlaneDialog extends Vue {
               .withPlaneId(this.p.id)
               .withText("Bearbeitet/Update")
           );
-          console.info("Log geändert auf:", this.p.log, ", war: ", value);
+          console.info("Log geändert auf:",  this.p.log[0].text, "um ", this.p.log[0].date , "\n, war: ", value);
           this.$toast.info(
-            "Log geändert auf: " + this.p.log + ", war: " + value
+            "Log update: "+  this.p.log[0].text + " am "+ this.p.log[0].date + "\nwar: " + value
           );
         } else if (key === "crash") {
           this.p[key] = false;

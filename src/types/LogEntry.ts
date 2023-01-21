@@ -1,8 +1,8 @@
 export default class LogEntry {
   constructor(
-    private date: Date,
-    private planeId: string,
-    private text: string
+    public date: Date,
+    public planeId: string,
+    public text: string
   ) {
     this.date = date;
     this.planeId = planeId;

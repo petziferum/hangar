@@ -155,7 +155,7 @@ export default class Plane {
   }
 }
 export const planeConverter = {
-  toFirestore: (plane) => {
+  toFirestore: function (plane)  {
     console.log("Converter gestartet für ", plane);
     return {
       id: plane.id,
@@ -170,7 +170,7 @@ export const planeConverter = {
       faktor: plane.faktor,
       image: plane.image,
       beschreibung: plane.beschreibung,
-      log: plane.log,
+      log: logConverter(plane.log),
       crash: plane.crash,
     };
   },
@@ -179,3 +179,16 @@ export const planeConverter = {
     return Plane.createFirePlane(plane);
   },
 };
+
+const logConverter = (log: Array<LogEntry>): Array<unknown> => {
+  console.log("logConverter", log);
+  const logArray = []
+  log.forEach(entry => {
+    logArray.push({
+      date: entry.date,
+      planeId: entry.planeId,
+      text: entry.text
+    })
+  })
+  return logArray;
+}
