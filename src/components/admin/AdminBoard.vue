@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Ref, Vue } from "vue-property-decorator";
 import firebaseService from "@/store/api/firebaseService";
 import Plane from "@/types/Plane";
 import EditPlane from "@/components/EditPlane.vue";
@@ -118,6 +118,9 @@ export default class AdminBoard extends Vue {
   dialog = false;
   basedialog = false;
   flugzeugListen: Flugzeugliste[] = [];
+  @Ref("planedialog")
+  planeDialog: PlaneDialog;
+
 
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
@@ -129,9 +132,22 @@ export default class AdminBoard extends Vue {
   }
 
   startEdit(): void {
-    const planeDialog = this.$refs.planedialog as PlaneDialog;
-    planeDialog.open();
+    console.info("startEdit", this.editPlane)
+    this.checkPlaneForUndefined();
+    this.planeDialog.open();
   }
+
+  checkPlaneForUndefined(): void {
+    console.log("check for undefined: ", this.editPlane);
+    if(this.editPlane) {
+      for (const [key, value] of Object.entries(this.editPlane)) {
+        if (value === undefined) {
+          this.$toast.info(key + " ist noch undefined");
+        }
+      }
+    }
+  }
+
   cancelEdit(): void {
     this.editPlane = null;
   }
@@ -165,10 +181,6 @@ export default class AdminBoard extends Vue {
     dialog.openDialog();
   }
 
-  setEditPlane(value: Plane): void {
-    this.editPlane = value;
-  }
-
   clearEdit(): void {
     this.message = null;
   }
@@ -188,6 +200,7 @@ export default class AdminBoard extends Vue {
 
   created(): void {
     this.$store.dispatch("FETCH_IMAGES");
+    this.loadPlanes()
   }
 }
 </script>

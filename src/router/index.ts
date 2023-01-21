@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import firebase from "firebase";
 import store from "@/store";
+import firebaseApp, { fireAuth } from "@/plugins/firesbaseConfig";
 
 Vue.use(VueRouter);
 
@@ -21,12 +22,7 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin",
     component: () => import("@/components/admin/AdminBoard.vue"),
-    beforeEnter: (to, from, next) => {
-      console.info("guard check: ", firebase.auth().currentUser);
-      if (store.getters.getUser) {
-        next();
-      } else next({ path: "/login" });
-    },
+    meta: { requiresAuth: true }
   },
   {
     path: "/hangar",
@@ -45,6 +41,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const authRequired = to.matched.some((record) => record.meta.requiresAuth); // checkt, ob in der rout "requriesAuth: true" steht
+  const isAuthenticated = fireAuth.currentUser;
+  if (authRequired && !isAuthenticated) {
+    const querypath = to.meta.frompath;
+    next({ name: "login", query: { from: querypath } });
+  } else next();
 });
 
 export default router;

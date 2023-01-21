@@ -235,9 +235,11 @@ export default class PlaneDialog extends Vue {
   set isOpen(value: boolean) {
     this.$emit("input", value);
   }
+
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
   }
+
   get faktor(): number {
     if (this.plane.spannweite && this.p.gewicht) {
       const f = this.p.gewicht / this.p.spannweite;
@@ -245,9 +247,11 @@ export default class PlaneDialog extends Vue {
       return f;
     } else return 0;
   }
+
   set faktor(value: number) {
     this.$emit("faktor", value);
   }
+
   setCrash(): void {
     this.p.crash = !this.p.crash;
     this.$emit("update", this.p);
@@ -268,6 +272,7 @@ export default class PlaneDialog extends Vue {
     this.imageFile = file;
     console.log("fileReader", fr);
   }
+
   uploadImage(): void {
     this.uploading = true;
     firebaseService

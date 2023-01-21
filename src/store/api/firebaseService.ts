@@ -48,32 +48,29 @@ export default class HangarService {
     let count = 0;
     return fireStore
       .collection("planes")
+      .withConverter(planeConverter)
       .orderBy(orderby ? orderby : "name")
       .get()
       .then((res) => {
-        console.info("response: ", res.docs);
         const planesList: Array<Plane> = [];
-        res.forEach((doc) => {
+        res.docs.forEach((doc) => {
           const data = doc.data();
-          for(const [key, value] of Object.entries(data)) {
+          const plane = Plane.createFirePlane(data as Plane);
+          plane.id = doc.id;
+          for(const [key, value] of Object.entries(plane)) {
             if(value === undefined) {
-              console.log("undefined", key, value);
+              if(key === "crash"){
+                console.log("crash auf false gesetzt", plane.name);
+                plane.crash = false;
+              }
             }
           }
-          data.id = doc.id;
-          const plane = Plane.createFirePlane(data as Plane);
-          plane.id = data.id;
           if (plane.gewicht && plane.spannweite) {
             plane.faktor =
               Math.round(
                 (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
               ) / 100;
           } else plane.faktor = 0;
-          for(const [key, value] of Object.entries(plane)) {
-            if(value === undefined) {
-              console.log(plane.name, "hat", key, value);
-            }
-          }
           planesList.push(plane);
         });
         count = planesList.length;
@@ -96,6 +93,7 @@ export default class HangarService {
     }
     return fireStore
       .collection("planes")
+      .withConverter(planeConverter)
       .add(Object.assign({}, plane))
       .then((res) => {
         return res;
