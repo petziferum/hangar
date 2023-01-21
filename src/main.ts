@@ -17,14 +17,16 @@ Vue.use(Toast, {
   draggablePercent: 0.5,
 });
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: (h) => h(App),
-  created() {
-    firebaseApp.auth().onAuthStateChanged((user) => {
-      this.$store.dispatch("FETCH_USER", user);
-    });
-  },
-}).$mount("#app");
+firebaseApp.auth().onAuthStateChanged((user) => {
+  new Vue({
+    router,
+    store,
+    vuetify,
+    render: (h) => h(App),
+    beforeCreate() {
+      if(user) {
+        this.$store.dispatch("FETCH_USER", user);
+      }
+    }
+  }).$mount("#app");
+});
