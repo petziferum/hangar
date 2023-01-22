@@ -78,7 +78,9 @@
           @cancel="cancelEdit"
         ></plane-dialog>
       </v-col>
-      <v-col> </v-col>
+      <v-col>
+      {{ returnLatestUpdatedPlane() }}
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -104,7 +106,7 @@ import FlugplanDialog from "@/components/features/FlugplanDialog.vue";
   },
 })
 export default class AdminBoard extends Vue {
-  planes: void | Plane[] = [];
+  planes: Plane[] = [];
   editPlane: Plane | null = null;
   message: null | Plane = null;
   newModel = false;
@@ -124,6 +126,12 @@ export default class AdminBoard extends Vue {
 
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
+  }
+
+  returnLatestUpdatedPlane(): Plane {
+    let latest = Plane.createEmptyPlane();
+
+    return latest;
   }
 
   addNewFlugplan(value: Flugzeugliste): void {
@@ -160,6 +168,7 @@ export default class AdminBoard extends Vue {
 
   loadPlanes(): void {
     firebaseService.getAllPlanes("name").then((p) => {
+      this.$toast.info(this.planes.length + " Flugzeuge geladen", { timeout: 1000});
       this.planes = p;
     });
   }

@@ -2,6 +2,8 @@ import Sender from "@/types/Sender";
 import Battery from "@/types/Battery";
 import LogEntry from "@/types/LogEntry";
 import PlaneDialog from "@/components/PlaneDialog.vue";
+import firebase from "firebase";
+import firestore = firebase.firestore;
 
 export default class Plane {
   id: string | undefined;
@@ -131,7 +133,7 @@ export default class Plane {
       obj.faktor || undefined,
       obj.image || undefined,
       obj.beschreibung,
-      obj.log || undefined,
+      logConverterTiemstampToDate(obj.log),
       obj.crash
     );
   }
@@ -155,7 +157,7 @@ export default class Plane {
   }
 }
 export const planeConverter = {
-  toFirestore: function (plane)  {
+  toFirestore: function (plane) {
     console.log("Converter gestartet für ", plane);
     return {
       id: plane.id,
@@ -181,14 +183,23 @@ export const planeConverter = {
 };
 
 const logConverter = (log: Array<LogEntry>): Array<unknown> => {
-  console.log("logConverter", log);
-  const logArray = []
-  log.forEach(entry => {
+  const logArray = [];
+  log.forEach((entry) => {
     logArray.push({
       date: entry.date,
       planeId: entry.planeId,
-      text: entry.text
-    })
-  })
+      text: entry.text,
+    });
+  });
   return logArray;
-}
+};
+
+const logConverterTiemstampToDate = (array: LogEntry[]): Array<LogEntry> => {
+  const logArray = [];
+  if(array != null) {
+    array.forEach((entry) => {
+      logArray.push(LogEntry.createLogEntryFromFirestore(entry));
+    });
+  }
+  return logArray;
+};

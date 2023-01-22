@@ -1,3 +1,6 @@
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
+
 export default class LogEntry {
   constructor(
     public date: Date,
@@ -26,5 +29,10 @@ export default class LogEntry {
 
   public static createEmtptyLogEntry(): LogEntry {
     return new LogEntry(undefined, undefined, undefined);
+  }
+
+  public static createLogEntryFromFirestore(obj: any): LogEntry {
+    const date = new Date((obj.date.seconds * 1000));
+    return new LogEntry(date, obj.planeId, obj.text);
   }
 }

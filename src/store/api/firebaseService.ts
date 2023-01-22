@@ -44,42 +44,37 @@ export default class HangarService {
       });
   }
 
-  static getAllPlanes(orderby: string | undefined): Promise<void | Plane[]> {
+  static getAllPlanes(orderby: string | undefined): Promise<Plane[]> {
     let count = 0;
+    const planesList: Array<Plane> = [];
     return fireStore
       .collection("planes")
       .withConverter(planeConverter)
       .orderBy(orderby ? orderby : "name")
       .get()
-      .then((res) => {
-        const planesList: Array<Plane> = [];
-        res.docs.forEach((doc) => {
-          const data = doc.data();
-          const plane = Plane.createFirePlane(data as Plane);
+      .then(async (res) => {
+        await res.docs.forEach((doc) => {
+          const plane: Plane = doc.data();
           plane.id = doc.id;
-          for(const [key, value] of Object.entries(plane)) {
-            if(value === undefined) {
-              if(key === "crash"){
+          for (const [key, value] of Object.entries(plane)) {
+            if (value === undefined) {
+              if (key === "crash") {
                 console.log("crash auf false gesetzt", plane.name);
                 plane.crash = false;
               }
             }
           }
-          if (plane.gewicht && plane.spannweite) {
-            plane.faktor =
-              Math.round(
-                (plane.gewicht / plane.spannweite + Number.EPSILON) * 100
-              ) / 100;
-          } else plane.faktor = 0;
           planesList.push(plane);
         });
         count = planesList.length;
         return planesList;
       })
-      .catch(() => {
-        console.log("nichts gefunden");
+      .catch((e) => {
+        console.log("nichts gefunden", e);
+        return [];
       })
       .finally(() => {
+        count = planesList.length;
         console.info("Fertig. ", count, " Flugzeuge geladen");
       });
   }
