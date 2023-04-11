@@ -1,9 +1,6 @@
 import Sender from "@/types/Sender";
 import Battery from "@/types/Battery";
 import LogEntry from "@/types/LogEntry";
-import PlaneDialog from "@/components/PlaneDialog.vue";
-import firebase from "firebase";
-import firestore = firebase.firestore;
 
 export default class Plane {
   id: string | undefined;
@@ -184,19 +181,21 @@ export const planeConverter = {
 
 const logConverter = (log: Array<LogEntry>): Array<unknown> => {
   const logArray = [];
-  log.forEach((entry) => {
-    logArray.push({
-      date: entry.date,
-      planeId: entry.planeId,
-      text: entry.text,
-    });
-  });
+  if(log.length > 0) {
+    log.forEach((entry) => {
+      logArray.push({
+        date: entry.date,
+        planeId: entry.planeId,
+        text: entry.text,
+      });
+    })
+  };
   return logArray;
 };
 
 const logConverterTiemstampToDate = (array: LogEntry[]): Array<LogEntry> => {
   const logArray = [];
-  if(array != null) {
+  if (array != null) {
     array.forEach((entry) => {
       logArray.push(LogEntry.createLogEntryFromFirestore(entry));
     });

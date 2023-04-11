@@ -38,7 +38,8 @@
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
         <v-card-subtitle>
           <span v-if="p.log != undefined">
-            Zuletzt bearbeitet: {{p.log[p.log.length -1].date.toLocaleString() }}
+            Zuletzt bearbeitet:
+            {{ p.log[p.log.length - 1].date.toLocaleString() }}
           </span>
           <v-dialog width="50%">
             <template v-slot:activator="{ on }">
@@ -47,10 +48,17 @@
             <v-card>
               <v-card-title>Log</v-card-title>
               <v-list v-if="p.log != undefined">
-                <v-list-item v-for="(entry, i) of p.log" :key="`${entry.planeId}-${i}`">
+                <v-list-item
+                  v-for="(entry, i) of p.log"
+                  :key="`${entry.planeId}-${i}`"
+                >
                   <v-list-item-content>
-                  <v-list-item-title>{{ entry.date.toLocaleString() }}</v-list-item-title>
-                    <v-list-item-subtitle> {{ entry.planeId }} {{ entry.text }}</v-list-item-subtitle>
+                    <v-list-item-title>{{
+                      entry.date.toLocaleString()
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ entry.planeId }} {{ entry.text }}</v-list-item-subtitle
+                    >
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -278,7 +286,7 @@ export default class PlaneDialog extends Vue {
   }
 
   convertTimestamp(seconds: number): string {
-    return new Date((seconds * 1000)).toLocaleString();
+    return new Date(seconds * 1000).toLocaleString();
   }
 
   setCrash(): void {

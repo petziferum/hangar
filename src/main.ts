@@ -24,9 +24,9 @@ firebaseApp.auth().onAuthStateChanged((user) => {
     vuetify,
     render: (h) => h(App),
     beforeCreate() {
-      if(user) {
+      if (user) {
         this.$store.dispatch("FETCH_USER", user);
       }
-    }
+    },
   }).$mount("#app");
 });

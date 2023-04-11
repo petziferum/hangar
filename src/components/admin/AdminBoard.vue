@@ -79,7 +79,7 @@
         ></plane-dialog>
       </v-col>
       <v-col>
-      {{ returnLatestUpdatedPlane() }}
+        {{ returnLatestUpdatedPlane() }}
       </v-col>
     </v-row>
   </v-container>
@@ -123,7 +123,6 @@ export default class AdminBoard extends Vue {
   @Ref("planedialog")
   planeDialog: PlaneDialog;
 
-
   get imageList(): any[] {
     return this.$store.getters.GET_IMAGELIST;
   }
@@ -140,14 +139,14 @@ export default class AdminBoard extends Vue {
   }
 
   startEdit(): void {
-    console.info("startEdit", this.editPlane)
+    console.info("startEdit", this.editPlane);
     this.checkPlaneForUndefined();
     this.planeDialog.open();
   }
 
   checkPlaneForUndefined(): void {
     console.log("check for undefined: ", this.editPlane);
-    if(this.editPlane) {
+    if (this.editPlane) {
       for (const [key, value] of Object.entries(this.editPlane)) {
         if (value === undefined) {
           this.$toast.info(key + " ist noch undefined");
@@ -168,7 +167,9 @@ export default class AdminBoard extends Vue {
 
   loadPlanes(): void {
     firebaseService.getAllPlanes("name").then((p) => {
-      this.$toast.info(this.planes.length + " Flugzeuge geladen", { timeout: 1000});
+      this.$toast.info(this.planes.length + " Flugzeuge geladen", {
+        timeout: 1000,
+      });
       this.planes = p;
     });
   }
@@ -209,7 +210,7 @@ export default class AdminBoard extends Vue {
 
   created(): void {
     this.$store.dispatch("FETCH_IMAGES");
-    this.loadPlanes()
+    this.loadPlanes();
   }
 }
 </script>

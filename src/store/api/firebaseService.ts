@@ -171,13 +171,13 @@ export default class HangarService {
       }
     }
 
-    console.info("try to update", planeConverter.toFirestore(plane))
+    console.info("try to update", planeConverter.toFirestore(plane));
     return fireStore
       .collection("planes")
       .doc(id)
       .update(planeConverter.toFirestore(plane))
       .then(() => {
-        const convertedObject = planeConverter.toFirestore(plane)
+        const convertedObject = planeConverter.toFirestore(plane);
         console.log("udated: ", convertedObject);
         return Plane.createFirePlane(convertedObject as Plane);
       });

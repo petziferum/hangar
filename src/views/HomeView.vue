@@ -7,7 +7,7 @@ import Vue from "vue";
 import LandingPage from "@/views/LandingPage.vue";
 
 export default Vue.extend({
-  name: "Home",
+  name: "HomeView",
 
   components: {
     LandingPage,

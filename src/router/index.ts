@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import firebase from "firebase";
-import store from "@/store";
-import firebaseApp, { fireAuth } from "@/plugins/firesbaseConfig";
+import { fireAuth } from "@/plugins/firesbaseConfig";
 
 Vue.use(VueRouter);
 
@@ -10,7 +8,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: () => import("@/views/Home.vue"),
+    component: () => import("@/views/HomeView.vue"),
   },
   {
     path: "/devtest",
@@ -22,7 +20,7 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin",
     component: () => import("@/components/admin/AdminBoard.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
   {
     path: "/hangar",

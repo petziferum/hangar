@@ -221,6 +221,11 @@ export default class AddPlane extends Vue {
   savePlane(): void {
     this.p.faktor = this.faktor;
     this.p.crash = false;
+    if(!this.p.mah) {
+      this.p.mah = 0
+    }
+    this.p.log = [];
+    this.p.id = "1";
     for (let key of Object.entries(this.p)) {
       key.forEach((el) => {
         if (el === undefined) {
@@ -232,6 +237,7 @@ export default class AddPlane extends Vue {
       this.$refs.editPlane as Vue & { validate: () => boolean }
     ).validate();
     if (valid) {
+      console.debug("rufe firebaseService.savNewPlane auf", this.p);
       firebaseService.saveNewPlane(this.p).then((res: any) => {
         console.log("Upload erfolgreich", res);
         this.$emit("uploaded");
