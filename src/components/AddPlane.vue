@@ -198,7 +198,7 @@ export default class AddPlane extends Vue {
   }
 
   picLocalImageFile(e: any): void {
-    let t = e.currentTarget as HTMLInputElement;
+    const t = e.currentTarget as HTMLInputElement;
 
     const file = e.target.files[0];
 
@@ -221,12 +221,12 @@ export default class AddPlane extends Vue {
   savePlane(): void {
     this.p.faktor = this.faktor;
     this.p.crash = false;
-    if(!this.p.mah) {
-      this.p.mah = 0
+    if (!this.p.mah) {
+      this.p.mah = 0;
     }
     this.p.log = [];
     this.p.id = "1";
-    for (let key of Object.entries(this.p)) {
+    for (const key of Object.entries(this.p)) {
       key.forEach((el) => {
         if (el === undefined) {
           console.log(key, "ist undefiniert");

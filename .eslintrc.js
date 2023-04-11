@@ -12,6 +12,7 @@ module.exports = {
   ],
   rules: {
     "vue/no-v-text-v-html-on-component": 0,
+    "vue/valid-v-slot": ["error", { allowModifiers: true }],
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
   },

@@ -1,4 +1,3 @@
-import firebase from "firebase";
 
 export default class LogEntry {
   constructor(public date: Date, public planeId: string, public text: string) {

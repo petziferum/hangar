@@ -88,7 +88,7 @@ export default class AdminActionBar extends Vue {
   }
 
   update(p: Plane): void {
-    firebaseService.updatePlane(p.id, p).then((res) => {
+    firebaseService.updatePlane(p.id, p).then(() => {
       this.dialog = false;
     });
   }

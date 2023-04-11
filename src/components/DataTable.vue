@@ -172,7 +172,7 @@ export default class DataTable extends Vue {
 
   importPlanes(): void {
     const liste = planes;
-    for (let p of liste) {
+    for (const p of liste) {
       const plane = Plane.createEmptyPlane()
         .withName(p.name)
         .withType(p.type)

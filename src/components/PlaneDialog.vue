@@ -38,7 +38,8 @@
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
         <v-card-subtitle>
           <span v-if="p.log.length > 0">
-            Zuletzt bearbeitet: {{p.log[p.log.length -1].date.toLocaleString() }}
+            Zuletzt bearbeitet:
+            {{ p.log[p.log.length - 1].date.toLocaleString() }}
           </span>
           <v-dialog width="50%">
             <template v-slot:activator="{ on }">
@@ -229,7 +230,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import Plane from "@/types/Plane";
 import { SenderAsRecord } from "@/types/Sender";
 import firebaseService from "@/store/api/firebaseService";
-import Battery, { BatteryAsRecord } from "@/types/Battery";
+import { BatteryAsRecord } from "@/types/Battery";
 import LogEntry from "@/types/LogEntry";
 
 @Component

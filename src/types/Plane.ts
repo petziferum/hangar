@@ -181,15 +181,15 @@ export const planeConverter = {
 
 const logConverter = (log: Array<LogEntry>): Array<unknown> => {
   const logArray = [];
-  if(log.length > 0) {
+  if (log.length > 0) {
     log.forEach((entry) => {
       logArray.push({
         date: entry.date,
         planeId: entry.planeId,
         text: entry.text,
       });
-    })
-  };
+    });
+  }
   return logArray;
 };
 

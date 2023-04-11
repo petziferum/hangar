@@ -88,7 +88,7 @@
 <script lang="ts">
 import { Component, Ref, Vue } from "vue-property-decorator";
 import firebaseService from "@/store/api/firebaseService";
-import Plane, { planeConverter } from "@/types/Plane";
+import Plane from "@/types/Plane";
 import EditPlane from "@/components/EditPlane.vue";
 import { SenderAsRecord } from "@/types/Sender";
 import PlaneDialog from "@/components/PlaneDialog.vue";
@@ -128,7 +128,7 @@ export default class AdminBoard extends Vue {
   }
 
   returnLatestUpdatedPlane(): Plane {
-    let latest = Plane.createEmptyPlane();
+    const latest = Plane.createEmptyPlane();
 
     return latest;
   }
