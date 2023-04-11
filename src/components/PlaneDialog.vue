@@ -37,9 +37,8 @@
       <v-card tile>
         <v-card-title>Flugzeug: {{ p.name }} - {{ p.id }}</v-card-title>
         <v-card-subtitle>
-          <span v-if="p.log != undefined">
-            Zuletzt bearbeitet:
-            {{ p.log[p.log.length - 1].date.toLocaleString() }}
+          <span v-if="p.log.length > 0">
+            Zuletzt bearbeitet: {{p.log[p.log.length -1].date.toLocaleString() }}
           </span>
           <v-dialog width="50%">
             <template v-slot:activator="{ on }">
@@ -47,7 +46,7 @@
             </template>
             <v-card>
               <v-card-title>Log</v-card-title>
-              <v-list v-if="p.log != undefined">
+              <v-list v-if="p.log.length > 0">
                 <v-list-item
                   v-for="(entry, i) of p.log"
                   :key="`${entry.planeId}-${i}`"
