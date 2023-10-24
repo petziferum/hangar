@@ -93,11 +93,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="6" md="6" lg="2">
-              <v-text-field
-                outlined
-                label="Mah"
-                v-model="p.mah"
-              ></v-text-field>
+              <v-text-field outlined label="Mah" v-model="p.mah"></v-text-field>
             </v-col>
             <v-col>
               <v-text-field
