@@ -81,7 +81,6 @@
                 item-text="text"
                 item-value="value"
                 v-model="p.battery"
-                :rules="rules"
                 label="Akku"
               ></v-select>
             </v-col>
@@ -98,7 +97,6 @@
                 outlined
                 label="Mah"
                 v-model="p.mah"
-                :rules="rules"
               ></v-text-field>
             </v-col>
             <v-col>
@@ -419,6 +417,9 @@ export default class PlaneDialog extends Vue {
               ", war: " +
               value
           );
+        } else {
+          this.p[key] = "";
+          console.log("key", key, value);
         }
       }
     }
