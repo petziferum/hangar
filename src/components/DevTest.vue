@@ -28,6 +28,12 @@
         ></plane-dialog>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        test:
+        {{ returnRandomNameAsString(24) }}
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -51,11 +57,29 @@ import PlaneFactorDiagram from "@/components/features/PlaneFactorDiagram.vue";
   },
 })
 export default class DevTest extends Vue {
-  planes: void | Plane[] = [];
+  planes: Plane[] = [];
   img = [{ plane: "", img: require("@/assets/logo.png") }];
   dialog = false;
   active = false;
   planeEdit: Plane | null = null;
+
+  returnRandomNameAsString(length: number) {
+    const result = [];
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result.push(
+        characters.charAt(Math.floor(Math.random() * charactersLength))
+      );
+    }
+    return result.join("");
+  }
+
+  combinePlanes(): void {
+    const p = Plane.createEmptyPlane();
+    p.name = this.returnRandomNameAsString(24);
+  }
 
   loadPlanes(): void {
     firebaseService.getAllPlanes("name").then((res) => {
