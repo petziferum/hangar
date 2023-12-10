@@ -3,6 +3,11 @@
     DEVTEST
     <v-spacer></v-spacer>
     <v-btn @click="loadPlanes">laden</v-btn>
+    <v-row>
+      <v-col>
+        <the-excel-upload-component />
+      </v-col>
+    </v-row>
     <v-row justify="center">
       <v-col v-if="planes.length > 0">
         Mit klick wird Flugzeug bearbeitet
@@ -46,9 +51,11 @@ import TestExpansion from "@/components/TestExpansion.vue";
 import EditPlane from "@/components/EditPlane.vue";
 import firebaseService from "@/store/api/firebaseService";
 import PlaneFactorDiagram from "@/components/features/PlaneFactorDiagram.vue";
+import TheExcelUploadComponent from "@/components/features/TheExcelUploadComponent.vue";
 
 @Component({
   components: {
+    TheExcelUploadComponent,
     PlaneFactorDiagram,
     EditPlane,
     TestExpansion,
